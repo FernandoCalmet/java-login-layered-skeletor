@@ -1,9 +1,9 @@
-# Sistema Modular CRUD + Java + JavaSwing + MySQL
+# Sistema Modular CRUD + Java + JavaSwing + SQL
 ----------
 > Autor : Fernando Calmet
 https://github.com/fernandocalmet  
 
-> SistemaModular-CRUD-Java-JavaSwing-MySQL
+> SistemaModular-CRUD-Java-JavaSwing-SQL
 
 <p>Esta aplicación de muestra está destinada a proporcionar un ejemplo práctico de una aplicación modular. Específicamente, esta aplicación de muestra demuestra lo siguiente:</p>
 
