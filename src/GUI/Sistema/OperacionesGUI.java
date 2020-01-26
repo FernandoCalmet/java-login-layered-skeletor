@@ -161,7 +161,7 @@ public class OperacionesGUI extends javax.swing.JPanel implements IGUIBase
 
         lblNombre.setText("Nombre");
 
-        lblIdModulo.setText("ID Operacion");
+        lblIdModulo.setText("ID Modulo");
 
         jLabelTitulo.setText("Operaciones");
 

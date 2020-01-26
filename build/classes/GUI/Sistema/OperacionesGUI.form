@@ -178,7 +178,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="lblIdModulo">
       <Properties>
-        <Property name="text" type="java.lang.String" value="ID Operacion"/>
+        <Property name="text" type="java.lang.String" value="ID Modulo"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtIdModulo">
