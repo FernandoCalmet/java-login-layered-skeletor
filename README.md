@@ -1,15 +1,15 @@
 # Sistema Modular CRUD + Java + JavaSwing + SQL
-----------
-> Autor : Fernando Calmet
-https://github.com/fernandocalmet  
-
 > SistemaModular-CRUD-Java-JavaSwing-SQL
 
+> Autor : Fernando Calmet  
+https://github.com/fernandocalmet  
+----------
 <p>Esta aplicación de muestra está destinada a proporcionar un ejemplo práctico de una aplicación modular. Específicamente, esta aplicación de muestra demuestra lo siguiente:</p>
 
 <ul>
 	<li>Crear, Eliminar, Detalles, Modificar y Listar datos de las entidades del programa.</li>
-	<li>Para la conexión con el gestor de la base de datos se usa la biblioteca de MySQL JDBC Driver (mysql-connector-java).</li>
+	<li>Acceso de conexión y desconexión de usuarios al sistema.</li>
+	<li>Para la conexión con el gestor de la base de datos se usa la biblioteca de MySQL JDBC Driver (mysql-connector-java).</li>	
 </ul>
 
 <p>Tenga en cuenta que si bien este programa de ejemplo funciona, las características mencionadas anteriormente no están destinadas a ser tomadas y utilizadas en aplicaciones comerciales de producción. En otras palabras, este no es un proyecto semilla para ser tomado  e implementado en su entorno de producción.</p>  
@@ -30,7 +30,7 @@ https://github.com/fernandocalmet
   
 ## Requerimientos
 ### Requerimientos Funcionales
-- Conexión y Desconexión de Sesión de Usuarios
+- Conexión y Desconexión de Acceso de Usuarios
 - CRUD para Modulos, Usuarios, Roles, Operaciones, Permisos
 
 ### Requerimientos No funcionales
