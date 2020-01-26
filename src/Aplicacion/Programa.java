@@ -1,8 +1,10 @@
 package Aplicacion;
 /**
  *
- * @author github.com/fernandocalmet
+ * @author Fernando Calmet <github.com/fernandocalmet>
  */
+import GUI.*;
+
 public class Programa 
 {
     public static void main(String[]args)
@@ -14,6 +16,6 @@ public class Programa
         */
         
         // TODO: Crear el objeto principal del programa
-        new Presentaciones.Login();
+        new AccesoGUI();
     }
 }
