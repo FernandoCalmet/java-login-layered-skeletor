@@ -62,7 +62,7 @@ public class PermisoServicio implements IServicioBase
     @Override
     public boolean Modificar(Object obj) {
         permiso = (PermisoEntidad) obj;
-        if(permiso.getId() != 0 && permiso.getId_rol()!= 0 && permiso.getId_operacion()!= 0)
+        if(permiso.getId() > 0 && permiso.getId_rol() > 0 && permiso.getId_operacion() > 0)
         {   
             if(repositorio.Modificar(permiso) == true)
                 return true;

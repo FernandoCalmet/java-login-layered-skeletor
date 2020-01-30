@@ -40,38 +40,49 @@
             <Property name="text" type="java.lang.String" value="Sistema"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemModulos">
+            <Menu class="javax.swing.JMenu" name="jMenuItemModulos">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Modulos"/>
               </Properties>
-            </MenuItem>
-            <Menu class="javax.swing.JMenu" name="jMenuItemSubModulos">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="SubModulos"/>
-              </Properties>
               <SubComponents>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItemOperaciones">
+                <Menu class="javax.swing.JMenu" name="jMenu1">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Operaciones"/>
                   </Properties>
-                </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItemRoles">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Roles"/>
-                  </Properties>
-                </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItemPermisos">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Permisos"/>
-                  </Properties>
-                </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="jMenuItemUsuarios">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Usuarios"/>
-                  </Properties>
-                </MenuItem>
+                  <SubComponents>
+                    <MenuItem class="javax.swing.JMenuItem" name="jMenuItemOperaciones">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Configuraci&#xf3;n"/>
+                      </Properties>
+                    </MenuItem>
+                    <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator4">
+                    </MenuItem>
+                    <MenuItem class="javax.swing.JMenuItem" name="jMenuItemUsuarios">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Usuarios"/>
+                      </Properties>
+                    </MenuItem>
+                    <MenuItem class="javax.swing.JMenuItem" name="jMenuItemRoles">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Roles"/>
+                      </Properties>
+                    </MenuItem>
+                    <MenuItem class="javax.swing.JMenuItem" name="jMenuItemPermisos">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Permisos"/>
+                      </Properties>
+                    </MenuItem>
+                  </SubComponents>
+                </Menu>
               </SubComponents>
             </Menu>
+            <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator1">
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemBase">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Configuraci&#xf3;n"/>
+              </Properties>
+            </MenuItem>
           </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="jMenuAyuda">

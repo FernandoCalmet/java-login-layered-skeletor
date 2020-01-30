@@ -5,9 +5,8 @@ package Entidad;
  */
 public class UsuarioEntidad 
 {
-    private int id;
+    private int id, id_rol;
     private String correo, clave, nombre;
-    private int id_rol;
 
     public UsuarioEntidad() {}
 
@@ -20,7 +19,7 @@ public class UsuarioEntidad
     public String getNombre() {return nombre;}
     public void setNombre(String nombre) {this.nombre = nombre;}
     public int getId_rol() {return id_rol;}
-    public void setId_rol(int id_rol) {this.id_rol = id_rol;}    
+    public void setId_rol(int id_rol) {this.id_rol = id_rol;} 
     @Override
     public String toString(){return "\nId: "+getId()+"\nCorreo: "+getCorreo()+"\nClave: "+getClave()+"\nNombre: "+getNombre()+"\nRol: "+getId_rol();}
 }

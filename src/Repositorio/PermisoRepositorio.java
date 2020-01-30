@@ -119,10 +119,10 @@ public class PermisoRepositorio implements IRepositorioBase
     public ArrayList<Object[]> ListarTodos() 
     {   
         String consultaSql = "SELECT "
-                + "P.id id, P.id_rol, R.nombre, P.id_operacion, O.nombre "
-                + "FROM PERMISOS P "
-                + "INNER JOIN ROLES R ON R.id = P.id_rol "
-                + "INNER JOIN OPERACIONES O ON O.id = P.id_operacion "
+                + "P.id, P.id_rol, R.nombre, P.id_operacion, O.nombre "
+                + "FROM permisos P "
+                + "INNER JOIN roles R ON R.id = P.id_rol "
+                + "INNER JOIN operaciones O ON O.id = P.id_operacion "
                 + "ORDER BY P.id ASC";     
         PreparedStatement declaracionSql; 
         ResultSet resultadoSql;

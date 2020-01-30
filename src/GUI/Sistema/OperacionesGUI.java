@@ -8,6 +8,12 @@ import javax.swing.table.DefaultTableModel;
 import Entidad.OperacionEntidad;
 import Servicio.OperacionServicio;
 import Interface.IGUIBase;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
+import javax.swing.table.TableRowSorter;
 
 public class OperacionesGUI extends javax.swing.JPanel implements IGUIBase
 {    
@@ -16,12 +22,15 @@ public class OperacionesGUI extends javax.swing.JPanel implements IGUIBase
     private String [] columnas = {"Id operación", "Operación", "Id Modulo", "Modulo"};
     private ArrayList<Object[]> listaDatos = new ArrayList<>();
     private DefaultTableModel tablaDatos = new DefaultTableModel(columnas, 0);
+    private TableRowSorter filtroDatos;
+    private ButtonGroup buttonGroupFiltro = new ButtonGroup();
 
     public OperacionesGUI() 
     {
         initComponents();
         cargarDatos();
         bloquearBotones();
+        cargarGrupoRadioBotones();        
     }
     
     @Override
@@ -34,42 +43,42 @@ public class OperacionesGUI extends javax.swing.JPanel implements IGUIBase
             tablaDatos.addRow(obj);
         }
         this.tblDatos.setModel(tablaDatos);
-        this.txtId.enable(false);
-        this.txtNombreModulo.enable(false);
+        this.jTextFieldId.enable(false);
+        this.jTextFieldNombreModulo.enable(false);        
     }
     
     @Override
     public void seleccionarDatos()
     {
-        this.txtId.setText(String.valueOf(this.tblDatos.getValueAt(this.tblDatos.getSelectedRow(), 0)));
-        this.txtNombre.setText(String.valueOf(this.tblDatos.getValueAt(this.tblDatos.getSelectedRow(), 1)));
-        this.txtIdModulo.setText(String.valueOf(this.tblDatos.getValueAt(this.tblDatos.getSelectedRow(), 2)));
-        this.txtNombreModulo.setText(String.valueOf(this.tblDatos.getValueAt(this.tblDatos.getSelectedRow(), 3)));
+        this.jTextFieldId.setText(String.valueOf(this.tblDatos.getValueAt(this.tblDatos.getSelectedRow(), 0)));
+        this.jTextFieldNombre.setText(String.valueOf(this.tblDatos.getValueAt(this.tblDatos.getSelectedRow(), 1)));
+        this.jTextFieldIdModulo.setText(String.valueOf(this.tblDatos.getValueAt(this.tblDatos.getSelectedRow(), 2)));
+        this.jTextFieldNombreModulo.setText(String.valueOf(this.tblDatos.getValueAt(this.tblDatos.getSelectedRow(), 3)));
         this.btnCrear.setEnabled(false);
     }
     
     @Override
     public void limpiarSeleccion()
     {
-        this.txtId.setText(null);
-        this.txtNombre.setText(null);
-        this.txtIdModulo.setText(null);
-        this.txtNombreModulo.setText(null);
+        this.jTextFieldId.setText(null);
+        this.jTextFieldNombre.setText(null);
+        this.jTextFieldIdModulo.setText(null);
+        this.jTextFieldNombreModulo.setText(null);
         this.btnCrear.setEnabled(true);
     }
     
     @Override
     public void bloquearCampos()
     {
-        this.txtNombre.enable(false);
-        this.txtIdModulo.enable(false);
+        this.jTextFieldNombre.enable(false);
+        this.jTextFieldIdModulo.enable(false);
     }
     
     @Override
     public void desbloquearCampos()
     {
-        this.txtNombre.enable(true);
-        this.txtIdModulo.enable(true);
+        this.jTextFieldNombre.enable(true);
+        this.jTextFieldIdModulo.enable(true);
     }
     
     @Override
@@ -87,6 +96,42 @@ public class OperacionesGUI extends javax.swing.JPanel implements IGUIBase
         this.btnEliminar.setEnabled(true);
         this.btnLimpiar.setEnabled(true);
     }
+    
+    @Override
+    public void filtroBusqueda()
+    {
+        String filtro = jTextFieldBuscar.getText();
+        if(jRadioButtonId.isSelected())
+        {
+            int columna = 0;
+            filtroDatos.setRowFilter(RowFilter.regexFilter(filtro, columna));
+        }
+        else if(jRadioButtonNombre.isSelected())
+        {
+            int columna = 1;
+            filtroDatos.setRowFilter(RowFilter.regexFilter(filtro, columna));
+        }  
+        else if(jRadioButtonIdModulo.isSelected())
+        {
+            int columna = 2;
+            filtroDatos.setRowFilter(RowFilter.regexFilter(filtro, columna));
+        } 
+    }
+    
+    @Override
+    public void cargarFiltro()
+    {
+        filtroDatos = new TableRowSorter(tablaDatos);
+        tblDatos.setRowSorter(filtroDatos);
+    }
+    
+    @Override
+    public void cargarGrupoRadioBotones()
+    {
+        buttonGroupFiltro.add(jRadioButtonId);
+        buttonGroupFiltro.add(jRadioButtonNombre);
+        buttonGroupFiltro.add(jRadioButtonIdModulo);
+    }
         
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -98,15 +143,21 @@ public class OperacionesGUI extends javax.swing.JPanel implements IGUIBase
         btnLimpiar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDatos = new javax.swing.JTable();
-        lblId = new javax.swing.JLabel();
-        lblNombre = new javax.swing.JLabel();
-        txtId = new javax.swing.JTextField();
-        txtNombre = new javax.swing.JTextField();
-        lblIdModulo = new javax.swing.JLabel();
-        txtIdModulo = new javax.swing.JTextField();
+        jLabelId = new javax.swing.JLabel();
+        jLabelNombre = new javax.swing.JLabel();
+        jTextFieldId = new javax.swing.JTextField();
+        jTextFieldNombre = new javax.swing.JTextField();
+        jLabelModulo = new javax.swing.JLabel();
+        jTextFieldIdModulo = new javax.swing.JTextField();
         jLabelTitulo = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        txtNombreModulo = new javax.swing.JTextField();
+        jTextFieldNombreModulo = new javax.swing.JTextField();
+        jLabelFiltro = new javax.swing.JLabel();
+        jRadioButtonId = new javax.swing.JRadioButton();
+        jRadioButtonNombre = new javax.swing.JRadioButton();
+        jTextFieldBuscar = new javax.swing.JTextField();
+        jLabelBuscar = new javax.swing.JLabel();
+        jRadioButtonIdModulo = new javax.swing.JRadioButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(400, 400));
@@ -157,13 +208,32 @@ public class OperacionesGUI extends javax.swing.JPanel implements IGUIBase
         });
         jScrollPane1.setViewportView(tblDatos);
 
-        lblId.setText("ID");
+        jLabelId.setText("ID");
 
-        lblNombre.setText("Nombre");
+        jLabelNombre.setText("Nombre");
 
-        lblIdModulo.setText("ID Modulo");
+        jLabelModulo.setText("Módulo");
 
         jLabelTitulo.setText("Operaciones");
+
+        jLabelFiltro.setText("Filtrar resultados por:");
+
+        jRadioButtonId.setBackground(new java.awt.Color(255, 255, 255));
+        jRadioButtonId.setText("Id");
+
+        jRadioButtonNombre.setBackground(new java.awt.Color(255, 255, 255));
+        jRadioButtonNombre.setText("Nombre");
+
+        jTextFieldBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldBuscarKeyTyped(evt);
+            }
+        });
+
+        jLabelBuscar.setText("Buscar");
+
+        jRadioButtonIdModulo.setBackground(new java.awt.Color(255, 255, 255));
+        jRadioButtonIdModulo.setText("Id Módulo");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -175,28 +245,44 @@ public class OperacionesGUI extends javax.swing.JPanel implements IGUIBase
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jSeparator1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabelTitulo)
-                        .addGap(0, 320, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(lblIdModulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblId, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
-                            .addComponent(lblNombre, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabelId, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabelModulo, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
+                            .addComponent(jLabelNombre, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNombreModulo, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtId)
-                            .addComponent(txtNombre)
-                            .addComponent(txtIdModulo)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jTextFieldIdModulo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextFieldNombreModulo))
+                            .addComponent(jTextFieldId)
+                            .addComponent(jTextFieldNombre)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabelTitulo)
+                        .addGap(320, 320, 320))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabelBuscar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTextFieldBuscar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabelFiltro)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jRadioButtonId)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jRadioButtonNombre)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jRadioButtonIdModulo)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -208,34 +294,42 @@ public class OperacionesGUI extends javax.swing.JPanel implements IGUIBase
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblId)
-                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelId)
+                    .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNombre)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelNombre)
+                    .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelModulo)
+                    .addComponent(jTextFieldIdModulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldNombreModulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCrear)
+                    .addComponent(btnModificar)
+                    .addComponent(btnEliminar)
+                    .addComponent(btnLimpiar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jRadioButtonId)
+                    .addComponent(jRadioButtonNombre)
+                    .addComponent(jRadioButtonIdModulo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblIdModulo)
-                    .addComponent(txtIdModulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtNombreModulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                    .addComponent(jLabelBuscar, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTextFieldBuscar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCrearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCrearMouseClicked
-        operacion.setNombre(this.txtNombre.getText());
-        operacion.setId_modulo(Integer.parseInt(this.txtIdModulo.getText()));
+        operacion.setNombre(this.jTextFieldNombre.getText());
+        operacion.setId_modulo(Integer.parseInt(this.jTextFieldIdModulo.getText()));
         if(servicio.Crear(operacion) == true)
         {
             cargarDatos();
@@ -244,9 +338,9 @@ public class OperacionesGUI extends javax.swing.JPanel implements IGUIBase
     }//GEN-LAST:event_btnCrearMouseClicked
 
     private void btnModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModificarMouseClicked
-        operacion.setId(Integer.parseInt(this.txtId.getText()));
-        operacion.setNombre(this.txtNombre.getText());
-        operacion.setId_modulo(Integer.parseInt(this.txtIdModulo.getText()));
+        operacion.setId(Integer.parseInt(this.jTextFieldId.getText()));
+        operacion.setNombre(this.jTextFieldNombre.getText());
+        operacion.setId_modulo(Integer.parseInt(this.jTextFieldIdModulo.getText()));
         if(servicio.Modificar(operacion) == true)
         {
             cargarDatos();
@@ -257,7 +351,7 @@ public class OperacionesGUI extends javax.swing.JPanel implements IGUIBase
     }//GEN-LAST:event_btnModificarMouseClicked
 
     private void btnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseClicked
-        operacion.setId(Integer.parseInt(this.txtId.getText()));
+        operacion.setId(Integer.parseInt(this.jTextFieldId.getText()));
         if(servicio.Eliminar(operacion) == true)
         {
             cargarDatos();
@@ -279,21 +373,45 @@ public class OperacionesGUI extends javax.swing.JPanel implements IGUIBase
         desbloquearBotones();
     }//GEN-LAST:event_tblDatosMouseClicked
 
+    private void jTextFieldBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldBuscarKeyTyped
+        if(buttonGroupFiltro.getSelection() == null)
+        {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Debes seleccionar una opcion de filtro");
+        }
+        else
+        {
+            jTextFieldBuscar.addKeyListener(new KeyAdapter() {
+                @Override
+                public void keyTyped(final KeyEvent e){
+                    filtroBusqueda();
+                }
+            });
+            cargarFiltro();
+        }
+    }//GEN-LAST:event_jTextFieldBuscarKeyTyped
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCrear;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnModificar;
+    private javax.swing.JLabel jLabelBuscar;
+    private javax.swing.JLabel jLabelFiltro;
+    private javax.swing.JLabel jLabelId;
+    private javax.swing.JLabel jLabelModulo;
+    private javax.swing.JLabel jLabelNombre;
     private javax.swing.JLabel jLabelTitulo;
+    private javax.swing.JRadioButton jRadioButtonId;
+    private javax.swing.JRadioButton jRadioButtonIdModulo;
+    private javax.swing.JRadioButton jRadioButtonNombre;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JLabel lblId;
-    private javax.swing.JLabel lblIdModulo;
-    private javax.swing.JLabel lblNombre;
+    private javax.swing.JTextField jTextFieldBuscar;
+    private javax.swing.JTextField jTextFieldId;
+    private javax.swing.JTextField jTextFieldIdModulo;
+    private javax.swing.JTextField jTextFieldNombre;
+    private javax.swing.JTextField jTextFieldNombreModulo;
     private javax.swing.JTable tblDatos;
-    private javax.swing.JTextField txtId;
-    private javax.swing.JTextField txtIdModulo;
-    private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtNombreModulo;
     // End of variables declaration//GEN-END:variables
 }

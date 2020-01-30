@@ -5,9 +5,8 @@ package Entidad;
  */
 public class OperacionEntidad 
 {
-    private int id;
+    private int id, id_modulo;
     private String nombre;
-    private int id_modulo;
 
     public OperacionEntidad() {}   
     

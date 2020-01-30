@@ -26,39 +26,53 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jScrollPane1" pref="0" max="32767" attributes="0"/>
                   <Component id="jSeparator1" max="32767" attributes="0"/>
-                  <Group type="102" attributes="0">
-                      <Component id="jLabelTitulo" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="338" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jLabelId" min="-2" pref="80" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jTextFieldId" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblId" alignment="0" min="-2" pref="80" max="-2" attributes="0"/>
-                          <Component id="lblIdRol" alignment="0" min="-2" pref="61" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="jLabelRol" min="-2" pref="80" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="txtNombreRol" alignment="1" max="32767" attributes="0"/>
-                          <Component id="txtIdRol" max="32767" attributes="0"/>
-                          <Component id="txtId" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="txtIdRol" min="-2" pref="50" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="txtNombreRol" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="lblIdOperacion" min="-2" pref="80" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="txtNombreOperacion" alignment="1" max="32767" attributes="0"/>
-                          <Component id="txtIdOperacion" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="txtIdOperacion" min="-2" pref="50" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="txtNombreOperacion" max="32767" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      <Component id="btnCrear" min="-2" pref="90" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jLabelBuscar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnModificar" min="-2" pref="90" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnEliminar" min="-2" pref="90" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnLimpiar" min="-2" pref="90" max="-2" attributes="0"/>
+                      <Component id="jTextFieldBuscar" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabelTitulo" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="btnCrear" min="-2" pref="90" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btnModificar" min="-2" pref="90" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btnEliminar" min="-2" pref="90" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btnLimpiar" min="-2" pref="90" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jLabelFiltro" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="jRadioButtonId" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="jRadioButtonIdRol" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jRadioButtonIdOperacion" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace min="0" pref="2" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -73,33 +87,43 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="lblId" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtId" alignment="0" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabelId" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jTextFieldId" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblIdRol" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabelRol" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtIdRol" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtNombreRol" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="txtNombreRol" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="txtIdOperacion" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblIdOperacion" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtIdOperacion" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtNombreOperacion" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="txtNombreOperacion" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnCrear" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                  <Component id="btnModificar" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                  <Component id="btnEliminar" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                  <Component id="btnLimpiar" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="btnCrear" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnModificar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnEliminar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnLimpiar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jScrollPane1" pref="174" max="32767" attributes="0"/>
+              <Component id="jScrollPane1" pref="185" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabelFiltro" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonId" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonIdRol" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonIdOperacion" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabelBuscar" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Component id="jTextFieldBuscar" alignment="1" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -165,23 +189,23 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JLabel" name="lblId">
+    <Component class="javax.swing.JLabel" name="jLabelId">
       <Properties>
         <Property name="text" type="java.lang.String" value="ID"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblIdRol">
+    <Component class="javax.swing.JLabel" name="jLabelRol">
       <Properties>
-        <Property name="text" type="java.lang.String" value="ID Rol"/>
+        <Property name="text" type="java.lang.String" value="Rol"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtId">
+    <Component class="javax.swing.JTextField" name="jTextFieldId">
     </Component>
     <Component class="javax.swing.JTextField" name="txtIdRol">
     </Component>
     <Component class="javax.swing.JLabel" name="lblIdOperacion">
       <Properties>
-        <Property name="text" type="java.lang.String" value="ID Operacion"/>
+        <Property name="text" type="java.lang.String" value="Operaci&#xf3;n"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtIdOperacion">
@@ -196,6 +220,45 @@
     <Component class="javax.swing.JTextField" name="txtNombreRol">
     </Component>
     <Component class="javax.swing.JTextField" name="txtNombreOperacion">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabelFiltro">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Filtrar resultados por:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonId">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Id"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonIdRol">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Id Rol"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jTextFieldBuscar">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextFieldBuscarKeyTyped"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabelBuscar">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Buscar"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonIdOperacion">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Id Operaci&#xf3;n"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

@@ -8,6 +8,12 @@ import javax.swing.table.DefaultTableModel;
 import Entidad.UsuarioEntidad;
 import Servicio.UsuarioServicio;
 import Interface.IGUIBase;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
+import javax.swing.table.TableRowSorter;
 
 public class UsuariosGUI extends javax.swing.JPanel implements IGUIBase
 {    
@@ -15,13 +21,16 @@ public class UsuariosGUI extends javax.swing.JPanel implements IGUIBase
     private UsuarioServicio servicio = new UsuarioServicio();    
     private String [] columnas = {"Id", "Correo", "Clave", "Nombre", "Id Rol", "Rol"};
     private ArrayList<Object[]> listaDatos = new ArrayList<>();    
-    private DefaultTableModel tablaDatos = new DefaultTableModel(columnas, 0);    
+    private DefaultTableModel tablaDatos = new DefaultTableModel(columnas, 0);   
+    private TableRowSorter filtroDatos;
+    private ButtonGroup buttonGroupFiltro = new ButtonGroup();
 
     public UsuariosGUI() 
     {
         initComponents();
         cargarDatos();  
         bloquearBotones();
+        cargarGrupoRadioBotones();
     }
       
     @Override
@@ -97,6 +106,48 @@ public class UsuariosGUI extends javax.swing.JPanel implements IGUIBase
         this.btnEliminar.setEnabled(true);
         this.btnLimpiar.setEnabled(true);
     }
+    
+    @Override
+    public void filtroBusqueda()
+    {
+        String filtro = jTextFieldBuscar.getText();
+        if(jRadioButtonId.isSelected())
+        {
+            int columna = 0;
+            filtroDatos.setRowFilter(RowFilter.regexFilter(filtro, columna));
+        }
+        else if(jRadioButtonCorreo.isSelected())
+        {
+            int columna = 1;
+            filtroDatos.setRowFilter(RowFilter.regexFilter(filtro, columna));
+        }
+        else if(jRadioButtonNombre.isSelected())
+        {
+            int columna = 3;
+            filtroDatos.setRowFilter(RowFilter.regexFilter(filtro, columna));
+        }  
+        else if(jRadioButtonIdRol.isSelected())
+        {
+            int columna = 4;
+            filtroDatos.setRowFilter(RowFilter.regexFilter(filtro, columna));
+        } 
+    }
+    
+    @Override
+    public void cargarFiltro()
+    {
+        filtroDatos = new TableRowSorter(tablaDatos);
+        tblDatos.setRowSorter(filtroDatos);
+    }
+    
+    @Override
+    public void cargarGrupoRadioBotones()
+    {
+        buttonGroupFiltro.add(jRadioButtonId);
+        buttonGroupFiltro.add(jRadioButtonCorreo);
+        buttonGroupFiltro.add(jRadioButtonNombre);
+        buttonGroupFiltro.add(jRadioButtonIdRol);
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -121,6 +172,13 @@ public class UsuariosGUI extends javax.swing.JPanel implements IGUIBase
         jSeparator1 = new javax.swing.JSeparator();
         txtIdRol = new javax.swing.JTextField();
         txtNombreRol = new javax.swing.JTextField();
+        jLabelFiltro = new javax.swing.JLabel();
+        jRadioButtonId = new javax.swing.JRadioButton();
+        jRadioButtonNombre = new javax.swing.JRadioButton();
+        jTextFieldBuscar = new javax.swing.JTextField();
+        jLabelBuscar = new javax.swing.JLabel();
+        jRadioButtonIdRol = new javax.swing.JRadioButton();
+        jRadioButtonCorreo = new javax.swing.JRadioButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -178,9 +236,31 @@ public class UsuariosGUI extends javax.swing.JPanel implements IGUIBase
 
         lblNombre.setText("Nombre");
 
-        lblIdRol.setText("ID Rol");
+        lblIdRol.setText("Rol");
 
         jLabelTitulo.setText("Usuarios");
+
+        jLabelFiltro.setText("Filtrar resultados por:");
+
+        jRadioButtonId.setBackground(new java.awt.Color(255, 255, 255));
+        jRadioButtonId.setText("Id");
+
+        jRadioButtonNombre.setBackground(new java.awt.Color(255, 255, 255));
+        jRadioButtonNombre.setText("Nombre");
+
+        jTextFieldBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldBuscarKeyTyped(evt);
+            }
+        });
+
+        jLabelBuscar.setText("Buscar");
+
+        jRadioButtonIdRol.setBackground(new java.awt.Color(255, 255, 255));
+        jRadioButtonIdRol.setText("Id Rol");
+
+        jRadioButtonCorreo.setBackground(new java.awt.Color(255, 255, 255));
+        jRadioButtonCorreo.setText("Correo");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -189,23 +269,29 @@ public class UsuariosGUI extends javax.swing.JPanel implements IGUIBase
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jSeparator1)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(lblIdRol, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblId, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblNombre, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblNombre, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
                             .addComponent(lblCorreo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblClave, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE))
+                            .addComponent(lblId, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblClave, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblIdRol, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtId)
-                            .addComponent(txtCorreo, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtCorreo)
                             .addComponent(txtClave)
                             .addComponent(txtNombre)
-                            .addComponent(txtIdRol)
-                            .addComponent(txtNombreRol)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtIdRol, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtNombreRol))))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabelBuscar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldBuscar))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelTitulo)
@@ -216,7 +302,17 @@ public class UsuariosGUI extends javax.swing.JPanel implements IGUIBase
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabelFiltro)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jRadioButtonId)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jRadioButtonNombre)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jRadioButtonCorreo)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jRadioButtonIdRol)))
                         .addGap(0, 2, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -228,35 +324,45 @@ public class UsuariosGUI extends javax.swing.JPanel implements IGUIBase
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblId))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblCorreo))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblClave))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblNombre))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblIdRol)
-                    .addComponent(txtIdRol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtNombreRol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblId)
+                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblCorreo)
+                    .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblClave)
+                    .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNombre)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblIdRol)
+                    .addComponent(txtIdRol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNombreRol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCrear)
+                    .addComponent(btnModificar)
+                    .addComponent(btnEliminar)
+                    .addComponent(btnLimpiar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jRadioButtonId)
+                    .addComponent(jRadioButtonNombre)
+                    .addComponent(jRadioButtonIdRol)
+                    .addComponent(jRadioButtonCorreo))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelBuscar, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTextFieldBuscar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -311,14 +417,39 @@ public class UsuariosGUI extends javax.swing.JPanel implements IGUIBase
         desbloquearBotones();
     }//GEN-LAST:event_tblDatosMouseClicked
 
+    private void jTextFieldBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldBuscarKeyTyped
+        if(buttonGroupFiltro.getSelection() == null)
+        {
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Debes seleccionar una opcion de filtro");
+        }
+        else
+        {
+            jTextFieldBuscar.addKeyListener(new KeyAdapter() {
+                @Override
+                public void keyTyped(final KeyEvent e){
+                    filtroBusqueda();
+                }
+            });
+            cargarFiltro();
+        }
+    }//GEN-LAST:event_jTextFieldBuscarKeyTyped
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCrear;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnModificar;
+    private javax.swing.JLabel jLabelBuscar;
+    private javax.swing.JLabel jLabelFiltro;
     private javax.swing.JLabel jLabelTitulo;
+    private javax.swing.JRadioButton jRadioButtonCorreo;
+    private javax.swing.JRadioButton jRadioButtonId;
+    private javax.swing.JRadioButton jRadioButtonIdRol;
+    private javax.swing.JRadioButton jRadioButtonNombre;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JTextField jTextFieldBuscar;
     private javax.swing.JLabel lblClave;
     private javax.swing.JLabel lblCorreo;
     private javax.swing.JLabel lblId;

@@ -11,13 +11,11 @@ import GUI.Archivo.*;
 import GUI.Ayuda.*;
 import GUI.Sistema.*;
 import Servicio.AccesoServicio;
-import Servicio.UsuarioServicio;
 
 public class PrincipalGUI extends javax.swing.JFrame implements ActionListener
 {  
     private UsuarioEntidad usuario;
     private final AccesoServicio acceso = new AccesoServicio();    
-    private final UsuarioServicio servicio = new UsuarioServicio();
     private InicioGUI inicio = new InicioGUI();
     private PerfilGUI perfil = null;
     private SobreGUI sobre = new SobreGUI();
@@ -33,14 +31,14 @@ public class PrincipalGUI extends javax.swing.JFrame implements ActionListener
         this.usuario = objUsuario;
         this.setResizable(false);
         this.setTitle("Sistema Modular : Inicio");
-        this.setLocationRelativeTo(null); //Centrar componente
+        this.setLocationRelativeTo(null);
         cargarComponentePanel(inicio);
         jMenuItemInicio.addActionListener(this);
         jMenuItemPerfilUsuario.addActionListener(this);
         jMenuItemSobrePrograma.addActionListener(this);
         jMenuItemCerrarPrograma.addActionListener(this);
         jMenuItemLogout.addActionListener(this);
-        jMenuItemModulos.addActionListener(this);
+        jMenuItemBase.addActionListener(this);
         jMenuItemOperaciones.addActionListener(this);
         jMenuItemPermisos.addActionListener(this);
         jMenuItemRoles.addActionListener(this);
@@ -90,9 +88,9 @@ public class PrincipalGUI extends javax.swing.JFrame implements ActionListener
             new GUI.AccesoGUI().setVisible(true);
             this.setVisible(false);            
         }
-        else if(e.getSource()==jMenuItemModulos)
+        else if(e.getSource()==jMenuItemBase)
         {
-            this.setTitle("Sistema Modular : Modulos");
+            this.setTitle("Sistema Modular : Configuración del sistema");
             cargarComponentePanel(modulos);
         }
         else if(e.getSource()==jMenuItemOperaciones)
@@ -131,12 +129,15 @@ public class PrincipalGUI extends javax.swing.JFrame implements ActionListener
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
         jMenuItemCerrarPrograma = new javax.swing.JMenuItem();
         jMenuSistema = new javax.swing.JMenu();
-        jMenuItemModulos = new javax.swing.JMenuItem();
-        jMenuItemSubModulos = new javax.swing.JMenu();
+        jMenuItemModulos = new javax.swing.JMenu();
+        jMenu1 = new javax.swing.JMenu();
         jMenuItemOperaciones = new javax.swing.JMenuItem();
+        jSeparator4 = new javax.swing.JPopupMenu.Separator();
+        jMenuItemUsuarios = new javax.swing.JMenuItem();
         jMenuItemRoles = new javax.swing.JMenuItem();
         jMenuItemPermisos = new javax.swing.JMenuItem();
-        jMenuItemUsuarios = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        jMenuItemBase = new javax.swing.JMenuItem();
         jMenuAyuda = new javax.swing.JMenu();
         jMenuItemSobrePrograma = new javax.swing.JMenuItem();
 
@@ -167,23 +168,29 @@ public class PrincipalGUI extends javax.swing.JFrame implements ActionListener
         jMenuSistema.setText("Sistema");
 
         jMenuItemModulos.setText("Modulos");
-        jMenuSistema.add(jMenuItemModulos);
 
-        jMenuItemSubModulos.setText("SubModulos");
+        jMenu1.setText("Operaciones");
 
-        jMenuItemOperaciones.setText("Operaciones");
-        jMenuItemSubModulos.add(jMenuItemOperaciones);
-
-        jMenuItemRoles.setText("Roles");
-        jMenuItemSubModulos.add(jMenuItemRoles);
-
-        jMenuItemPermisos.setText("Permisos");
-        jMenuItemSubModulos.add(jMenuItemPermisos);
+        jMenuItemOperaciones.setText("Configuración");
+        jMenu1.add(jMenuItemOperaciones);
+        jMenu1.add(jSeparator4);
 
         jMenuItemUsuarios.setText("Usuarios");
-        jMenuItemSubModulos.add(jMenuItemUsuarios);
+        jMenu1.add(jMenuItemUsuarios);
 
-        jMenuSistema.add(jMenuItemSubModulos);
+        jMenuItemRoles.setText("Roles");
+        jMenu1.add(jMenuItemRoles);
+
+        jMenuItemPermisos.setText("Permisos");
+        jMenu1.add(jMenuItemPermisos);
+
+        jMenuItemModulos.add(jMenu1);
+
+        jMenuSistema.add(jMenuItemModulos);
+        jMenuSistema.add(jSeparator1);
+
+        jMenuItemBase.setText("Configuración");
+        jMenuSistema.add(jMenuItemBase);
 
         jMenuBar1.add(jMenuSistema);
 
@@ -211,23 +218,26 @@ public class PrincipalGUI extends javax.swing.JFrame implements ActionListener
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenuArchivo;
     private javax.swing.JMenu jMenuAyuda;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItemBase;
     private javax.swing.JMenuItem jMenuItemCerrarPrograma;
     private javax.swing.JMenuItem jMenuItemInicio;
     private javax.swing.JMenuItem jMenuItemLogout;
-    private javax.swing.JMenuItem jMenuItemModulos;
+    private javax.swing.JMenu jMenuItemModulos;
     private javax.swing.JMenuItem jMenuItemOperaciones;
     private javax.swing.JMenuItem jMenuItemPerfilUsuario;
     private javax.swing.JMenuItem jMenuItemPermisos;
     private javax.swing.JMenuItem jMenuItemRoles;
     private javax.swing.JMenuItem jMenuItemSobrePrograma;
-    private javax.swing.JMenu jMenuItemSubModulos;
     private javax.swing.JMenuItem jMenuItemUsuarios;
     private javax.swing.JMenu jMenuSistema;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
+    private javax.swing.JPopupMenu.Separator jSeparator4;
     private javax.swing.JPanel panelFondo;
     // End of variables declaration//GEN-END:variables
     

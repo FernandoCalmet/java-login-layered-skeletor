@@ -12,4 +12,7 @@ public interface IGUIBase
     public void desbloquearCampos();
     public void bloquearBotones();
     public void desbloquearBotones();
+    public void filtroBusqueda();
+    public void cargarFiltro();
+    public void cargarGrupoRadioBotones();
 }

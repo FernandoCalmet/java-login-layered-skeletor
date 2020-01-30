@@ -29,33 +29,54 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jScrollPane1" pref="0" max="32767" attributes="0"/>
                   <Component id="jSeparator1" max="32767" attributes="0"/>
-                  <Group type="102" attributes="0">
-                      <Component id="jLabelTitulo" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="320" max="32767" attributes="0"/>
-                  </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="lblIdModulo" max="32767" attributes="0"/>
-                          <Component id="lblId" alignment="0" pref="80" max="32767" attributes="0"/>
-                          <Component id="lblNombre" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jLabelId" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jLabelModulo" pref="80" max="32767" attributes="0"/>
+                          <Component id="jLabelNombre" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="txtNombreModulo" alignment="1" max="32767" attributes="0"/>
-                          <Component id="txtId" max="32767" attributes="0"/>
-                          <Component id="txtNombre" alignment="0" max="32767" attributes="0"/>
-                          <Component id="txtIdModulo" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="jTextFieldIdModulo" min="-2" pref="50" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jTextFieldNombreModulo" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="jTextFieldId" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jTextFieldNombre" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
+                      <Component id="jLabelTitulo" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="320" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jLabelBuscar" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jTextFieldBuscar" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="btnCrear" min="-2" pref="90" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btnModificar" min="-2" pref="90" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btnEliminar" min="-2" pref="90" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btnLimpiar" min="-2" pref="90" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jLabelFiltro" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="jRadioButtonId" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="jRadioButtonNombre" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jRadioButtonIdModulo" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      <Component id="btnCrear" min="-2" pref="90" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnModificar" min="-2" pref="90" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnEliminar" min="-2" pref="90" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnLimpiar" min="-2" pref="90" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -71,32 +92,41 @@
               <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblId" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtId" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabelId" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jTextFieldId" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblNombre" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtNombre" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabelNombre" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jTextFieldNombre" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabelModulo" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jTextFieldIdModulo" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jTextFieldNombreModulo" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnCrear" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnModificar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnEliminar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnLimpiar" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jScrollPane1" pref="180" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabelFiltro" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonId" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonNombre" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonIdModulo" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="lblIdModulo" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtIdModulo" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabelBuscar" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Component id="jTextFieldBuscar" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="txtNombreModulo" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="btnCrear" alignment="0" min="-2" pref="32" max="-2" attributes="0"/>
-                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                      <Component id="btnModificar" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                      <Component id="btnEliminar" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                      <Component id="btnLimpiar" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="jScrollPane1" pref="200" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -162,26 +192,26 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JLabel" name="lblId">
+    <Component class="javax.swing.JLabel" name="jLabelId">
       <Properties>
         <Property name="text" type="java.lang.String" value="ID"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblNombre">
+    <Component class="javax.swing.JLabel" name="jLabelNombre">
       <Properties>
         <Property name="text" type="java.lang.String" value="Nombre"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtId">
+    <Component class="javax.swing.JTextField" name="jTextFieldId">
     </Component>
-    <Component class="javax.swing.JTextField" name="txtNombre">
+    <Component class="javax.swing.JTextField" name="jTextFieldNombre">
     </Component>
-    <Component class="javax.swing.JLabel" name="lblIdModulo">
+    <Component class="javax.swing.JLabel" name="jLabelModulo">
       <Properties>
-        <Property name="text" type="java.lang.String" value="ID Modulo"/>
+        <Property name="text" type="java.lang.String" value="M&#xf3;dulo"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtIdModulo">
+    <Component class="javax.swing.JTextField" name="jTextFieldIdModulo">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelTitulo">
       <Properties>
@@ -190,7 +220,46 @@
     </Component>
     <Component class="javax.swing.JSeparator" name="jSeparator1">
     </Component>
-    <Component class="javax.swing.JTextField" name="txtNombreModulo">
+    <Component class="javax.swing.JTextField" name="jTextFieldNombreModulo">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabelFiltro">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Filtrar resultados por:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonId">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Id"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonNombre">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Nombre"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jTextFieldBuscar">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextFieldBuscarKeyTyped"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabelBuscar">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Buscar"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonIdModulo">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Id M&#xf3;dulo"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

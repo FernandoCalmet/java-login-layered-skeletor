@@ -126,10 +126,10 @@ public class UsuarioRepositorio implements IRepositorioBase
     public ArrayList<Object[]> ListarTodos() 
     {           
         String consultaSql = "SELECT "
-                + "U.id id, U.correo correo, U.clave clave, U.nombre nombre, U.id_rol id_rol, R.nombre nombre_rol "
-                + "FROM USUARIOS U "
-                + "INNER JOIN ROLES R ON R.id = U.id_rol "
-                + "ORDER BY id ASC";
+                + "U.id, U.correo correo, U.clave clave, U.nombre nombre, U.id_rol id_rol, R.nombre nombre_rol "
+                + "FROM usuarios U "
+                + "INNER JOIN roles R ON R.id = U.id_rol "
+                + "ORDER BY U.id ASC";
         PreparedStatement declaracionSql; 
         ResultSet resultadoSql;
         ResultSetMetaData metaSql;

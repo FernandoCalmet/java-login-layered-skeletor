@@ -117,9 +117,9 @@ public class OperacionRepositorio implements IRepositorioBase
     public ArrayList<Object[]> ListarTodos() 
     {
         String consultaSql = "SELECT "
-                + "O.id id, O.nombre, O.id_modulo, M.nombre "
-                + "FROM OPERACIONES O "
-                + "INNER JOIN MODULOS M ON M.id = O.id_modulo "
+                + "O.id, O.nombre, O.id_modulo, M.nombre "
+                + "FROM operaciones O "
+                + "INNER JOIN modulos M ON M.id = O.id_modulo "
                 + "ORDER BY O.id ASC";
         PreparedStatement declaracionSql; 
         ResultSet resultadoSql;
