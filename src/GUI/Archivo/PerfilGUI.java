@@ -7,20 +7,28 @@ import Entidad.UsuarioEntidad;
 
 public class PerfilGUI extends javax.swing.JPanel 
 {
+    private UsuarioEntidad entidad;
 
-    public PerfilGUI(UsuarioEntidad usuario) 
+    public PerfilGUI(Object objEntidad) 
+    {        
+        this.entidad = new UsuarioEntidad();
+        this.entidad = (UsuarioEntidad) objEntidad;  
+        initComponents(); 
+        datosUsuario();
+    }
+    
+    private void datosUsuario()
     {
-        initComponents();
-        this.jTextFieldId.enable(false);
-        this.jTextFieldId.setText(String.valueOf(usuario.getId()));
+        this.jTextFieldId.enable(false);        
+        this.jTextFieldId.setText(String.valueOf(entidad.getId()));
         this.jTextFieldCorreo.enable(false);
-        this.jTextFieldCorreo.setText(String.valueOf(usuario.getCorreo()));
+        this.jTextFieldCorreo.setText(String.valueOf(entidad.getCorreo()));
         this.jPasswordFieldClave.enable(false);
-        this.jPasswordFieldClave.setText(String.valueOf(usuario.getClave()));
+        this.jPasswordFieldClave.setText(String.valueOf(entidad.getClave()));
         this.jTextFieldNombre.enable(false);
-        this.jTextFieldNombre.setText(String.valueOf(usuario.getNombre()));
+        this.jTextFieldNombre.setText(String.valueOf(entidad.getNombre()));
         this.jTextFieldIdRol.enable(false);  
-        this.jTextFieldIdRol.setText(String.valueOf(usuario.getId_rol()));
+        this.jTextFieldIdRol.setText(String.valueOf(entidad.getId_rol()));
     }
 
     @SuppressWarnings("unchecked")

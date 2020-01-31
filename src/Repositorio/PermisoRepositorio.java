@@ -1,5 +1,8 @@
 package Repositorio;
-
+/**
+ *
+ * @author Fernando Calmet <github.com/fernandocalmet>
+ */
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -8,27 +11,29 @@ import java.util.ArrayList;
 import Interface.IRepositorioBase ;
 import Entidad.PermisoEntidad;
 import BaseDatos.*;
-/**
- *
- * @author Fernando Calmet <github.com/fernandocalmet>
- */
+
 public class PermisoRepositorio implements IRepositorioBase 
 {
-    private final MySql baseDatos = new MySql();
-    private PermisoEntidad permiso = new PermisoEntidad();
+    private final MySql baseDatos;
+    private PermisoEntidad entidad;
     
-    //TODO: Recibe como parametro un objeto, verifica si el objeto existe en la base de datos para crear el registro
+    public PermisoRepositorio()
+    {
+        this.baseDatos = new MySql();
+        this.entidad = new PermisoEntidad();
+    }
+    
     @Override
     public boolean Crear(Object obj) 
     {
-        permiso = (PermisoEntidad) obj;
+        entidad = (PermisoEntidad) obj;
         String consultaSql = "INSERT INTO permisos (id_rol, id_operacion) VALUES (?, ?)";      
         PreparedStatement declaracionSql;        
         try
         {
             declaracionSql = baseDatos.conectado().prepareStatement(consultaSql);
-            declaracionSql.setInt(1, permiso.getId_rol());
-            declaracionSql.setInt(2, permiso.getId_operacion());
+            declaracionSql.setInt(1, entidad.getId_rol());
+            declaracionSql.setInt(2, entidad.getId_operacion());
             int filas = declaracionSql.executeUpdate();
             if(filas > 0){return true;}
             else{return false;}
@@ -40,27 +45,27 @@ public class PermisoRepositorio implements IRepositorioBase
         }
     }
 
-    //TODO: Recibe como parametro un objeto, verifica si el objeto existe en la base de datos para eliminar el registro
     @Override
     public boolean Eliminar(Object obj) 
     {
-        permiso = (PermisoEntidad) obj;
+        entidad = (PermisoEntidad) obj;
         String consultaSql = "DELETE FROM permisos WHERE id=?";      
         PreparedStatement declaracionSql;        
         try
         {
             declaracionSql = baseDatos.conectado().prepareStatement(consultaSql);
-            declaracionSql.setInt(1, permiso.getId());
+            declaracionSql.setInt(1, entidad.getId());
             int filas = declaracionSql.executeUpdate();
             if(filas > 0){return true;}
             else{return false;}
-        }catch(SQLException ex){
+        }
+        catch(SQLException ex)
+        {
             System.out.println("Ocurrio un error: "+ex.getMessage());
             return false;
         }
     }
 
-    //TODO: Recibe como parametro un objeto, verifica si el objeto existe en la base de datos para consultar el registro
     @Override
     public Object[] ListarDetalles(Object obj) 
     {
@@ -72,7 +77,7 @@ public class PermisoRepositorio implements IRepositorioBase
         try
         {
             declaracionSql = baseDatos.conectado().prepareStatement(consultaSql);  
-            declaracionSql.setInt(1, permiso.getId());
+            declaracionSql.setInt(1, entidad.getId());
             int filas = declaracionSql.executeUpdate();
             if(filas > 0)
             {
@@ -90,19 +95,18 @@ public class PermisoRepositorio implements IRepositorioBase
         return listaDatos;
     }
 
-    //TODO: Recibe como parametro un objeto, verifica si el objeto existe en la base de datos para modificar el registro
     @Override
     public boolean Modificar(Object obj) 
     {
-        permiso = (PermisoEntidad) obj;
+        entidad = (PermisoEntidad) obj;
         String consultaSql = "UPDATE permisos SET id_rol=?, id_operacion=? WHERE id=?";      
         PreparedStatement declaracionSql;        
         try
         {
             declaracionSql = baseDatos.conectado().prepareStatement(consultaSql);
-            declaracionSql.setInt(1, permiso.getId_rol());
-            declaracionSql.setInt(2, permiso.getId_operacion());
-            declaracionSql.setInt(3, permiso.getId());
+            declaracionSql.setInt(1, entidad.getId_rol());
+            declaracionSql.setInt(2, entidad.getId_operacion());
+            declaracionSql.setInt(3, entidad.getId());
             int filas = declaracionSql.executeUpdate();
             if(filas > 0){return true;}
             else{return false;}
@@ -114,7 +118,6 @@ public class PermisoRepositorio implements IRepositorioBase
         }
     }
 
-    //TODO: Verifica los registros en la base de datos y devuelve una lista de los objetos encontrados
     @Override
     public ArrayList<Object[]> ListarTodos() 
     {   

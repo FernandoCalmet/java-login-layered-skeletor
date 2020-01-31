@@ -1,5 +1,8 @@
 package Repositorio;
-
+/**
+ *
+ * @author Fernando Calmet <github.com/fernandocalmet>
+ */
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -8,26 +11,28 @@ import java.util.ArrayList;
 import Interface.IRepositorioBase;
 import Entidad.RolEntidad;
 import BaseDatos.*;
-/**
- *
- * @author Fernando Calmet <github.com/fernandocalmet>
- */
+
 public class RolRepositorio implements IRepositorioBase 
 {
-    private final MySql baseDatos = new MySql();
-    private RolEntidad rol = new RolEntidad();
+    private final MySql baseDatos;
+    private RolEntidad entidad;
     
-    //TODO: Recibe como parametro un objeto, verifica si el objeto existe en la base de datos para crear el registro
+    public RolRepositorio()
+    {
+        this.baseDatos = new MySql();
+        this.entidad = new RolEntidad();
+    }
+    
     @Override
     public boolean Crear(Object obj) 
     {
-        rol = (RolEntidad) obj;
+        entidad = (RolEntidad) obj;
         String consultaSql = "INSERT INTO roles (nombre) VALUES (?)";      
         PreparedStatement declaracionSql;        
         try
         {
             declaracionSql = baseDatos.conectado().prepareStatement(consultaSql);
-            declaracionSql.setString(1, rol.getNombre());
+            declaracionSql.setString(1, entidad.getNombre());
             int filas = declaracionSql.executeUpdate();
             if(filas > 0){return true;}
             else{return false;}
@@ -39,17 +44,16 @@ public class RolRepositorio implements IRepositorioBase
         }
     }
 
-    //TODO: Recibe como parametro un objeto, verifica si el objeto existe en la base de datos para eliminar el registro
     @Override
     public boolean Eliminar(Object obj) 
     {
-        rol = (RolEntidad) obj;
+        entidad = (RolEntidad) obj;
         String consultaSql = "DELETE FROM roles WHERE id=?";      
         PreparedStatement declaracionSql;        
         try
         {
             declaracionSql = baseDatos.conectado().prepareStatement(consultaSql);
-            declaracionSql.setInt(1, rol.getId());
+            declaracionSql.setInt(1, entidad.getId());
             int filas = declaracionSql.executeUpdate();
             if(filas > 0){return true;}
             else{return false;}
@@ -61,7 +65,6 @@ public class RolRepositorio implements IRepositorioBase
         }
     }
 
-    //TODO: Recibe como parametro un objeto, verifica si el objeto existe en la base de datos para consultar el registro
     @Override
     public Object[] ListarDetalles(Object obj) 
     {
@@ -73,7 +76,7 @@ public class RolRepositorio implements IRepositorioBase
         try
         {
             declaracionSql = baseDatos.conectado().prepareStatement(consultaSql);  
-            declaracionSql.setInt(1, rol.getId());
+            declaracionSql.setInt(1, entidad.getId());
             int filas = declaracionSql.executeUpdate();
             if(filas > 0)
             {
@@ -95,14 +98,14 @@ public class RolRepositorio implements IRepositorioBase
     @Override
     public boolean Modificar(Object obj) 
     {
-        rol = (RolEntidad) obj;
+        entidad = (RolEntidad) obj;
         String consultaSql = "UPDATE roles SET nombre=? WHERE id=?";      
         PreparedStatement declaracionSql;        
         try
         {
             declaracionSql = baseDatos.conectado().prepareStatement(consultaSql);
-            declaracionSql.setString(1, rol.getNombre());
-            declaracionSql.setInt(2, rol.getId());
+            declaracionSql.setString(1, entidad.getNombre());
+            declaracionSql.setInt(2, entidad.getId());
             int filas = declaracionSql.executeUpdate();
             if(filas > 0){return true;}
             else{return false;}
@@ -114,7 +117,6 @@ public class RolRepositorio implements IRepositorioBase
         }
     }
 
-    //TODO: Verifica los registros en la base de datos y devuelve una lista de los objetos encontrados
     @Override
     public ArrayList<Object[]> ListarTodos() 
     {   

@@ -17,16 +17,21 @@ import javax.swing.table.TableRowSorter;
 
 public class OperacionesGUI extends javax.swing.JPanel implements IGUIBase
 {    
-    private OperacionEntidad operacion = new OperacionEntidad();
-    private OperacionServicio servicio = new OperacionServicio();
+    private OperacionEntidad operacion;
+    private OperacionServicio servicio;
     private String [] columnas = {"Id operación", "Operación", "Id Modulo", "Modulo"};
-    private ArrayList<Object[]> listaDatos = new ArrayList<>();
-    private DefaultTableModel tablaDatos = new DefaultTableModel(columnas, 0);
+    private ArrayList<Object[]> listaDatos;
+    private DefaultTableModel tablaDatos;
     private TableRowSorter filtroDatos;
-    private ButtonGroup buttonGroupFiltro = new ButtonGroup();
+    private ButtonGroup buttonGroupFiltro;
 
     public OperacionesGUI() 
     {
+        this.operacion = new OperacionEntidad();
+        this.servicio = new OperacionServicio();
+        this.listaDatos = new ArrayList<>();
+        this.tablaDatos= new DefaultTableModel(columnas, 0);
+        this.buttonGroupFiltro = new ButtonGroup();
         initComponents();
         cargarDatos();
         bloquearBotones();

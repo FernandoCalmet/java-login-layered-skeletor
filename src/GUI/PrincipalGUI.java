@@ -6,33 +6,60 @@ package GUI;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import Entidad.UsuarioEntidad;
 import GUI.Archivo.*;
 import GUI.Ayuda.*;
 import GUI.Sistema.*;
 import Servicio.AccesoServicio;
+import Entidad.UsuarioEntidad;
 
 public class PrincipalGUI extends javax.swing.JFrame implements ActionListener
 {  
-    private UsuarioEntidad usuario;
-    private final AccesoServicio acceso = new AccesoServicio();    
-    private InicioGUI inicio = new InicioGUI();
-    private PerfilGUI perfil = null;
-    private SobreGUI sobre = new SobreGUI();
-    private ModulosGUI modulos = new ModulosGUI();
-    private OperacionesGUI operaciones = new OperacionesGUI();
-    private PermisosGUI permisos = new PermisosGUI();
-    private RolesGUI roles = new RolesGUI();
-    private UsuariosGUI usuarios = new UsuariosGUI();
+    private UsuarioEntidad entidad;
+    private final AccesoServicio acceso;
+    private final InicioGUI inicio;
+    private final PerfilGUI perfil;
+    private final SobreGUI sobre;
+    private final ModulosGUI modulos;
+    private final OperacionesGUI operaciones;
+    private final PermisosGUI permisos;
+    private final RolesGUI roles;
+    private final UsuariosGUI usuarios;
    
-    public PrincipalGUI(UsuarioEntidad objUsuario) 
+    public PrincipalGUI(Object objEntidad) 
     {
-        initComponents();
-        this.usuario = objUsuario;
+        this.entidad = (UsuarioEntidad) objEntidad;
+        this.acceso = new AccesoServicio();
+        this.inicio = new InicioGUI();
+        this.perfil = new PerfilGUI(this.entidad);
+        this.sobre = new SobreGUI();
+        this.modulos = new ModulosGUI();
+        this.operaciones = new OperacionesGUI();
+        this.permisos = new PermisosGUI();
+        this.roles = new RolesGUI();
+        this.usuarios = new UsuariosGUI();
+        initComponents();               
+        cargarComponentePanel(inicio);
+        configInicial();        
+    }
+    
+    private void configInicial()
+    {
         this.setResizable(false);
         this.setTitle("Sistema Modular : Inicio");
         this.setLocationRelativeTo(null);
-        cargarComponentePanel(inicio);
+        cargarAccionesMenu();
+    }
+            
+    private void cargarComponentePanel(Component componenteGUI)
+    { 
+        panelFondo.setVisible(false);
+        panelFondo.removeAll();
+        panelFondo.add(componenteGUI);
+        panelFondo.setVisible(true);
+    }   
+    
+    private void cargarAccionesMenu()
+    {
         jMenuItemInicio.addActionListener(this);
         jMenuItemPerfilUsuario.addActionListener(this);
         jMenuItemSobrePrograma.addActionListener(this);
@@ -44,19 +71,6 @@ public class PrincipalGUI extends javax.swing.JFrame implements ActionListener
         jMenuItemRoles.addActionListener(this);
         jMenuItemUsuarios.addActionListener(this);
     }
-
-    private UsuarioEntidad getEntidadUsuario() 
-    {
-        return this.usuario;
-    }      
-        
-    private void cargarComponentePanel(Component componenteGUI)
-    { 
-        panelFondo.setVisible(false);
-        panelFondo.removeAll();
-        panelFondo.add(componenteGUI);
-        panelFondo.setVisible(true);
-    }   
     
     @Override
     public void actionPerformed(ActionEvent e) 
@@ -68,8 +82,7 @@ public class PrincipalGUI extends javax.swing.JFrame implements ActionListener
         }
         else if(e.getSource()==jMenuItemPerfilUsuario)
         {
-            this.setTitle("Sistema Modular : Perfil");
-            perfil = new GUI.Archivo.PerfilGUI(getEntidadUsuario());
+            this.setTitle("Sistema Modular : Perfil");           
             cargarComponentePanel(perfil);
         }
         else if(e.getSource()==jMenuItemSobrePrograma)
@@ -79,18 +92,18 @@ public class PrincipalGUI extends javax.swing.JFrame implements ActionListener
         }
         else if(e.getSource()==jMenuItemCerrarPrograma)
         {           
-            acceso.Logout(getEntidadUsuario());
+            acceso.Logout(this.entidad);
             System.exit(0);                      
         }
         else if(e.getSource()==jMenuItemLogout)
         {            
-            acceso.Logout(getEntidadUsuario());             
+            acceso.Logout(this.entidad);             
             new GUI.AccesoGUI().setVisible(true);
             this.setVisible(false);            
         }
         else if(e.getSource()==jMenuItemBase)
         {
-            this.setTitle("Sistema Modular : Configuración del sistema");
+            this.setTitle("Sistema Modular : Módulos");
             cargarComponentePanel(modulos);
         }
         else if(e.getSource()==jMenuItemOperaciones)

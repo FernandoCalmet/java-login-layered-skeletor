@@ -17,16 +17,21 @@ import javax.swing.table.TableRowSorter;
 
 public class PermisosGUI extends javax.swing.JPanel implements IGUIBase
 {    
-    private PermisoEntidad permiso = new PermisoEntidad();
-    private PermisoServicio servicio = new PermisoServicio();
+    private PermisoEntidad permiso ;
+    private PermisoServicio servicio;
     private String [] columnas = {"Id Permiso", "Id Rol", "Rol", "Id Operación", "Operación"};
-    private ArrayList<Object[]> listaDatos = new ArrayList<>();
-    private DefaultTableModel tablaDatos = new DefaultTableModel(columnas, 0);
+    private ArrayList<Object[]> listaDatos;
+    private DefaultTableModel tablaDatos;
     private TableRowSorter filtroDatos;
-    private ButtonGroup buttonGroupFiltro = new ButtonGroup();
+    private ButtonGroup buttonGroupFiltro;
 
     public PermisosGUI() 
     {
+        this.permiso = new PermisoEntidad();
+        this.servicio = new PermisoServicio();
+        this.listaDatos = new ArrayList<>();
+        this.tablaDatos = new DefaultTableModel(columnas, 0);
+        this.buttonGroupFiltro = new ButtonGroup();
         initComponents();
         cargarDatos();
         bloquearBotones();

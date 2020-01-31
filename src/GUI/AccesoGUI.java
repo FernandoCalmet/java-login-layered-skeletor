@@ -3,17 +3,27 @@ package GUI;
  *
  * @author Fernando Calmet <github.com/fernandocalmet>
  */
-import Entidad.UsuarioEntidad;
 import Servicio.AccesoServicio;
+import Entidad.UsuarioEntidad;
 
 public class AccesoGUI extends javax.swing.JFrame 
-{    
-    private UsuarioEntidad usuario = new UsuarioEntidad();  
-    private AccesoServicio acceso = new AccesoServicio();
-
+{ 
+    private final AccesoServicio servicio;
+    private UsuarioEntidad entidad;
+    private String correo, clave;    
+    
     public AccesoGUI() 
     {       
+        this.servicio = new AccesoServicio();
+        this.entidad = new UsuarioEntidad();
+        this.correo = null;
+        this.clave = null;
         initComponents();
+        configPanel();
+    }
+    
+    private void configPanel()
+    {
         this.setResizable(false);
         this.setTitle("Acceso de Usuario");
         this.setLocationRelativeTo(null);
@@ -110,13 +120,14 @@ public class AccesoGUI extends javax.swing.JFrame
     }// </editor-fold>//GEN-END:initComponents
 
     private void JButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButtonLoginActionPerformed
-        usuario.setCorreo(this.JTextCorreo.getText());
-        usuario.setClave(this.JTextClave.getText());        
-        if(acceso.Login(usuario).getId() > 0)
+        correo = this.JTextCorreo.getText();
+        clave = this.JTextClave.getText();
+        entidad = (UsuarioEntidad) servicio.Login(correo, clave);
+        if(entidad.getId() > 0)
         {
-            new GUI.PrincipalGUI(usuario).setVisible(true);
+            new PrincipalGUI(entidad).setVisible(true);     
             this.setVisible(false);            
-        }        
+        }
     }//GEN-LAST:event_JButtonLoginActionPerformed
  
     // Variables declaration - do not modify//GEN-BEGIN:variables

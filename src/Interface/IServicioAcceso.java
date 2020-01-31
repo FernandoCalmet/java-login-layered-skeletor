@@ -3,10 +3,8 @@ package Interface;
  *
  * @author Fernando Calmet <github.com/fernandocalmet>
  */
-import Entidad.UsuarioEntidad;
-
 public interface IServicioAcceso 
 {
-    public UsuarioEntidad Login(UsuarioEntidad objUsuario);
-    public UsuarioEntidad Logout(UsuarioEntidad objUsuario);
+    public Object Login(String correo, String clave);
+    public Object Logout(Object objEntidad);
 }

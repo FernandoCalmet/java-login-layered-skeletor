@@ -7,49 +7,59 @@ import Entidad.ModuloEntidad;
 import Repositorio.ModuloRepositorio;
 import Interface.IServicioBase;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
+import Excepcion.ModuloException;
 
 public class ModuloServicio implements IServicioBase
 {
-    private ModuloEntidad modulo = null;
-    private final ModuloRepositorio repositorio = new ModuloRepositorio();
-
+    private ModuloEntidad entidad;
+    private final ModuloRepositorio repositorio;
+    
+    public ModuloServicio()
+    {
+        this.entidad = new ModuloEntidad();
+        this.repositorio = new ModuloRepositorio();
+    }
+   
     @Override
     public boolean Crear(Object obj) {
-        modulo = (ModuloEntidad) obj;
-        if(!modulo.getNombre().isEmpty())
+        entidad = (ModuloEntidad) obj;
+        if(!entidad.getNombre().isEmpty())
         {   
-            if(repositorio.Crear(modulo) == true)
+            if(repositorio.Crear(entidad) == true)
                 return true;
             else
             {
-                JOptionPane.showMessageDialog(null ,"Este nombre no es valido"); 
+                try { throw new ModuloException("Este nombre no es valido"); } 
+                catch (Exception ex) { System.out.println("Excepción capturada: "+ex); }       
                 return false;
             }   
         }
         else
         {
-            JOptionPane.showMessageDialog(null ,"No esta permitido campos vacios"); 
+            try { throw new ModuloException("No esta permitido campos vacios, ingresar los datos solicitados"); } 
+            catch (Exception ex) { System.out.println("Excepción capturada: "+ex); } 
             return false;
         }
     }
 
     @Override
     public boolean Eliminar(Object obj) {
-        modulo = (ModuloEntidad) obj;
-        if(modulo.getId() != 0)
+        entidad = (ModuloEntidad) obj;
+        if(entidad.getId() != 0)
         {   
-            if(repositorio.Eliminar(modulo) == true)
+            if(repositorio.Eliminar(entidad) == true)
                 return true;
             else
             {
-                JOptionPane.showMessageDialog(null ,"Este ID no es valido"); 
+                try { throw new ModuloException("Este ID no es valido"); } 
+                catch (Exception ex) { System.out.println("Excepción capturada: "+ex); } 
                 return false;
             }   
         }
         else
         {
-            JOptionPane.showMessageDialog(null ,"No esta permitido campos vacios"); 
+            try { throw new ModuloException("No esta permitido campos vacios, ingresar los datos solicitados"); } 
+            catch (Exception ex) { System.out.println("Excepción capturada: "+ex); }  
             return false;
         }
     }
@@ -61,20 +71,22 @@ public class ModuloServicio implements IServicioBase
 
     @Override
     public boolean Modificar(Object obj) {
-        modulo = (ModuloEntidad) obj;
-        if(!modulo.getNombre().isEmpty() && modulo.getId() != 0)
+        entidad = (ModuloEntidad) obj;
+        if(!entidad.getNombre().isEmpty() && entidad.getId() != 0)
         {   
-            if(repositorio.Modificar(modulo) == true)
+            if(repositorio.Modificar(entidad) == true)
                 return true;
             else
             {
-                JOptionPane.showMessageDialog(null ,"ID/Nombre no es valido"); 
+                try { throw new ModuloException("Este ID no es valido"); } 
+                catch (Exception ex) { System.out.println("Excepción capturada: "+ex); }  
                 return false;
             }   
         }
         else
         {
-            JOptionPane.showMessageDialog(null ,"No esta permitido campos vacios"); 
+            try { throw new ModuloException("No esta permitido campos vacios, ingresar los datos solicitados"); } 
+            catch (Exception ex) { System.out.println("Excepción capturada: "+ex); } 
             return false;
         }
     }
@@ -82,6 +94,5 @@ public class ModuloServicio implements IServicioBase
     @Override
     public ArrayList<Object[]> ListarTodos() {
         return repositorio.ListarTodos();
-    }
-    
+    }    
 }

@@ -14,21 +14,26 @@ import BaseDatos.*;
 
 public class OperacionRepositorio implements IRepositorioBase 
 {
-    private final MySql baseDatos = new BaseDatos.MySql();
-    private OperacionEntidad operacion = new OperacionEntidad();
+    private final MySql baseDatos;
+    private OperacionEntidad entidad;
     
-    //TODO: Recibe como parametro un objeto, verifica si el objeto existe en la base de datos para crear el registro
+    public OperacionRepositorio()
+    {
+        this.baseDatos = new BaseDatos.MySql();
+        this.entidad = new OperacionEntidad();
+    }
+   
     @Override
     public boolean Crear(Object obj) 
     {
-        operacion = (OperacionEntidad) obj;
+        entidad = (OperacionEntidad) obj;
         String consultaSql = "INSERT INTO operaciones (nombre, id_modulo) VALUES (?, ?)";      
         PreparedStatement declaracionSql;        
         try
         {
             declaracionSql = baseDatos.conectado().prepareStatement(consultaSql);
-            declaracionSql.setString(1, operacion.getNombre());
-            declaracionSql.setInt(2, operacion.getId_modulo());
+            declaracionSql.setString(1, entidad.getNombre());
+            declaracionSql.setInt(2, entidad.getId_modulo());
             int filas = declaracionSql.executeUpdate();
             if(filas > 0){return true;}
             else{return false;}
@@ -40,17 +45,16 @@ public class OperacionRepositorio implements IRepositorioBase
         }
     }
 
-    //TODO: Recibe como parametro un objeto, verifica si el objeto existe en la base de datos para eliminar el registro
     @Override
     public boolean Eliminar(Object obj) 
     {
-        operacion = (OperacionEntidad) obj;
+        entidad = (OperacionEntidad) obj;
         String consultaSql = "DELETE FROM operaciones WHERE id=?";      
         PreparedStatement declaracionSql;        
         try
         {
             declaracionSql = baseDatos.conectado().prepareStatement(consultaSql);
-            declaracionSql.setInt(1, operacion.getId());
+            declaracionSql.setInt(1, entidad.getId());
             int filas = declaracionSql.executeUpdate();
             if(filas > 0){return true;}
             else{return false;}
@@ -62,7 +66,6 @@ public class OperacionRepositorio implements IRepositorioBase
         }
     }
 
-    //TODO: Recibe como parametro un objeto, verifica si el objeto existe en la base de datos para consultar el registro
     @Override
     public Object[] ListarDetalles(Object obj) 
     {
@@ -73,7 +76,7 @@ public class OperacionRepositorio implements IRepositorioBase
         Object[] listaDatos = null;
         try{
             declaracionSql = baseDatos.conectado().prepareStatement(consultaSql);  
-            declaracionSql.setInt(1, operacion.getId());
+            declaracionSql.setInt(1, entidad.getId());
             int filas = declaracionSql.executeUpdate();
             if(filas > 0)
             {
@@ -91,28 +94,29 @@ public class OperacionRepositorio implements IRepositorioBase
         return listaDatos;
     }
 
-    //TODO: Recibe como parametro un objeto, verifica si el objeto existe en la base de datos para modificar el registro
     @Override
     public boolean Modificar(Object obj) 
     {
-        operacion = (OperacionEntidad) obj;
+        entidad = (OperacionEntidad) obj;
         String consultaSql = "UPDATE operaciones SET nombre=?, id_modulo=? WHERE id=?";      
         PreparedStatement declaracionSql;        
-        try{
+        try
+        {
             declaracionSql = baseDatos.conectado().prepareStatement(consultaSql);
-            declaracionSql.setString(1, operacion.getNombre());
-            declaracionSql.setInt(2, operacion.getId_modulo());
-            declaracionSql.setInt(3, operacion.getId());
+            declaracionSql.setString(1, entidad.getNombre());
+            declaracionSql.setInt(2, entidad.getId_modulo());
+            declaracionSql.setInt(3, entidad.getId());
             int filas = declaracionSql.executeUpdate();
-            if(filas > 0){return true;}
-            else{ return false;}
-        }catch(SQLException ex){
+            if(filas > 0){ return true; }
+            else{ return false; }
+        }
+        catch(SQLException ex)
+        {
             System.out.println("Ocurrio un error: "+ex.getMessage());
             return false;
         }
     }
 
-    //TODO: Verifica los registros en la base de datos y devuelve una lista de los objetos encontrados
     @Override
     public ArrayList<Object[]> ListarTodos() 
     {
@@ -133,11 +137,11 @@ public class OperacionRepositorio implements IRepositorioBase
             while(resultadoSql.next())
             {
                 Object[] fila = new Object[metaSql.getColumnCount()];
-                for(int i=0; i<fila.length; i++){fila[i] = resultadoSql.getObject(i + 1);}
+                for(int i=0; i<fila.length; i++){ fila[i] = resultadoSql.getObject(i + 1); }
                 listaDatos.add(fila);
             }
         }
-        catch(SQLException ex){System.out.println("Ocurrio un error: "+ex.getMessage());}
+        catch(SQLException ex){ System.out.println("Ocurrio un error: "+ex.getMessage()); }
         return listaDatos;
     }
 }

@@ -17,16 +17,21 @@ import javax.swing.table.TableRowSorter;
 
 public class UsuariosGUI extends javax.swing.JPanel implements IGUIBase
 {    
-    private UsuarioEntidad usuario = new UsuarioEntidad();
-    private UsuarioServicio servicio = new UsuarioServicio();    
+    private UsuarioEntidad usuario;
+    private UsuarioServicio servicio;   
     private String [] columnas = {"Id", "Correo", "Clave", "Nombre", "Id Rol", "Rol"};
-    private ArrayList<Object[]> listaDatos = new ArrayList<>();    
-    private DefaultTableModel tablaDatos = new DefaultTableModel(columnas, 0);   
+    private ArrayList<Object[]> listaDatos;   
+    private DefaultTableModel tablaDatos;   
     private TableRowSorter filtroDatos;
-    private ButtonGroup buttonGroupFiltro = new ButtonGroup();
+    private ButtonGroup buttonGroupFiltro;
 
     public UsuariosGUI() 
     {
+        this.usuario = new UsuarioEntidad();
+        this.servicio = new UsuarioServicio(); 
+        this.listaDatos = new ArrayList<>(); 
+        this.tablaDatos = new DefaultTableModel(columnas, 0);
+        this.buttonGroupFiltro = new ButtonGroup();
         initComponents();
         cargarDatos();  
         bloquearBotones();

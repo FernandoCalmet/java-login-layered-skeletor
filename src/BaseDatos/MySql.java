@@ -9,34 +9,41 @@ import java.sql.SQLException;
 
 public class MySql implements Interface.IConexionBD
 {
-    private Connection bd_conexion = null;
-    private final String bd_driver = "com.mysql.jdbc.Driver";
-    private final String bd_url = "jdbc:mysql://localhost/sistema_modular";  
-    private final String bd_usuario = "root";
-    private final String bd_clave = "root";       
-    
-    //TODO: El Constructor establece conexion con la base de datos
+    private Connection bd_conexion;
+    private final String bd_driver;
+    private final String bd_url;  
+    private final String bd_usuario;
+    private final String bd_clave;      
+
     public MySql() 
     {
-        try{        
-            //Con el metodo de la clase forName, le pasamos el driver de MySQL para que lo cargue
+        this.bd_conexion = null;
+        this.bd_driver = "com.mysql.jdbc.Driver";
+        this.bd_url = "jdbc:mysql://localhost/sistema_modular";
+        this.bd_usuario = "root";
+        this.bd_clave = "root"; 
+        try{
             Class.forName(this.bd_driver); 
-            this.bd_conexion = DriverManager.getConnection(bd_url, bd_usuario, bd_clave);
+            this.bd_conexion = DriverManager.getConnection(this.bd_url, this.bd_usuario, this.bd_clave);
         }
         catch(SQLException e){System.out.println(e.getMessage());}
         catch(ClassNotFoundException e){System.out.println(e.getMessage());}
     }
+    
+    private Connection getBDconexion(){return this.bd_conexion;}    
+    
+    private void setBDconexion(Connection objConexion){this.bd_conexion = objConexion;}
   
     //TODO: Devolver el objeto de conexion a la base de datos
     @Override
-    public Connection conectado(){return this.bd_conexion;}
+    public Connection conectado(){return getBDconexion();}
 
     //TODO: Cerrar la conexion con la base de datos y vaciar el objeto de conexion
     @Override
     public void desconectado() throws SQLException
     {
       this.bd_conexion.close();
-      this.bd_conexion = null;      
+      setBDconexion(null);
       System.out.println("La conexion a la Base de Datos se ha cerrado exitosamente");
     } 
     
@@ -44,10 +51,10 @@ public class MySql implements Interface.IConexionBD
     @Override
     public void prueba()
     {       
-        if (this.bd_conexion != null){
+        if (getBDconexion() != null){
             System.out.println("La conexión con la Base de Datos esta funcionando correctamente");
         }else{
             System.out.println("No hay conexión con la Base de Datos");
         }
-    }
+    } 
 }

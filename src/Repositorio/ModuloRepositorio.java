@@ -14,20 +14,25 @@ import BaseDatos.*;
 
 public class ModuloRepositorio implements IRepositorioBase 
 {
-    private final MySql baseDatos = new MySql();
-    private ModuloEntidad modulo = new ModuloEntidad();
+    private final MySql baseDatos;
+    private ModuloEntidad entidad;
     
-    //TODO: Recibe como parametro un objeto, verifica si el objeto existe en la base de datos para crear el registro
+    public ModuloRepositorio()
+    {
+        this.baseDatos = new MySql();
+        this.entidad = new ModuloEntidad();
+    }
+
     @Override
     public boolean Crear(Object obj) 
     {
-        modulo = (ModuloEntidad) obj;
+        entidad = (ModuloEntidad) obj;
         String consultaSql = "INSERT INTO modulos (nombre) VALUES (?)";      
         PreparedStatement declaracionSql;
         try
         {
             declaracionSql = baseDatos.conectado().prepareStatement(consultaSql);
-            declaracionSql.setString(1, modulo.getNombre());
+            declaracionSql.setString(1, entidad.getNombre());
             int filas = declaracionSql.executeUpdate();
             if(filas > 0){return true;}
             else{return false;}
@@ -39,17 +44,16 @@ public class ModuloRepositorio implements IRepositorioBase
         }
     }
 
-    //TODO: Recibe como parametro un objeto, verifica si el objeto existe en la base de datos para eliminar el registro
     @Override
     public boolean Eliminar(Object obj) 
     {
-        modulo = (ModuloEntidad) obj;
+        entidad = (ModuloEntidad) obj;
         String consultaSql = "DELETE FROM modulos WHERE id=?";      
         PreparedStatement declaracionSql;        
         try
         {
             declaracionSql = baseDatos.conectado().prepareStatement(consultaSql);
-            declaracionSql.setInt(1, modulo.getId());
+            declaracionSql.setInt(1, entidad.getId());
             int filas = declaracionSql.executeUpdate();
             if(filas > 0){return true;}
             else{return false;}
@@ -61,7 +65,6 @@ public class ModuloRepositorio implements IRepositorioBase
         }
     }
 
-    //TODO: Recibe como parametro un objeto, verifica si el objeto existe en la base de datos para consultar el registro
     @Override
     public Object[] ListarDetalles(Object obj) 
     {
@@ -73,7 +76,7 @@ public class ModuloRepositorio implements IRepositorioBase
         try
         {
             declaracionSql = baseDatos.conectado().prepareStatement(consultaSql);  
-            declaracionSql.setInt(1, modulo.getId());
+            declaracionSql.setInt(1, entidad.getId());
             int filas = declaracionSql.executeUpdate();
             if(filas > 0)
             {
@@ -82,7 +85,7 @@ public class ModuloRepositorio implements IRepositorioBase
                 while(resultadoSql.next())
                 {
                     Object[] fila = new Object[metaSql.getColumnCount()];
-                    for(int i=0; i<fila.length; i++){fila[i] = resultadoSql.getObject(i + 1);}                   
+                    for(int i=0; i<fila.length; i++){ fila[i] = resultadoSql.getObject(i + 1); }                   
                 }          
             }
             else{System.out.println("El registro no existe en la base de datos");}            
@@ -91,21 +94,20 @@ public class ModuloRepositorio implements IRepositorioBase
         return listaDatos;
     }
 
-    //TODO: Recibe como parametro un objeto, verifica si el objeto existe en la base de datos para modificar el registro
     @Override
     public boolean Modificar(Object obj) 
     {
-        modulo = (ModuloEntidad) obj;
+        entidad = (ModuloEntidad) obj;
         String consultaSql = "UPDATE modulos SET nombre=? WHERE id=?";      
         PreparedStatement declaracionSql;        
         try
         {
             declaracionSql = baseDatos.conectado().prepareStatement(consultaSql);
-            declaracionSql.setString(1, modulo.getNombre());
-            declaracionSql.setInt(2, modulo.getId());
+            declaracionSql.setString(1, entidad.getNombre());
+            declaracionSql.setInt(2, entidad.getId());
             int filas = declaracionSql.executeUpdate();
-            if(filas > 0){return true;}
-            else{return false;}
+            if(filas > 0){ return true; }
+            else{ return false; }
         }
         catch(SQLException ex)
         {
@@ -113,8 +115,7 @@ public class ModuloRepositorio implements IRepositorioBase
             return false;
         }
     }
-    
-    //TODO: Verifica los registros en la base de datos y devuelve una lista de los objetos encontrados
+
     @Override
     public ArrayList<Object[]> ListarTodos() 
     {   
@@ -131,11 +132,11 @@ public class ModuloRepositorio implements IRepositorioBase
             while(resultadoSql.next())
             {
                 Object[] fila = new Object[metaSql.getColumnCount()];
-                for(int i=0; i<fila.length; i++){fila[i] = resultadoSql.getObject(i + 1);}
+                for(int i=0; i<fila.length; i++){ fila[i] = resultadoSql.getObject(i + 1); }
                 listaDatos.add(fila);
             }
         }
-        catch(SQLException ex){System.out.println("Ocurrio un error: "+ex.getMessage());}
+        catch(SQLException ex){ System.out.println("Ocurrio un error: "+ex.getMessage()); }
         return listaDatos;
-    }    
+    } 
 }

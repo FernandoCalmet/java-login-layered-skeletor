@@ -1,5 +1,8 @@
 package Repositorio;
-
+/**
+ *
+ * @author Fernando Calmet <github.com/fernandocalmet>
+ */
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -8,29 +11,31 @@ import java.util.ArrayList;
 import Interface.IRepositorioBase ;
 import Entidad.UsuarioEntidad;
 import BaseDatos.*;
-/**
- *
- * @author Fernando Calmet <github.com/fernandocalmet>
- */
+
 public class UsuarioRepositorio implements IRepositorioBase 
 {
-    private final MySql baseDatos = new MySql();
-    private UsuarioEntidad usuario = new UsuarioEntidad();
+    private final MySql baseDatos;
+    private UsuarioEntidad entidad;
     
-    //TODO: Recibe como parametro un objeto, verifica si el objeto existe en la base de datos para crear el registro
+    public UsuarioRepositorio()
+    {
+        this.baseDatos = new MySql();
+        this.entidad = new UsuarioEntidad();
+    }
+
     @Override
     public boolean Crear(Object obj) 
     {
-        usuario = (UsuarioEntidad) obj;
+        entidad = (UsuarioEntidad) obj;
         String consultaSql = "INSERT INTO usuarios (correo, clave, nombre, id_rol) VALUES (?, ?, ?, ?)";      
         PreparedStatement declaracionSql;        
         try
         {
             declaracionSql = baseDatos.conectado().prepareStatement(consultaSql);
-            declaracionSql.setString(1, usuario.getCorreo());
-            declaracionSql.setString(2, usuario.getClave());
-            declaracionSql.setString(3, usuario.getNombre());
-            declaracionSql.setInt(4, usuario.getId_rol());
+            declaracionSql.setString(1, entidad.getCorreo());
+            declaracionSql.setString(2, entidad.getClave());
+            declaracionSql.setString(3, entidad.getNombre());
+            declaracionSql.setInt(4, entidad.getId_rol());
             int filas = declaracionSql.executeUpdate();
             if(filas > 0){return true;}
             else{return false;}
@@ -42,17 +47,16 @@ public class UsuarioRepositorio implements IRepositorioBase
         }
     }
 
-    //TODO: Recibe como parametro un objeto, verifica si el objeto existe en la base de datos para eliminar el registro
     @Override
     public boolean Eliminar(Object obj) 
     {
-        usuario = (UsuarioEntidad) obj;
+        entidad = (UsuarioEntidad) obj;
         String consultaSql = "DELETE FROM usuarios WHERE id=?";      
         PreparedStatement declaracionSql;        
         try
         {
             declaracionSql = baseDatos.conectado().prepareStatement(consultaSql);
-            declaracionSql.setInt(1, usuario.getId());
+            declaracionSql.setInt(1, entidad.getId());
             int filas = declaracionSql.executeUpdate();
             if(filas > 0){return true;}
             else{return false;}
@@ -64,11 +68,10 @@ public class UsuarioRepositorio implements IRepositorioBase
         }
     }
 
-    //TODO: Recibe como parametro un objeto, verifica si el objeto existe en la base de datos para consultar el registro
     @Override
     public Object[] ListarDetalles(Object obj) 
     {
-        usuario = (UsuarioEntidad) obj;
+        entidad = (UsuarioEntidad) obj;
         String consultaSql = "SELECT * FROM usuarios WHERE correo=?";         
         PreparedStatement declaracionSql;    
         ResultSet resultadoSql;
@@ -77,7 +80,7 @@ public class UsuarioRepositorio implements IRepositorioBase
         try
         {
             declaracionSql = baseDatos.conectado().prepareStatement(consultaSql);  
-            declaracionSql.setString(1, usuario.getCorreo());            
+            declaracionSql.setString(1, entidad.getCorreo());            
             int filas = declaracionSql.executeUpdate();            
             if(filas > 0)
             {                
@@ -95,21 +98,20 @@ public class UsuarioRepositorio implements IRepositorioBase
         return listaDatos;
     }
 
-    //TODO: Recibe como parametro un objeto, verifica si el objeto existe en la base de datos para modificar el registro
     @Override
     public boolean Modificar(Object obj) 
     {
-        usuario = (UsuarioEntidad) obj;
+        entidad = (UsuarioEntidad) obj;
         String consultaSql = "UPDATE usuarios SET correo=?, clave=?, nombre=?, id_rol=? WHERE id=?";      
         PreparedStatement declaracionSql;        
         try
         {
             declaracionSql = baseDatos.conectado().prepareStatement(consultaSql);
-            declaracionSql.setString(1, usuario.getCorreo());
-            declaracionSql.setString(2, usuario.getClave());
-            declaracionSql.setString(3, usuario.getNombre());
-            declaracionSql.setInt(4, usuario.getId_rol());
-            declaracionSql.setInt(5, usuario.getId());
+            declaracionSql.setString(1, entidad.getCorreo());
+            declaracionSql.setString(2, entidad.getClave());
+            declaracionSql.setString(3, entidad.getNombre());
+            declaracionSql.setInt(4, entidad.getId_rol());
+            declaracionSql.setInt(5, entidad.getId());
             int filas = declaracionSql.executeUpdate();
             if(filas > 0){return true;}
             else{return false;}
@@ -121,7 +123,6 @@ public class UsuarioRepositorio implements IRepositorioBase
         }
     }
 
-    //TODO: Verifica los registros en la base de datos y devuelve una lista de los objetos encontrados
     @Override
     public ArrayList<Object[]> ListarTodos() 
     {           
@@ -142,11 +143,11 @@ public class UsuarioRepositorio implements IRepositorioBase
             while(resultadoSql.next())
             {
                 Object[] fila = new Object[metaSql.getColumnCount()];
-                for(int i=0; i<fila.length; i++){fila[i] = resultadoSql.getObject(i + 1);}
+                for(int i=0; i<fila.length; i++){ fila[i] = resultadoSql.getObject(i + 1); }
                 listaDatos.add(fila);
             }
         }
-        catch(SQLException ex){System.out.println("Ocurrio un error: "+ex.getMessage());}
+        catch(SQLException ex){ System.out.println("Ocurrio un error: "+ex.getMessage()); }
         return listaDatos;
     }
 }
