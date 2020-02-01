@@ -7,7 +7,7 @@ https://github.com/fernandocalmet
 <p>Esta aplicación de muestra está destinada a proporcionar un ejemplo práctico de una aplicación modular. Específicamente, esta aplicación de muestra demuestra lo siguiente:</p>
 
 <ul>
-	<li>Crear, Eliminar, Detalles, Modificar, Listar y Busqueda con filtro de datos de las entidades del programa.</li>
+	<li>Crear, Eliminar, Listar uno, Modificar, Listar todos y Busquedas con filtro de datos.</li>
 	<li>Acceso de conexión y desconexión de usuarios al sistema.</li>
 	<li>Para la conexión con el gestor de la base de datos se usa la biblioteca de MySQL JDBC Driver (mysql-connector-java).</li>	
 </ul>
@@ -30,8 +30,8 @@ https://github.com/fernandocalmet
   
 ## Requerimientos
 ### Requerimientos Funcionales
-- Conexión + Desconexión de Acceso de Usuarios
-- CRUD + Busqueda con filtro de datos para los componentes: Modulos, Usuarios, Roles, Operaciones, Permisos
+- Conexión + Desconexión de acceso de usuarios
+- Operaciones CRUD + Busqueda con filtro de datos
 
 ### Requerimientos No funcionales
 1. Java JDK 1.8
