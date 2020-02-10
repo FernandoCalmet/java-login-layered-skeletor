@@ -3,30 +3,21 @@ package Servicio;
  *
  * @author Fernando Calmet <github.com/fernandocalmet>
  */
-import Entidad.RolEntidad;
+import Modelo.RolModelo;
 import Excepcion.RolException;
-import Interface.IServicioBase;
-import Repositorio.RolRepositorio;
 import java.util.ArrayList;
 
-public class RolServicio implements IServicioBase
-{
-    private RolEntidad entidad;   
-    private final RolRepositorio repositorio;
-    
-    public RolServicio()
-    {
-        this.entidad = new RolEntidad();
-        this.repositorio = new RolRepositorio();
-    }
+public class RolServicio extends BaseServicio implements IBaseServicio
+{    
+    public RolServicio(){ }
 
     @Override
     public boolean Crear(Object obj) 
     {
-        entidad = (RolEntidad) obj;
-        if(!entidad.getNombre().isEmpty())
+        rolModelo = (RolModelo) obj;
+        if(!rolModelo.getNombre().isEmpty())
         {   
-            if(repositorio.Crear(entidad) == true)
+            if(rolRepositorio.Crear(rolModelo) == true)
                 return true;
             else
             {
@@ -46,10 +37,10 @@ public class RolServicio implements IServicioBase
     @Override
     public boolean Eliminar(Object obj) 
     {
-        entidad = (RolEntidad) obj;
-        if(entidad.getId() > 0)
+        rolModelo = (RolModelo) obj;
+        if(rolModelo.getId() > 0)
         {   
-            if(repositorio.Eliminar(entidad) == true)
+            if(rolRepositorio.Eliminar(rolModelo) == true)
                 return true;
             else
             {
@@ -69,16 +60,16 @@ public class RolServicio implements IServicioBase
     @Override
     public Object[] ListarDetalles(Object obj) 
     {
-        return repositorio.ListarDetalles(obj);
+        return rolRepositorio.ListarDetalles(obj);
     }
 
     @Override
     public boolean Modificar(Object obj) 
     {
-        entidad = (RolEntidad) obj;
-        if(entidad.getId() > 0 && !entidad.getNombre().isEmpty())
+        rolModelo = (RolModelo) obj;
+        if(rolModelo.getId() > 0 && !rolModelo.getNombre().isEmpty())
         {   
-            if(repositorio.Modificar(entidad) == true)
+            if(rolRepositorio.Modificar(rolModelo) == true)
                 return true;
             else
             {
@@ -98,7 +89,7 @@ public class RolServicio implements IServicioBase
     @Override
     public ArrayList<Object[]> ListarTodos() 
     {     
-        return repositorio.ListarTodos();
+        return rolRepositorio.ListarTodos();
     }
     
 }

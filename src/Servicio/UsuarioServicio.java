@@ -3,30 +3,21 @@ package Servicio;
  *
  * @author Fernando Calmet <github.com/fernandocalmet>
  */
-import Entidad.UsuarioEntidad;
+import Modelo.UsuarioModelo;
 import Excepcion.UsuarioException;
-import Interface.IServicioBase;
-import Repositorio.UsuarioRepositorio;
 import java.util.ArrayList;
 
-public class UsuarioServicio implements IServicioBase
+public class UsuarioServicio extends BaseServicio implements IBaseServicio
 {
-    private UsuarioEntidad usuario;
-    private final UsuarioRepositorio repositorio;
-    
-    public UsuarioServicio()
-    {
-        this.usuario = new UsuarioEntidad();
-        this.repositorio = new UsuarioRepositorio();
-    }
+    public UsuarioServicio(){ }
 
     @Override
     public boolean Crear(Object obj) 
     {
-        usuario = (UsuarioEntidad) obj;
-        if(!usuario.getCorreo().isEmpty() && !usuario.getClave().isEmpty() && !usuario.getNombre().isEmpty() && usuario.getId_rol() > 0)
+        usuarioModelo = (UsuarioModelo) obj;
+        if(!usuarioModelo.getCorreo().isEmpty() && !usuarioModelo.getClave().isEmpty() && !usuarioModelo.getNombre().isEmpty() && usuarioModelo.getId_rol() > 0)
         {   
-            if(repositorio.Crear(usuario) == true)
+            if(usuarioRepositorio.Crear(usuarioModelo) == true)
                 return true;
             else
             {
@@ -46,10 +37,10 @@ public class UsuarioServicio implements IServicioBase
     @Override
     public boolean Eliminar(Object obj) 
     {
-        usuario = (UsuarioEntidad) obj;
-        if(usuario.getId() != 0)
+        usuarioModelo = (UsuarioModelo) obj;
+        if(usuarioModelo.getId() != 0)
         {   
-            if(repositorio.Eliminar(usuario) == true)
+            if(usuarioRepositorio.Eliminar(usuarioModelo) == true)
                 return true;
             else
             {
@@ -69,16 +60,16 @@ public class UsuarioServicio implements IServicioBase
     @Override
     public Object[] ListarDetalles(Object obj) 
     {
-        return repositorio.ListarDetalles(obj);
+        return usuarioRepositorio.ListarDetalles(obj);
     }
 
     @Override
     public boolean Modificar(Object obj) 
     {
-        usuario = (UsuarioEntidad) obj;
-        if(usuario.getId() > 0 && !usuario.getCorreo().isEmpty() && !usuario.getClave().isEmpty() && !usuario.getNombre().isEmpty() && usuario.getId_rol() > 0)
+        usuarioModelo = (UsuarioModelo) obj;
+        if(usuarioModelo.getId() > 0 && !usuarioModelo.getCorreo().isEmpty() && !usuarioModelo.getClave().isEmpty() && !usuarioModelo.getNombre().isEmpty() && usuarioModelo.getId_rol() > 0)
         {   
-            if(repositorio.Modificar(usuario) == true)
+            if(usuarioRepositorio.Modificar(usuarioModelo) == true)
                 return true;
             else
             {
@@ -98,6 +89,6 @@ public class UsuarioServicio implements IServicioBase
     @Override
     public ArrayList<Object[]> ListarTodos() 
     {
-        return repositorio.ListarTodos();
+        return usuarioRepositorio.ListarTodos();
     }    
 }

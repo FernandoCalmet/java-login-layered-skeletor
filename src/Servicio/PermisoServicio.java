@@ -3,30 +3,21 @@ package Servicio;
  *
  * @author Fernando Calmet <github.com/fernandocalmet>
  */
-import Entidad.PermisoEntidad;
+import Modelo.PermisoModelo;
 import Excepcion.PermisoException;
-import Interface.IServicioBase;
-import Repositorio.PermisoRepositorio;
 import java.util.ArrayList;
 
-public class PermisoServicio implements IServicioBase
+public class PermisoServicio extends BaseServicio implements IBaseServicio
 {
-    private PermisoEntidad permiso;
-    private final PermisoRepositorio repositorio;
-    
-    public PermisoServicio()
-    {
-        this.permiso = new PermisoEntidad();
-        this.repositorio = new PermisoRepositorio();
-    }
+    public PermisoServicio(){ }
 
     @Override
     public boolean Crear(Object obj) 
     {
-        permiso = (PermisoEntidad) obj;
-        if(permiso.getId_rol() > 0 && permiso.getId_operacion() > 0)
+        permisoModelo = (PermisoModelo) obj;
+        if(permisoModelo.getId_rol() > 0 && permisoModelo.getId_operacion() > 0)
         {   
-            if(repositorio.Crear(permiso) == true)
+            if(permisoRepositorio.Crear(permisoModelo) == true)
                 return true;
             else
             {
@@ -45,10 +36,10 @@ public class PermisoServicio implements IServicioBase
 
     @Override
     public boolean Eliminar(Object obj) {
-        permiso = (PermisoEntidad) obj;
-        if(permiso.getId() > 0)
+        permisoModelo = (PermisoModelo) obj;
+        if(permisoModelo.getId() > 0)
         {   
-            if(repositorio.Eliminar(permiso) == true)
+            if(permisoRepositorio.Eliminar(permisoModelo) == true)
                 return true;
             else
             {
@@ -68,15 +59,15 @@ public class PermisoServicio implements IServicioBase
     @Override
     public Object[] ListarDetalles(Object obj) 
     {
-        return repositorio.ListarDetalles(obj);
+        return permisoRepositorio.ListarDetalles(obj);
     }
 
     @Override
     public boolean Modificar(Object obj) {
-        permiso = (PermisoEntidad) obj;
-        if(permiso.getId() > 0 && permiso.getId_rol() > 0 && permiso.getId_operacion() > 0)
+        permisoModelo = (PermisoModelo) obj;
+        if(permisoModelo.getId() > 0 && permisoModelo.getId_rol() > 0 && permisoModelo.getId_operacion() > 0)
         {   
-            if(repositorio.Modificar(permiso) == true)
+            if(permisoRepositorio.Modificar(permisoModelo) == true)
                 return true;
             else
             {
@@ -96,7 +87,6 @@ public class PermisoServicio implements IServicioBase
     @Override
     public ArrayList<Object[]> ListarTodos() 
     {
-        return repositorio.ListarTodos();
-    }
-    
+        return permisoRepositorio.ListarTodos();
+    }    
 }

@@ -6,61 +6,56 @@ package Repositorio;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import Interface.IRepositorioAcceso;
-import Entidad.UsuarioEntidad;
-import BaseDatos.*;
+import Excepcion.AccesoException;
 
-public class AccesoRepositorio implements IRepositorioAcceso
-{
-    private final MySql baseDatos;
-    private UsuarioEntidad entidad;
-    
-    public AccesoRepositorio()
-    {
-        this.baseDatos = new MySql();
-        this.entidad = new UsuarioEntidad();
-    }
+public class AccesoRepositorio extends BaseRepositorio implements IAccesoRepositorio
+{  
+    public AccesoRepositorio(){ }
     
     @Override
     public Object accesoLogin(String correo, String clave)
-    {
-        entidad.setCorreo(correo);
-        entidad.setClave(clave);
+    { 
         String consultaSql = "SELECT * FROM usuarios WHERE correo=? AND clave=?";       
         PreparedStatement declaracionSql;
         ResultSet resultadoSql;   
-        try{
-            declaracionSql = baseDatos.conectado().prepareStatement(consultaSql);             
-            declaracionSql.setString(1, entidad.getCorreo());
-            declaracionSql.setString(2, entidad.getClave());            
+        try
+        {
+            declaracionSql = getBD().prepareStatement(consultaSql);             
+            declaracionSql.setString(1, correo);
+            declaracionSql.setString(2, clave);            
             resultadoSql = declaracionSql.executeQuery();
             resultadoSql.next();
-            if(entidad.getCorreo().equals(resultadoSql.getString("correo")) && entidad.getClave().equals(resultadoSql.getString("clave")))
-            {                  
-                entidad.setId(resultadoSql.getInt("id"));
-                entidad.setCorreo(resultadoSql.getString("correo"));
-                entidad.setClave(resultadoSql.getString("clave"));
-                entidad.setNombre(resultadoSql.getString("nombre"));
-                entidad.setId_rol(resultadoSql.getInt("id_rol"));
+            
+            if(correo.equals(resultadoSql.getString("correo")) && clave.equals(resultadoSql.getString("clave")))
+            {
+                usuarioModelo.setId(resultadoSql.getInt("id"));
+                usuarioModelo.setCorreo(resultadoSql.getString("correo"));
+                usuarioModelo.setClave(resultadoSql.getString("clave"));
+                usuarioModelo.setNombre(resultadoSql.getString("nombre"));
+                usuarioModelo.setId_rol(resultadoSql.getInt("id_rol"));
+                try { throw new AccesoException("Bienvenido "+usuarioModelo.getNombre()+"!"); }
+                catch (Exception ex) { System.out.println("Excepción capturada: "+ex); }                
             }
-            else{               
-                entidad = (UsuarioEntidad) accesoLogout(entidad);
-            } 
+            else
+            {
+                try { throw new AccesoException("El Usuario no existe o algun dato es incorrecto."); }
+                catch (Exception ex) { System.out.println("Excepción capturada: "+ex); }
+            }           
         }
         catch(SQLException ex){System.out.println("Ocurrio un error: "+ex.getMessage());}      
-        return entidad;
+        return usuarioModelo;
     }
     
     @Override
     public Object accesoLogout(Object objEntidad)
     {
-        entidad.setId(0);
-        entidad.setCorreo(null);
-        entidad.setClave(null);
-        entidad.setNombre(null);
-        entidad.setId_rol(0);
-        entidad = null;
-        objEntidad = entidad;
+        usuarioModelo.setId(0);
+        usuarioModelo.setCorreo(null);
+        usuarioModelo.setClave(null);
+        usuarioModelo.setNombre(null);
+        usuarioModelo.setId_rol(0);
+        usuarioModelo = null;
+        objEntidad = usuarioModelo;
         return objEntidad;
     }
 }

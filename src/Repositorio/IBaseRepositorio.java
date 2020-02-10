@@ -1,11 +1,11 @@
-package Interface;
+package Repositorio;
 /**
  *
  * @author Fernando Calmet <github.com/fernandocalmet>
  */
 import java.util.ArrayList;
 
-public interface IServicioBase 
+public interface IBaseRepositorio 
 {
     public boolean Crear(Object obj);
     public boolean Eliminar(Object obj);

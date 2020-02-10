@@ -1,14 +1,14 @@
-package Entidad;
+package Modelo;
 /**
  *
  * @author Fernando Calmet <github.com/fernandocalmet>
  */
-public class OperacionEntidad 
+public class OperacionModelo 
 {
     private int id, id_modulo;
     private String nombre;
 
-    public OperacionEntidad() {}   
+    public OperacionModelo() {}   
     
     public int getId() {return id;}
     public void setId(int id) {this.id = id;}  

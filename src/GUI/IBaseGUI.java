@@ -1,9 +1,9 @@
-package Interface;
+package GUI;
 /**
  *
  * @author Fernando Calmet <github.com/fernandocalmet>
  */
-public interface IGUIBase 
+public interface IBaseGUI 
 {
     public void cargarDatos();
     public void seleccionarDatos();

@@ -5,9 +5,9 @@ package GUI.Sistema;
  */
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
-import Entidad.PermisoEntidad;
+import Modelo.PermisoModelo;
 import Servicio.PermisoServicio;
-import Interface.IGUIBase;
+import GUI.IBaseGUI;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.ButtonGroup;
@@ -15,9 +15,9 @@ import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.TableRowSorter;
 
-public class PermisosGUI extends javax.swing.JPanel implements IGUIBase
+public class PermisosGUI extends javax.swing.JPanel implements IBaseGUI
 {    
-    private PermisoEntidad permiso ;
+    private PermisoModelo permiso ;
     private PermisoServicio servicio;
     private String [] columnas = {"Id Permiso", "Id Rol", "Rol", "Id Operación", "Operación"};
     private ArrayList<Object[]> listaDatos;
@@ -27,7 +27,7 @@ public class PermisosGUI extends javax.swing.JPanel implements IGUIBase
 
     public PermisosGUI() 
     {
-        this.permiso = new PermisoEntidad();
+        this.permiso = new PermisoModelo();
         this.servicio = new PermisoServicio();
         this.listaDatos = new ArrayList<>();
         this.tablaDatos = new DefaultTableModel(columnas, 0);

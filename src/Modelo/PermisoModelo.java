@@ -1,13 +1,13 @@
-package Entidad;
+package Modelo;
 /**
  *
  * @author Fernando Calmet <github.com/fernandocalmet>
  */
-public class PermisoEntidad 
+public class PermisoModelo 
 {
     private int id, id_rol, id_operacion;
 
-    public PermisoEntidad() {}
+    public PermisoModelo() {}
 
     public int getId() {return id;}
     public void setId(int id) {this.id = id;}

@@ -8,31 +8,22 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import Interface.IRepositorioBase;
-import Entidad.ModuloEntidad;
-import BaseDatos.*;
+import Modelo.ModuloModelo;
 
-public class ModuloRepositorio implements IRepositorioBase 
-{
-    private final MySql baseDatos;
-    private ModuloEntidad entidad;
-    
-    public ModuloRepositorio()
-    {
-        this.baseDatos = new MySql();
-        this.entidad = new ModuloEntidad();
-    }
+public class ModuloRepositorio extends BaseRepositorio implements IBaseRepositorio 
+{    
+    public ModuloRepositorio(){ }
 
     @Override
     public boolean Crear(Object obj) 
     {
-        entidad = (ModuloEntidad) obj;
+        moduloModelo = (ModuloModelo) obj;
         String consultaSql = "INSERT INTO modulos (nombre) VALUES (?)";      
         PreparedStatement declaracionSql;
         try
         {
-            declaracionSql = baseDatos.conectado().prepareStatement(consultaSql);
-            declaracionSql.setString(1, entidad.getNombre());
+            declaracionSql = getBD().prepareStatement(consultaSql);
+            declaracionSql.setString(1, moduloModelo.getNombre());
             int filas = declaracionSql.executeUpdate();
             if(filas > 0){return true;}
             else{return false;}
@@ -47,13 +38,13 @@ public class ModuloRepositorio implements IRepositorioBase
     @Override
     public boolean Eliminar(Object obj) 
     {
-        entidad = (ModuloEntidad) obj;
+        moduloModelo = (ModuloModelo) obj;
         String consultaSql = "DELETE FROM modulos WHERE id=?";      
         PreparedStatement declaracionSql;        
         try
         {
-            declaracionSql = baseDatos.conectado().prepareStatement(consultaSql);
-            declaracionSql.setInt(1, entidad.getId());
+            declaracionSql = getBD().prepareStatement(consultaSql);
+            declaracionSql.setInt(1, moduloModelo.getId());
             int filas = declaracionSql.executeUpdate();
             if(filas > 0){return true;}
             else{return false;}
@@ -75,8 +66,8 @@ public class ModuloRepositorio implements IRepositorioBase
         Object[] listaDatos = null;
         try
         {
-            declaracionSql = baseDatos.conectado().prepareStatement(consultaSql);  
-            declaracionSql.setInt(1, entidad.getId());
+            declaracionSql = getBD().prepareStatement(consultaSql);  
+            declaracionSql.setInt(1, moduloModelo.getId());
             int filas = declaracionSql.executeUpdate();
             if(filas > 0)
             {
@@ -97,14 +88,14 @@ public class ModuloRepositorio implements IRepositorioBase
     @Override
     public boolean Modificar(Object obj) 
     {
-        entidad = (ModuloEntidad) obj;
+        moduloModelo = (ModuloModelo) obj;
         String consultaSql = "UPDATE modulos SET nombre=? WHERE id=?";      
         PreparedStatement declaracionSql;        
         try
         {
-            declaracionSql = baseDatos.conectado().prepareStatement(consultaSql);
-            declaracionSql.setString(1, entidad.getNombre());
-            declaracionSql.setInt(2, entidad.getId());
+            declaracionSql = getBD().prepareStatement(consultaSql);
+            declaracionSql.setString(1, moduloModelo.getNombre());
+            declaracionSql.setInt(2, moduloModelo.getId());
             int filas = declaracionSql.executeUpdate();
             if(filas > 0){ return true; }
             else{ return false; }
@@ -126,7 +117,7 @@ public class ModuloRepositorio implements IRepositorioBase
         ArrayList<Object[]> listaDatos = new ArrayList<>();
         try
         {
-            declaracionSql = baseDatos.conectado().prepareStatement(consultaSql);      
+            declaracionSql = getBD().prepareStatement(consultaSql);      
             resultadoSql = declaracionSql.executeQuery();
             metaSql = resultadoSql.getMetaData();
             while(resultadoSql.next())

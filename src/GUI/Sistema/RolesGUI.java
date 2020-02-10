@@ -5,9 +5,9 @@ package GUI.Sistema;
  */
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
-import Entidad.RolEntidad;
+import Modelo.RolModelo;
 import Servicio.RolServicio;
-import Interface.IGUIBase;
+import GUI.IBaseGUI;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.ButtonGroup;
@@ -15,9 +15,9 @@ import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.TableRowSorter;
 
-public class RolesGUI extends javax.swing.JPanel implements IGUIBase
+public class RolesGUI extends javax.swing.JPanel implements IBaseGUI
 {    
-    private RolEntidad rol;
+    private RolModelo rol;
     private RolServicio servicio;
     private String [] columnas = {"Id", "Nombre"};
     private ArrayList<Object[]> listaDatos;
@@ -27,7 +27,7 @@ public class RolesGUI extends javax.swing.JPanel implements IGUIBase
 
     public RolesGUI() 
     {
-        this.rol = new RolEntidad();
+        this.rol = new RolModelo();
         this.servicio = new RolServicio();
         this.listaDatos = new ArrayList<>();
         this.tablaDatos = new DefaultTableModel(columnas, 0);

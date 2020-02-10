@@ -3,16 +3,16 @@ package GUI.Archivo;
  *
  * @author Fernando Calmet <github.com/fernandocalmet>
  */
-import Entidad.UsuarioEntidad;
+import Modelo.UsuarioModelo;
 
 public class PerfilGUI extends javax.swing.JPanel 
 {
-    private UsuarioEntidad entidad;
+    private UsuarioModelo entidad;
 
     public PerfilGUI(Object objEntidad) 
     {        
-        this.entidad = new UsuarioEntidad();
-        this.entidad = (UsuarioEntidad) objEntidad;  
+        this.entidad = new UsuarioModelo();
+        this.entidad = (UsuarioModelo) objEntidad;  
         initComponents(); 
         datosUsuario();
     }

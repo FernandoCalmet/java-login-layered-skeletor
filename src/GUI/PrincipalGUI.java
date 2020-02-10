@@ -10,11 +10,11 @@ import GUI.Archivo.*;
 import GUI.Ayuda.*;
 import GUI.Sistema.*;
 import Servicio.AccesoServicio;
-import Entidad.UsuarioEntidad;
+import Modelo.UsuarioModelo;
 
 public class PrincipalGUI extends javax.swing.JFrame implements ActionListener
 {  
-    private UsuarioEntidad entidad;
+    private UsuarioModelo entidad;
     private final AccesoServicio acceso;
     private final InicioGUI inicio;
     private final PerfilGUI perfil;
@@ -27,7 +27,7 @@ public class PrincipalGUI extends javax.swing.JFrame implements ActionListener
    
     public PrincipalGUI(Object objEntidad) 
     {
-        this.entidad = (UsuarioEntidad) objEntidad;
+        this.entidad = (UsuarioModelo) objEntidad;
         this.acceso = new AccesoServicio();
         this.inicio = new InicioGUI();
         this.perfil = new PerfilGUI(this.entidad);

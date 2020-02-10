@@ -9,7 +9,7 @@ https://github.com/fernandocalmet
 <ul>
 	<li>Crear, Eliminar, Listar uno, Modificar, Listar todos y Busquedas con filtro de datos.</li>
 	<li>Acceso de conexión y desconexión de usuarios al sistema.</li>
-	<li>Para la conexión con el gestor de la base de datos se usa la biblioteca de MySQL JDBC Driver (mysql-connector-java).</li>	
+	<li>Para la conexión con con la base de datos se importan los drivers de las bibliotecas correspondientes de cada gestor de base de datos.</li>	
 </ul>
 
 <p>Tenga en cuenta que si bien este programa de ejemplo funciona, las características mencionadas anteriormente no están destinadas a ser tomadas y utilizadas en aplicaciones comerciales de producción. En otras palabras, este no es un proyecto semilla para ser tomado  e implementado en su entorno de producción.</p>  
@@ -35,10 +35,11 @@ https://github.com/fernandocalmet
 
 ### Requerimientos No funcionales
 1. Java JDK 1.8
-2. MySQL JDBC Driver
-3. Apache XAMPP [apachefriends.org](https://www.apachefriends.org/)
-4. XAMMP: Servicio del modulo Apache
-5. XAMMP: Servicio del modulo MySQL
+2. MySQL JDBC Driver (mysql-connector-java)
+3. Microsoft JDBC Driver (sqljdbc42)
+4. Apache XAMPP [apachefriends.org](https://www.apachefriends.org/)
+5. XAMMP: Servicio del modulo Apache
+6. XAMMP: Servicio del modulo MySQL
 
 ## Diagrama de Casos de uso
 ![Diagrama de Casos de uso](diagramas/Diagrama-Casos_de_uso.png)

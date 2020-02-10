@@ -8,32 +8,23 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import Interface.IRepositorioBase ;
-import Entidad.PermisoEntidad;
-import BaseDatos.*;
+import Modelo.PermisoModelo;
 
-public class PermisoRepositorio implements IRepositorioBase 
-{
-    private final MySql baseDatos;
-    private PermisoEntidad entidad;
-    
-    public PermisoRepositorio()
-    {
-        this.baseDatos = new MySql();
-        this.entidad = new PermisoEntidad();
-    }
+public class PermisoRepositorio extends BaseRepositorio implements IBaseRepositorio 
+{  
+    public PermisoRepositorio(){ }
     
     @Override
     public boolean Crear(Object obj) 
     {
-        entidad = (PermisoEntidad) obj;
+        permisoModelo = (PermisoModelo) obj;
         String consultaSql = "INSERT INTO permisos (id_rol, id_operacion) VALUES (?, ?)";      
         PreparedStatement declaracionSql;        
         try
         {
-            declaracionSql = baseDatos.conectado().prepareStatement(consultaSql);
-            declaracionSql.setInt(1, entidad.getId_rol());
-            declaracionSql.setInt(2, entidad.getId_operacion());
+            declaracionSql = getBD().prepareStatement(consultaSql);
+            declaracionSql.setInt(1, permisoModelo.getId_rol());
+            declaracionSql.setInt(2, permisoModelo.getId_operacion());
             int filas = declaracionSql.executeUpdate();
             if(filas > 0){return true;}
             else{return false;}
@@ -48,13 +39,13 @@ public class PermisoRepositorio implements IRepositorioBase
     @Override
     public boolean Eliminar(Object obj) 
     {
-        entidad = (PermisoEntidad) obj;
+        permisoModelo = (PermisoModelo) obj;
         String consultaSql = "DELETE FROM permisos WHERE id=?";      
         PreparedStatement declaracionSql;        
         try
         {
-            declaracionSql = baseDatos.conectado().prepareStatement(consultaSql);
-            declaracionSql.setInt(1, entidad.getId());
+            declaracionSql = getBD().prepareStatement(consultaSql);
+            declaracionSql.setInt(1, permisoModelo.getId());
             int filas = declaracionSql.executeUpdate();
             if(filas > 0){return true;}
             else{return false;}
@@ -76,8 +67,8 @@ public class PermisoRepositorio implements IRepositorioBase
         Object[] listaDatos = null;
         try
         {
-            declaracionSql = baseDatos.conectado().prepareStatement(consultaSql);  
-            declaracionSql.setInt(1, entidad.getId());
+            declaracionSql = getBD().prepareStatement(consultaSql);  
+            declaracionSql.setInt(1, permisoModelo.getId());
             int filas = declaracionSql.executeUpdate();
             if(filas > 0)
             {
@@ -98,15 +89,15 @@ public class PermisoRepositorio implements IRepositorioBase
     @Override
     public boolean Modificar(Object obj) 
     {
-        entidad = (PermisoEntidad) obj;
+        permisoModelo = (PermisoModelo) obj;
         String consultaSql = "UPDATE permisos SET id_rol=?, id_operacion=? WHERE id=?";      
         PreparedStatement declaracionSql;        
         try
         {
-            declaracionSql = baseDatos.conectado().prepareStatement(consultaSql);
-            declaracionSql.setInt(1, entidad.getId_rol());
-            declaracionSql.setInt(2, entidad.getId_operacion());
-            declaracionSql.setInt(3, entidad.getId());
+            declaracionSql = getBD().prepareStatement(consultaSql);
+            declaracionSql.setInt(1, permisoModelo.getId_rol());
+            declaracionSql.setInt(2, permisoModelo.getId_operacion());
+            declaracionSql.setInt(3, permisoModelo.getId());
             int filas = declaracionSql.executeUpdate();
             if(filas > 0){return true;}
             else{return false;}
@@ -122,18 +113,18 @@ public class PermisoRepositorio implements IRepositorioBase
     public ArrayList<Object[]> ListarTodos() 
     {   
         String consultaSql = "SELECT "
-                + "P.id, P.id_rol, R.nombre, P.id_operacion, O.nombre "
-                + "FROM permisos P "
-                + "INNER JOIN roles R ON R.id = P.id_rol "
-                + "INNER JOIN operaciones O ON O.id = P.id_operacion "
-                + "ORDER BY P.id ASC";     
+                + "permisos.id, permisos.id_rol, roles.nombre, permisos.id_operacion, operaciones.nombre "
+                + "FROM permisos "
+                + "INNER JOIN roles ON roles.id = permisos.id_rol "
+                + "INNER JOIN operaciones ON operaciones.id = permisos.id_operacion "
+                + "ORDER BY permisos.id ASC";     
         PreparedStatement declaracionSql; 
         ResultSet resultadoSql;
         ResultSetMetaData metaSql;
         ArrayList<Object[]> listaDatos = new ArrayList<>();
         try
         {
-            declaracionSql = baseDatos.conectado().prepareStatement(consultaSql);      
+            declaracionSql = getBD().prepareStatement(consultaSql);      
             resultadoSql = declaracionSql.executeQuery();
             metaSql = resultadoSql.getMetaData();
             while(resultadoSql.next())

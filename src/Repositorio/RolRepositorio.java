@@ -8,31 +8,22 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import Interface.IRepositorioBase;
-import Entidad.RolEntidad;
-import BaseDatos.*;
+import Modelo.RolModelo;
 
-public class RolRepositorio implements IRepositorioBase 
-{
-    private final MySql baseDatos;
-    private RolEntidad entidad;
-    
-    public RolRepositorio()
-    {
-        this.baseDatos = new MySql();
-        this.entidad = new RolEntidad();
-    }
+public class RolRepositorio extends BaseRepositorio implements IBaseRepositorio 
+{   
+    public RolRepositorio(){ }
     
     @Override
     public boolean Crear(Object obj) 
     {
-        entidad = (RolEntidad) obj;
+        rolModelo = (RolModelo) obj;
         String consultaSql = "INSERT INTO roles (nombre) VALUES (?)";      
         PreparedStatement declaracionSql;        
         try
         {
-            declaracionSql = baseDatos.conectado().prepareStatement(consultaSql);
-            declaracionSql.setString(1, entidad.getNombre());
+            declaracionSql = getBD().prepareStatement(consultaSql);
+            declaracionSql.setString(1, rolModelo.getNombre());
             int filas = declaracionSql.executeUpdate();
             if(filas > 0){return true;}
             else{return false;}
@@ -47,13 +38,13 @@ public class RolRepositorio implements IRepositorioBase
     @Override
     public boolean Eliminar(Object obj) 
     {
-        entidad = (RolEntidad) obj;
+        rolModelo = (RolModelo) obj;
         String consultaSql = "DELETE FROM roles WHERE id=?";      
         PreparedStatement declaracionSql;        
         try
         {
-            declaracionSql = baseDatos.conectado().prepareStatement(consultaSql);
-            declaracionSql.setInt(1, entidad.getId());
+            declaracionSql = getBD().prepareStatement(consultaSql);
+            declaracionSql.setInt(1, rolModelo.getId());
             int filas = declaracionSql.executeUpdate();
             if(filas > 0){return true;}
             else{return false;}
@@ -75,8 +66,8 @@ public class RolRepositorio implements IRepositorioBase
         Object[] listaDatos = null;
         try
         {
-            declaracionSql = baseDatos.conectado().prepareStatement(consultaSql);  
-            declaracionSql.setInt(1, entidad.getId());
+            declaracionSql = getBD().prepareStatement(consultaSql);  
+            declaracionSql.setInt(1, rolModelo.getId());
             int filas = declaracionSql.executeUpdate();
             if(filas > 0)
             {
@@ -98,14 +89,14 @@ public class RolRepositorio implements IRepositorioBase
     @Override
     public boolean Modificar(Object obj) 
     {
-        entidad = (RolEntidad) obj;
+        rolModelo = (RolModelo) obj;
         String consultaSql = "UPDATE roles SET nombre=? WHERE id=?";      
         PreparedStatement declaracionSql;        
         try
         {
-            declaracionSql = baseDatos.conectado().prepareStatement(consultaSql);
-            declaracionSql.setString(1, entidad.getNombre());
-            declaracionSql.setInt(2, entidad.getId());
+            declaracionSql = getBD().prepareStatement(consultaSql);
+            declaracionSql.setString(1, rolModelo.getNombre());
+            declaracionSql.setInt(2, rolModelo.getId());
             int filas = declaracionSql.executeUpdate();
             if(filas > 0){return true;}
             else{return false;}
@@ -127,7 +118,7 @@ public class RolRepositorio implements IRepositorioBase
         ArrayList<Object[]> listaDatos = new ArrayList<>();
         try
         {
-            declaracionSql = baseDatos.conectado().prepareStatement(consultaSql);      
+            declaracionSql = getBD().prepareStatement(consultaSql);      
             resultadoSql = declaracionSql.executeQuery();
             metaSql = resultadoSql.getMetaData();
             while(resultadoSql.next())

@@ -1,14 +1,14 @@
-package Entidad;
+package Modelo;
 /**
  *
  * @author Fernando Calmet <github.com/fernandocalmet>
  */
-public class UsuarioEntidad 
+public class UsuarioModelo 
 {
     private int id, id_rol;
     private String correo, clave, nombre;
 
-    public UsuarioEntidad() {}
+    public UsuarioModelo() {}
 
     public int getId() {return id;}
     public void setId(int id) {this.id = id;}

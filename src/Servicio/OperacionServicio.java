@@ -3,29 +3,20 @@ package Servicio;
  *
  * @author Fernando Calmet <github.com/fernandocalmet>
  */
-import Entidad.OperacionEntidad;
+import Modelo.OperacionModelo;
 import Excepcion.OperacionException;
-import Interface.IServicioBase;
-import Repositorio.OperacionRepositorio;
 import java.util.ArrayList;
 
-public class OperacionServicio implements IServicioBase
+public class OperacionServicio extends BaseServicio implements IBaseServicio
 {
-    private OperacionEntidad operacion;
-    private final OperacionRepositorio repositorio;
-    
-    public OperacionServicio()
-    {
-        this.operacion = new OperacionEntidad();
-        this.repositorio = new OperacionRepositorio();
-    }
+    public OperacionServicio(){ }
 
     @Override
     public boolean Crear(Object obj) {
-        operacion = (OperacionEntidad) obj;
-        if(!operacion.getNombre().isEmpty() && operacion.getId_modulo() > 0)
+        operacionModelo = (OperacionModelo) obj;
+        if(!operacionModelo.getNombre().isEmpty() && operacionModelo.getId_modulo() > 0)
         {   
-            if(repositorio.Crear(operacion) == true)
+            if(operacionRepositorio.Crear(operacionModelo) == true)
                 return true;
             else
             {
@@ -44,10 +35,10 @@ public class OperacionServicio implements IServicioBase
 
     @Override
     public boolean Eliminar(Object obj) {
-        operacion = (OperacionEntidad) obj;
-        if(operacion.getId() > 0)
+        operacionModelo = (OperacionModelo) obj;
+        if(operacionModelo.getId() > 0)
         {   
-            if(repositorio.Eliminar(operacion) == true)
+            if(operacionRepositorio.Eliminar(operacionModelo) == true)
                 return true;
             else
             {
@@ -67,15 +58,15 @@ public class OperacionServicio implements IServicioBase
     @Override
     public Object[] ListarDetalles(Object obj) 
     {
-        return repositorio.ListarDetalles(obj);
+        return operacionRepositorio.ListarDetalles(obj);
     }
 
     @Override
     public boolean Modificar(Object obj) {
-        operacion = (OperacionEntidad) obj;
-        if(operacion.getId() > 0 && !operacion.getNombre().isEmpty() && operacion.getId_modulo() > 0)
+        operacionModelo = (OperacionModelo) obj;
+        if(operacionModelo.getId() > 0 && !operacionModelo.getNombre().isEmpty() && operacionModelo.getId_modulo() > 0)
         {   
-            if(repositorio.Modificar(operacion) == true)
+            if(operacionRepositorio.Modificar(operacionModelo) == true)
                 return true;
             else
             {            
@@ -95,6 +86,6 @@ public class OperacionServicio implements IServicioBase
     @Override
     public ArrayList<Object[]> ListarTodos() 
     {
-        return repositorio.ListarTodos();
+        return operacionRepositorio.ListarTodos();
     }
 }

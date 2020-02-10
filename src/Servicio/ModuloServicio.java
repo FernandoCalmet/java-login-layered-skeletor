@@ -3,29 +3,20 @@ package Servicio;
  *
  * @author Fernando Calmet <github.com/fernandocalmet>
  */
-import Entidad.ModuloEntidad;
-import Repositorio.ModuloRepositorio;
-import Interface.IServicioBase;
+import Modelo.ModuloModelo;
 import java.util.ArrayList;
 import Excepcion.ModuloException;
 
-public class ModuloServicio implements IServicioBase
-{
-    private ModuloEntidad entidad;
-    private final ModuloRepositorio repositorio;
-    
-    public ModuloServicio()
-    {
-        this.entidad = new ModuloEntidad();
-        this.repositorio = new ModuloRepositorio();
-    }
+public class ModuloServicio extends BaseServicio implements IBaseServicio
+{    
+    public ModuloServicio(){ }
    
     @Override
     public boolean Crear(Object obj) {
-        entidad = (ModuloEntidad) obj;
-        if(!entidad.getNombre().isEmpty())
+        moduloModelo = (ModuloModelo) obj;
+        if(!moduloModelo.getNombre().isEmpty())
         {   
-            if(repositorio.Crear(entidad) == true)
+            if(moduloRepositorio.Crear(moduloModelo) == true)
                 return true;
             else
             {
@@ -44,10 +35,10 @@ public class ModuloServicio implements IServicioBase
 
     @Override
     public boolean Eliminar(Object obj) {
-        entidad = (ModuloEntidad) obj;
-        if(entidad.getId() != 0)
+        moduloModelo = (ModuloModelo) obj;
+        if(moduloModelo.getId() != 0)
         {   
-            if(repositorio.Eliminar(entidad) == true)
+            if(moduloRepositorio.Eliminar(moduloModelo) == true)
                 return true;
             else
             {
@@ -66,15 +57,15 @@ public class ModuloServicio implements IServicioBase
 
     @Override
     public Object[] ListarDetalles(Object obj) {
-        return repositorio.ListarDetalles(obj);
+        return moduloRepositorio.ListarDetalles(obj);
     }
 
     @Override
     public boolean Modificar(Object obj) {
-        entidad = (ModuloEntidad) obj;
-        if(!entidad.getNombre().isEmpty() && entidad.getId() != 0)
+        moduloModelo = (ModuloModelo) obj;
+        if(!moduloModelo.getNombre().isEmpty() && moduloModelo.getId() != 0)
         {   
-            if(repositorio.Modificar(entidad) == true)
+            if(moduloRepositorio.Modificar(moduloModelo) == true)
                 return true;
             else
             {
@@ -93,6 +84,6 @@ public class ModuloServicio implements IServicioBase
 
     @Override
     public ArrayList<Object[]> ListarTodos() {
-        return repositorio.ListarTodos();
+        return moduloRepositorio.ListarTodos();
     }    
 }

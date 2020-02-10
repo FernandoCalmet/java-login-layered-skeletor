@@ -8,32 +8,23 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import Interface.IRepositorioBase ;
-import Entidad.OperacionEntidad;
-import BaseDatos.*;
+import Modelo.OperacionModelo;
 
-public class OperacionRepositorio implements IRepositorioBase 
-{
-    private final MySql baseDatos;
-    private OperacionEntidad entidad;
-    
-    public OperacionRepositorio()
-    {
-        this.baseDatos = new BaseDatos.MySql();
-        this.entidad = new OperacionEntidad();
-    }
+public class OperacionRepositorio extends BaseRepositorio implements IBaseRepositorio 
+{ 
+    public OperacionRepositorio() {}
    
     @Override
     public boolean Crear(Object obj) 
     {
-        entidad = (OperacionEntidad) obj;
+        operacionModelo = (OperacionModelo) obj;
         String consultaSql = "INSERT INTO operaciones (nombre, id_modulo) VALUES (?, ?)";      
         PreparedStatement declaracionSql;        
         try
         {
-            declaracionSql = baseDatos.conectado().prepareStatement(consultaSql);
-            declaracionSql.setString(1, entidad.getNombre());
-            declaracionSql.setInt(2, entidad.getId_modulo());
+            declaracionSql = getBD().prepareStatement(consultaSql);
+            declaracionSql.setString(1, operacionModelo.getNombre());
+            declaracionSql.setInt(2, operacionModelo.getId_modulo());
             int filas = declaracionSql.executeUpdate();
             if(filas > 0){return true;}
             else{return false;}
@@ -48,13 +39,13 @@ public class OperacionRepositorio implements IRepositorioBase
     @Override
     public boolean Eliminar(Object obj) 
     {
-        entidad = (OperacionEntidad) obj;
+        operacionModelo = (OperacionModelo) obj;
         String consultaSql = "DELETE FROM operaciones WHERE id=?";      
         PreparedStatement declaracionSql;        
         try
         {
-            declaracionSql = baseDatos.conectado().prepareStatement(consultaSql);
-            declaracionSql.setInt(1, entidad.getId());
+            declaracionSql = getBD().prepareStatement(consultaSql);
+            declaracionSql.setInt(1, operacionModelo.getId());
             int filas = declaracionSql.executeUpdate();
             if(filas > 0){return true;}
             else{return false;}
@@ -75,8 +66,8 @@ public class OperacionRepositorio implements IRepositorioBase
         ResultSetMetaData metaSql;
         Object[] listaDatos = null;
         try{
-            declaracionSql = baseDatos.conectado().prepareStatement(consultaSql);  
-            declaracionSql.setInt(1, entidad.getId());
+            declaracionSql = getBD().prepareStatement(consultaSql);  
+            declaracionSql.setInt(1, operacionModelo.getId());
             int filas = declaracionSql.executeUpdate();
             if(filas > 0)
             {
@@ -97,15 +88,15 @@ public class OperacionRepositorio implements IRepositorioBase
     @Override
     public boolean Modificar(Object obj) 
     {
-        entidad = (OperacionEntidad) obj;
+        operacionModelo = (OperacionModelo) obj;
         String consultaSql = "UPDATE operaciones SET nombre=?, id_modulo=? WHERE id=?";      
         PreparedStatement declaracionSql;        
         try
         {
-            declaracionSql = baseDatos.conectado().prepareStatement(consultaSql);
-            declaracionSql.setString(1, entidad.getNombre());
-            declaracionSql.setInt(2, entidad.getId_modulo());
-            declaracionSql.setInt(3, entidad.getId());
+            declaracionSql = getBD().prepareStatement(consultaSql);
+            declaracionSql.setString(1, operacionModelo.getNombre());
+            declaracionSql.setInt(2, operacionModelo.getId_modulo());
+            declaracionSql.setInt(3, operacionModelo.getId());
             int filas = declaracionSql.executeUpdate();
             if(filas > 0){ return true; }
             else{ return false; }
@@ -131,7 +122,7 @@ public class OperacionRepositorio implements IRepositorioBase
         ArrayList<Object[]> listaDatos = new ArrayList<>();
         try
         {
-            declaracionSql = baseDatos.conectado().prepareStatement(consultaSql);      
+            declaracionSql = getBD().prepareStatement(consultaSql);      
             resultadoSql = declaracionSql.executeQuery();
             metaSql = resultadoSql.getMetaData();
             while(resultadoSql.next())

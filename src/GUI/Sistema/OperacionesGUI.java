@@ -5,9 +5,9 @@ package GUI.Sistema;
  */
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
-import Entidad.OperacionEntidad;
+import Modelo.OperacionModelo;
 import Servicio.OperacionServicio;
-import Interface.IGUIBase;
+import GUI.IBaseGUI;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.ButtonGroup;
@@ -15,9 +15,9 @@ import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.TableRowSorter;
 
-public class OperacionesGUI extends javax.swing.JPanel implements IGUIBase
+public class OperacionesGUI extends javax.swing.JPanel implements IBaseGUI
 {    
-    private OperacionEntidad operacion;
+    private OperacionModelo operacion;
     private OperacionServicio servicio;
     private String [] columnas = {"Id operación", "Operación", "Id Modulo", "Modulo"};
     private ArrayList<Object[]> listaDatos;
@@ -27,7 +27,7 @@ public class OperacionesGUI extends javax.swing.JPanel implements IGUIBase
 
     public OperacionesGUI() 
     {
-        this.operacion = new OperacionEntidad();
+        this.operacion = new OperacionModelo();
         this.servicio = new OperacionServicio();
         this.listaDatos = new ArrayList<>();
         this.tablaDatos= new DefaultTableModel(columnas, 0);

@@ -5,9 +5,9 @@ package GUI.Sistema;
  */
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
-import Entidad.ModuloEntidad;
+import Modelo.ModuloModelo;
 import Servicio.ModuloServicio;
-import Interface.IGUIBase;
+import GUI.IBaseGUI;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.ButtonGroup;
@@ -15,9 +15,9 @@ import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.TableRowSorter;
 
-public class ModulosGUI extends javax.swing.JPanel implements IGUIBase
+public class ModulosGUI extends javax.swing.JPanel implements IBaseGUI
 {    
-    private ModuloEntidad entidad;
+    private ModuloModelo entidad;
     private final ModuloServicio servicio;
     private String [] columnas = {"Id Modulo", "Modulo"};
     private ArrayList<Object[]> listaDatos;
@@ -27,7 +27,7 @@ public class ModulosGUI extends javax.swing.JPanel implements IGUIBase
 
     public ModulosGUI() 
     {
-        this.entidad = new ModuloEntidad();
+        this.entidad = new ModuloModelo();
         this.servicio = new ModuloServicio();
         this.listaDatos = new ArrayList<>();
         this.tablaDatos = new DefaultTableModel(columnas, 0);

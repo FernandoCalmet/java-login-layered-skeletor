@@ -4,18 +4,18 @@ package GUI;
  * @author Fernando Calmet <github.com/fernandocalmet>
  */
 import Servicio.AccesoServicio;
-import Entidad.UsuarioEntidad;
+import Modelo.UsuarioModelo;
 
 public class AccesoGUI extends javax.swing.JFrame 
 { 
     private final AccesoServicio servicio;
-    private UsuarioEntidad entidad;
+    private UsuarioModelo entidad;
     private String correo, clave;    
     
     public AccesoGUI() 
     {       
         this.servicio = new AccesoServicio();
-        this.entidad = new UsuarioEntidad();
+        this.entidad = new UsuarioModelo();
         this.correo = null;
         this.clave = null;
         initComponents();
@@ -122,12 +122,12 @@ public class AccesoGUI extends javax.swing.JFrame
     private void JButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButtonLoginActionPerformed
         correo = this.JTextCorreo.getText();
         clave = this.JTextClave.getText();
-        entidad = (UsuarioEntidad) servicio.Login(correo, clave);
+        entidad = (UsuarioModelo) servicio.Login(correo, clave);
         if(entidad.getId() > 0)
         {
             new PrincipalGUI(entidad).setVisible(true);     
             this.setVisible(false);            
-        }
+        }      
     }//GEN-LAST:event_JButtonLoginActionPerformed
  
     // Variables declaration - do not modify//GEN-BEGIN:variables
