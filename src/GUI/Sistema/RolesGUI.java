@@ -3,10 +3,10 @@ package GUI.Sistema;
  *
  * @author Fernando Calmet <github.com/fernandocalmet>
  */
+import GUI.BaseRol;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import Modelo.RolModelo;
-import Servicio.RolServicio;
 import GUI.IBaseGUI;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -15,10 +15,9 @@ import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.TableRowSorter;
 
-public class RolesGUI extends javax.swing.JPanel implements IBaseGUI
+public class RolesGUI extends BaseRol implements IBaseGUI
 {    
     private RolModelo rol;
-    private RolServicio servicio;
     private String [] columnas = {"Id", "Nombre"};
     private ArrayList<Object[]> listaDatos;
     private DefaultTableModel tablaDatos;
@@ -28,7 +27,6 @@ public class RolesGUI extends javax.swing.JPanel implements IBaseGUI
     public RolesGUI() 
     {
         this.rol = new RolModelo();
-        this.servicio = new RolServicio();
         this.listaDatos = new ArrayList<>();
         this.tablaDatos = new DefaultTableModel(columnas, 0);
         this.buttonGroupFiltro = new ButtonGroup();
@@ -42,7 +40,7 @@ public class RolesGUI extends javax.swing.JPanel implements IBaseGUI
     public void cargarDatos()
     {
         tablaDatos.setRowCount(0);
-        listaDatos = servicio.ListarTodos();
+        listaDatos = getConsultarTodosRoles();
         for(Object[] obj : listaDatos)
         {
             tablaDatos.addRow(obj);
@@ -296,7 +294,7 @@ public class RolesGUI extends javax.swing.JPanel implements IBaseGUI
 
     private void btnCrearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCrearMouseClicked
         rol.setNombre(this.txtNombre.getText());
-        if(servicio.Crear(rol) == true)
+        if(getCrearRol(rol) == true)
         {
             cargarDatos();
             limpiarSeleccion();
@@ -306,7 +304,7 @@ public class RolesGUI extends javax.swing.JPanel implements IBaseGUI
     private void btnModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModificarMouseClicked
         rol.setId(Integer.parseInt(this.txtId.getText()));
         rol.setNombre(this.txtNombre.getText());
-        if(servicio.Modificar(rol) == true)
+        if(getModificarRol(rol) == true)
         {
             cargarDatos();
             limpiarSeleccion();
@@ -317,7 +315,7 @@ public class RolesGUI extends javax.swing.JPanel implements IBaseGUI
 
     private void btnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseClicked
         rol.setId(Integer.parseInt(this.txtId.getText()));
-        if(servicio.Eliminar(rol) == true)
+        if(getEliminarRol(rol) == true)
         {
             cargarDatos();
             limpiarSeleccion();

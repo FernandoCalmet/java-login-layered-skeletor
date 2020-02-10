@@ -57,7 +57,7 @@ public class PermisoServicio extends BaseServicio implements IBaseServicio
     }
 
     @Override
-    public Object[] ListarDetalles(Object obj) 
+    public Object[] ConsultarUno(Object obj) 
     {
         return permisoRepositorio.ListarDetalles(obj);
     }
@@ -85,7 +85,7 @@ public class PermisoServicio extends BaseServicio implements IBaseServicio
     }
 
     @Override
-    public ArrayList<Object[]> ListarTodos() 
+    public ArrayList<Object[]> ConsultarTodos() 
     {
         return permisoRepositorio.ListarTodos();
     }    

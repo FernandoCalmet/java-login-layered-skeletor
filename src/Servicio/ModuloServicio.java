@@ -54,12 +54,7 @@ public class ModuloServicio extends BaseServicio implements IBaseServicio
             return false;
         }
     }
-
-    @Override
-    public Object[] ListarDetalles(Object obj) {
-        return moduloRepositorio.ListarDetalles(obj);
-    }
-
+    
     @Override
     public boolean Modificar(Object obj) {
         moduloModelo = (ModuloModelo) obj;
@@ -83,7 +78,12 @@ public class ModuloServicio extends BaseServicio implements IBaseServicio
     }
 
     @Override
-    public ArrayList<Object[]> ListarTodos() {
+    public Object[] ConsultarUno(Object obj) {
+        return moduloRepositorio.ListarDetalles(obj);
+    }  
+
+    @Override
+    public ArrayList<Object[]> ConsultarTodos() {
         return moduloRepositorio.ListarTodos();
     }    
 }

@@ -3,10 +3,10 @@ package GUI.Sistema;
  *
  * @author Fernando Calmet <github.com/fernandocalmet>
  */
+import GUI.BaseOperacion;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import Modelo.OperacionModelo;
-import Servicio.OperacionServicio;
 import GUI.IBaseGUI;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -15,10 +15,9 @@ import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.TableRowSorter;
 
-public class OperacionesGUI extends javax.swing.JPanel implements IBaseGUI
+public class OperacionesGUI extends BaseOperacion implements IBaseGUI
 {    
     private OperacionModelo operacion;
-    private OperacionServicio servicio;
     private String [] columnas = {"Id operación", "Operación", "Id Modulo", "Modulo"};
     private ArrayList<Object[]> listaDatos;
     private DefaultTableModel tablaDatos;
@@ -28,7 +27,6 @@ public class OperacionesGUI extends javax.swing.JPanel implements IBaseGUI
     public OperacionesGUI() 
     {
         this.operacion = new OperacionModelo();
-        this.servicio = new OperacionServicio();
         this.listaDatos = new ArrayList<>();
         this.tablaDatos= new DefaultTableModel(columnas, 0);
         this.buttonGroupFiltro = new ButtonGroup();
@@ -42,7 +40,7 @@ public class OperacionesGUI extends javax.swing.JPanel implements IBaseGUI
     public void cargarDatos()
     {
         tablaDatos.setRowCount(0);
-        listaDatos = servicio.ListarTodos();
+        listaDatos = getConsultarTodosOperaciones();
         for(Object[] obj : listaDatos)
         {
             tablaDatos.addRow(obj);
@@ -335,7 +333,7 @@ public class OperacionesGUI extends javax.swing.JPanel implements IBaseGUI
     private void btnCrearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCrearMouseClicked
         operacion.setNombre(this.jTextFieldNombre.getText());
         operacion.setId_modulo(Integer.parseInt(this.jTextFieldIdModulo.getText()));
-        if(servicio.Crear(operacion) == true)
+        if(getCrearOperacion(operacion) == true)
         {
             cargarDatos();
             limpiarSeleccion();
@@ -346,7 +344,7 @@ public class OperacionesGUI extends javax.swing.JPanel implements IBaseGUI
         operacion.setId(Integer.parseInt(this.jTextFieldId.getText()));
         operacion.setNombre(this.jTextFieldNombre.getText());
         operacion.setId_modulo(Integer.parseInt(this.jTextFieldIdModulo.getText()));
-        if(servicio.Modificar(operacion) == true)
+        if(getModificarOperacion(operacion) == true)
         {
             cargarDatos();
             limpiarSeleccion();
@@ -357,7 +355,7 @@ public class OperacionesGUI extends javax.swing.JPanel implements IBaseGUI
 
     private void btnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseClicked
         operacion.setId(Integer.parseInt(this.jTextFieldId.getText()));
-        if(servicio.Eliminar(operacion) == true)
+        if(getEliminarOperacion(operacion) == true)
         {
             cargarDatos();
             limpiarSeleccion();

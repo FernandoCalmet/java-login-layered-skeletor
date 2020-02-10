@@ -3,10 +3,10 @@ package GUI.Sistema;
  *
  * @author Fernando Calmet <github.com/fernandocalmet>
  */
+import GUI.BaseUsuario;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import Modelo.UsuarioModelo;
-import Servicio.UsuarioServicio;
 import GUI.IBaseGUI;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -15,10 +15,9 @@ import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.TableRowSorter;
 
-public class UsuariosGUI extends javax.swing.JPanel implements IBaseGUI
+public class UsuariosGUI extends BaseUsuario implements IBaseGUI
 {    
     private UsuarioModelo usuario;
-    private UsuarioServicio servicio;   
     private String [] columnas = {"Id", "Correo", "Clave", "Nombre", "Id Rol", "Rol"};
     private ArrayList<Object[]> listaDatos;   
     private DefaultTableModel tablaDatos;   
@@ -28,7 +27,6 @@ public class UsuariosGUI extends javax.swing.JPanel implements IBaseGUI
     public UsuariosGUI() 
     {
         this.usuario = new UsuarioModelo();
-        this.servicio = new UsuarioServicio(); 
         this.listaDatos = new ArrayList<>(); 
         this.tablaDatos = new DefaultTableModel(columnas, 0);
         this.buttonGroupFiltro = new ButtonGroup();
@@ -42,7 +40,7 @@ public class UsuariosGUI extends javax.swing.JPanel implements IBaseGUI
     public void cargarDatos()
     {
         tablaDatos.setRowCount(0);
-        listaDatos = servicio.ListarTodos();
+        listaDatos = getConsultarTodosUsuarios();
         for(Object[] obj : listaDatos)
         {
             tablaDatos.addRow(obj);
@@ -377,7 +375,7 @@ public class UsuariosGUI extends javax.swing.JPanel implements IBaseGUI
         usuario.setClave(this.txtClave.getText());
         usuario.setNombre(this.txtNombre.getText());
         usuario.setId_rol(Integer.parseInt(this.txtIdRol.getText()));
-        if(servicio.Crear(usuario) == true)
+        if(getCrearUsuario(usuario) == true)
         {
             cargarDatos();
             limpiarSeleccion();
@@ -390,7 +388,7 @@ public class UsuariosGUI extends javax.swing.JPanel implements IBaseGUI
         usuario.setClave(this.txtClave.getText());
         usuario.setNombre(this.txtNombre.getText());
         usuario.setId_rol(Integer.parseInt(this.txtIdRol.getText()));
-        if(servicio.Modificar(usuario) == true)
+        if(getModificarUsuario(usuario) == true)
         {
             cargarDatos();
             limpiarSeleccion();
@@ -401,7 +399,7 @@ public class UsuariosGUI extends javax.swing.JPanel implements IBaseGUI
 
     private void btnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseClicked
         usuario.setId(Integer.parseInt(this.txtId.getText()));
-        if(servicio.Eliminar(usuario) == true)
+        if(getEliminarUsuario(usuario) == true)
         {
             cargarDatos();
             limpiarSeleccion();

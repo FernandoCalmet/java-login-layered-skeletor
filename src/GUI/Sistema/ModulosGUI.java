@@ -6,8 +6,8 @@ package GUI.Sistema;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import Modelo.ModuloModelo;
-import Servicio.ModuloServicio;
 import GUI.IBaseGUI;
+import GUI.BaseModulo;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.ButtonGroup;
@@ -15,10 +15,9 @@ import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.TableRowSorter;
 
-public class ModulosGUI extends javax.swing.JPanel implements IBaseGUI
+public class ModulosGUI extends BaseModulo implements IBaseGUI
 {    
     private ModuloModelo entidad;
-    private final ModuloServicio servicio;
     private String [] columnas = {"Id Modulo", "Modulo"};
     private ArrayList<Object[]> listaDatos;
     private DefaultTableModel tablaDatos;
@@ -26,13 +25,12 @@ public class ModulosGUI extends javax.swing.JPanel implements IBaseGUI
     private final ButtonGroup buttonGroupFiltro;
 
     public ModulosGUI() 
-    {
+    {   
+        initComponents();
         this.entidad = new ModuloModelo();
-        this.servicio = new ModuloServicio();
         this.listaDatos = new ArrayList<>();
         this.tablaDatos = new DefaultTableModel(columnas, 0);
-        this.buttonGroupFiltro = new ButtonGroup();
-        initComponents();
+        this.buttonGroupFiltro = new ButtonGroup();        
         cargarDatos();
         bloquearBotones(); 
         cargarGrupoRadioBotones();        
@@ -46,7 +44,7 @@ public class ModulosGUI extends javax.swing.JPanel implements IBaseGUI
     public void cargarDatos()
     {
         tablaDatos.setRowCount(0);
-        listaDatos = servicio.ListarTodos();
+        listaDatos = getConsultarTodosModulos();
         for(Object[] obj : listaDatos)
         {
             tablaDatos.addRow(obj);
@@ -301,7 +299,7 @@ public class ModulosGUI extends javax.swing.JPanel implements IBaseGUI
 
     private void btnCrearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCrearMouseClicked
         setEntidadNombre(this.jTextFieldNombre.getText());
-        if(servicio.Crear(getEntidad()) == true)
+        if(getCrearModulo(getEntidad()) == true)
         {
             cargarDatos();
             limpiarSeleccion();
@@ -311,7 +309,7 @@ public class ModulosGUI extends javax.swing.JPanel implements IBaseGUI
     private void btnModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModificarMouseClicked
         setEntidadId(Integer.parseInt(this.jTextFieldId.getText()));
         setEntidadNombre(this.jTextFieldNombre.getText());
-        if(servicio.Modificar(getEntidad()) == true)
+        if(getModificarModulo(getEntidad()) == true)
         {
             cargarDatos();
             limpiarSeleccion();
@@ -322,7 +320,7 @@ public class ModulosGUI extends javax.swing.JPanel implements IBaseGUI
 
     private void btnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseClicked
         setEntidadId(Integer.parseInt(this.jTextFieldId.getText()));
-        if(servicio.Eliminar(getEntidad()) == true)
+        if(getEliminarModulo(getEntidad()) == true)
         {
             cargarDatos();
             limpiarSeleccion();

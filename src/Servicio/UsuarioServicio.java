@@ -58,7 +58,7 @@ public class UsuarioServicio extends BaseServicio implements IBaseServicio
     }
 
     @Override
-    public Object[] ListarDetalles(Object obj) 
+    public Object[] ConsultarUno(Object obj) 
     {
         return usuarioRepositorio.ListarDetalles(obj);
     }
@@ -87,7 +87,7 @@ public class UsuarioServicio extends BaseServicio implements IBaseServicio
     }
 
     @Override
-    public ArrayList<Object[]> ListarTodos() 
+    public ArrayList<Object[]> ConsultarTodos() 
     {
         return usuarioRepositorio.ListarTodos();
     }    

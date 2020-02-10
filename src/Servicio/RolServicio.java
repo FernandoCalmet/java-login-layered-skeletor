@@ -58,7 +58,7 @@ public class RolServicio extends BaseServicio implements IBaseServicio
     }
 
     @Override
-    public Object[] ListarDetalles(Object obj) 
+    public Object[] ConsultarUno(Object obj) 
     {
         return rolRepositorio.ListarDetalles(obj);
     }
@@ -87,7 +87,7 @@ public class RolServicio extends BaseServicio implements IBaseServicio
     }
 
     @Override
-    public ArrayList<Object[]> ListarTodos() 
+    public ArrayList<Object[]> ConsultarTodos() 
     {     
         return rolRepositorio.ListarTodos();
     }
