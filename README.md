@@ -4,10 +4,10 @@
 > Autor : Fernando Calmet  
 https://github.com/fernandocalmet  
 ----------
-<p>Esta aplicación de muestra está destinada a proporcionar un ejemplo práctico de una aplicación modular. Específicamente, esta aplicación de muestra demuestra lo siguiente:</p>
+<p>Esta aplicación de muestra está destinada a proporcionar un ejemplo práctico de una aplicación modular desarrollada por mi propio criterio. Específicamente, esta aplicación de muestra demuestra lo siguiente:</p>
 
 <ul>
-	<li>Crear, Eliminar, Listar uno, Modificar, Listar todos y Busquedas con filtro de datos.</li>
+	<li>Crear, Eliminar, Modificar, Listar Uno, Listar Todos y Busquedas con filtro de datos.</li>
 	<li>Acceso de conexión y desconexión de usuarios al sistema.</li>
 	<li>Para la conexión con con la base de datos se importan los drivers de las bibliotecas correspondientes de cada gestor de base de datos.</li>	
 </ul>
