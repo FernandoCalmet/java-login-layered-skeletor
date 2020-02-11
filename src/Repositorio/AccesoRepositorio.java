@@ -24,22 +24,29 @@ public class AccesoRepositorio extends BaseRepositorio implements IAccesoReposit
             declaracionSql.setString(1, correo);
             declaracionSql.setString(2, clave);            
             resultadoSql = declaracionSql.executeQuery();
-            resultadoSql.next();            
-            if(correo.equals(resultadoSql.getString("correo")) && clave.equals(resultadoSql.getString("clave")))
+            if(resultadoSql.next())
             {
-                usuarioModelo.setId(resultadoSql.getInt("id"));
-                usuarioModelo.setCorreo(resultadoSql.getString("correo"));
-                usuarioModelo.setClave(resultadoSql.getString("clave"));
-                usuarioModelo.setNombre(resultadoSql.getString("nombre"));
-                usuarioModelo.setId_rol(resultadoSql.getInt("id_rol"));
-                try { throw new AccesoException("Bienvenido "+usuarioModelo.getNombre()+"!"); }
-                catch (Exception ex) { System.out.println("Excepción capturada: "+ex); }                
-            }
+                if(correo.equals(resultadoSql.getString("correo")) && clave.equals(resultadoSql.getString("clave")))
+                {
+                    usuarioModelo.setId(resultadoSql.getInt("id"));
+                    usuarioModelo.setCorreo(resultadoSql.getString("correo"));
+                    usuarioModelo.setClave(resultadoSql.getString("clave"));
+                    usuarioModelo.setNombre(resultadoSql.getString("nombre"));
+                    usuarioModelo.setId_rol(resultadoSql.getInt("id_rol"));
+                    try { throw new AccesoException("Bienvenido "+usuarioModelo.getNombre()+"!"); }
+                    catch (Exception ex) { System.out.println("Excepción capturada: "+ex); }                
+                }
+                else
+                {
+                    try { throw new AccesoException("El correo o la contraseña es incorrecta, intentelo de nuevo."); }
+                    catch (Exception ex) { System.out.println("Excepción capturada: "+ex); }
+                }
+            } 
             else
             {
-                try { throw new AccesoException("El Usuario no existe o algun dato es incorrecto."); }
+                try { throw new AccesoException("El Usuario no existe."); }
                 catch (Exception ex) { System.out.println("Excepción capturada: "+ex); }
-            }           
+            }
         }
         catch(SQLException ex){System.out.println("Ocurrio un error: "+ex.getMessage());}      
         return usuarioModelo;
