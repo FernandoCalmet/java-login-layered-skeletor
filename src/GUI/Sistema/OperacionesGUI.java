@@ -3,21 +3,25 @@ package GUI.Sistema;
  *
  * @author Fernando Calmet <github.com/fernandocalmet>
  */
-import GUI.BaseOperacion;
+import Controlador.Operacion.*;
+import Modelo.OperacionModelo;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
-import Modelo.OperacionModelo;
-import GUI.IBaseGUI;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.ButtonGroup;
+import javax.swing.JPanel;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.TableRowSorter;
 
-public class OperacionesGUI extends BaseOperacion implements IBaseGUI
+public class OperacionesGUI extends JPanel
 {    
-    private OperacionModelo operacion;
+    private OperacionModelo modelo;
+    private ConsultarTodosOperacionesControlador consultarTodosControlador;
+    private CrearOperacionControlador crearControlador;
+    private ModificarOperacionControlador modificarControlador;
+    private EliminarOperacionControlador eliminarControlador;
     private String [] columnas = {"Id operación", "Operación", "Id Modulo", "Modulo"};
     private ArrayList<Object[]> listaDatos;
     private DefaultTableModel tablaDatos;
@@ -26,21 +30,24 @@ public class OperacionesGUI extends BaseOperacion implements IBaseGUI
 
     public OperacionesGUI() 
     {
-        this.operacion = new OperacionModelo();
+        this.modelo = new OperacionModelo();
+        this.consultarTodosControlador = new ConsultarTodosOperacionesControlador();
+        this.crearControlador = new CrearOperacionControlador();
+        this.modificarControlador = new ModificarOperacionControlador();
+        this.eliminarControlador = new EliminarOperacionControlador();
         this.listaDatos = new ArrayList<>();
         this.tablaDatos= new DefaultTableModel(columnas, 0);
-        this.buttonGroupFiltro = new ButtonGroup();
+        this.buttonGroupFiltro = new ButtonGroup();        
         initComponents();
         cargarDatos();
         bloquearBotones();
         cargarGrupoRadioBotones();        
     }
     
-    @Override
     public void cargarDatos()
     {
         tablaDatos.setRowCount(0);
-        listaDatos = getConsultarTodosOperaciones();
+        listaDatos = consultarTodosControlador.ConsultarTodosOperaciones();
         for(Object[] obj : listaDatos)
         {
             tablaDatos.addRow(obj);
@@ -50,7 +57,6 @@ public class OperacionesGUI extends BaseOperacion implements IBaseGUI
         this.jTextFieldNombreModulo.enable(false);        
     }
     
-    @Override
     public void seleccionarDatos()
     {
         this.jTextFieldId.setText(String.valueOf(this.tblDatos.getValueAt(this.tblDatos.getSelectedRow(), 0)));
@@ -60,7 +66,6 @@ public class OperacionesGUI extends BaseOperacion implements IBaseGUI
         this.btnCrear.setEnabled(false);
     }
     
-    @Override
     public void limpiarSeleccion()
     {
         this.jTextFieldId.setText(null);
@@ -70,21 +75,18 @@ public class OperacionesGUI extends BaseOperacion implements IBaseGUI
         this.btnCrear.setEnabled(true);
     }
     
-    @Override
     public void bloquearCampos()
     {
         this.jTextFieldNombre.enable(false);
         this.jTextFieldIdModulo.enable(false);
     }
     
-    @Override
     public void desbloquearCampos()
     {
         this.jTextFieldNombre.enable(true);
         this.jTextFieldIdModulo.enable(true);
     }
     
-    @Override
     public void bloquearBotones()
     {
         this.btnModificar.setEnabled(false);
@@ -92,7 +94,6 @@ public class OperacionesGUI extends BaseOperacion implements IBaseGUI
         this.btnLimpiar.setEnabled(false);
     }
     
-    @Override
     public void desbloquearBotones()
     {
         this.btnModificar.setEnabled(true);
@@ -100,7 +101,6 @@ public class OperacionesGUI extends BaseOperacion implements IBaseGUI
         this.btnLimpiar.setEnabled(true);
     }
     
-    @Override
     public void filtroBusqueda()
     {
         String filtro = jTextFieldBuscar.getText();
@@ -121,14 +121,12 @@ public class OperacionesGUI extends BaseOperacion implements IBaseGUI
         } 
     }
     
-    @Override
     public void cargarFiltro()
     {
         filtroDatos = new TableRowSorter(tablaDatos);
         tblDatos.setRowSorter(filtroDatos);
     }
     
-    @Override
     public void cargarGrupoRadioBotones()
     {
         buttonGroupFiltro.add(jRadioButtonId);
@@ -331,9 +329,9 @@ public class OperacionesGUI extends BaseOperacion implements IBaseGUI
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCrearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCrearMouseClicked
-        operacion.setNombre(this.jTextFieldNombre.getText());
-        operacion.setId_modulo(Integer.parseInt(this.jTextFieldIdModulo.getText()));
-        if(getCrearOperacion(operacion) == true)
+        modelo.setNombre(this.jTextFieldNombre.getText());
+        modelo.setId_modulo(Integer.parseInt(this.jTextFieldIdModulo.getText()));
+        if(crearControlador.CrearOperacion(modelo) == true)
         {
             cargarDatos();
             limpiarSeleccion();
@@ -341,10 +339,10 @@ public class OperacionesGUI extends BaseOperacion implements IBaseGUI
     }//GEN-LAST:event_btnCrearMouseClicked
 
     private void btnModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModificarMouseClicked
-        operacion.setId(Integer.parseInt(this.jTextFieldId.getText()));
-        operacion.setNombre(this.jTextFieldNombre.getText());
-        operacion.setId_modulo(Integer.parseInt(this.jTextFieldIdModulo.getText()));
-        if(getModificarOperacion(operacion) == true)
+        modelo.setId(Integer.parseInt(this.jTextFieldId.getText()));
+        modelo.setNombre(this.jTextFieldNombre.getText());
+        modelo.setId_modulo(Integer.parseInt(this.jTextFieldIdModulo.getText()));
+        if(modificarControlador.ModificarOperacion(modelo) == true)
         {
             cargarDatos();
             limpiarSeleccion();
@@ -354,8 +352,8 @@ public class OperacionesGUI extends BaseOperacion implements IBaseGUI
     }//GEN-LAST:event_btnModificarMouseClicked
 
     private void btnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseClicked
-        operacion.setId(Integer.parseInt(this.jTextFieldId.getText()));
-        if(getEliminarOperacion(operacion) == true)
+        modelo.setId(Integer.parseInt(this.jTextFieldId.getText()));
+        if(eliminarControlador.EliminarOperacion(modelo) == true)
         {
             cargarDatos();
             limpiarSeleccion();

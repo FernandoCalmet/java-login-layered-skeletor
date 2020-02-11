@@ -3,21 +3,25 @@ package GUI.Sistema;
  *
  * @author Fernando Calmet <github.com/fernandocalmet>
  */
-import GUI.BaseRol;
+import Modelo.RolModelo;
+import Controlador.Rol.*;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
-import Modelo.RolModelo;
-import GUI.IBaseGUI;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.ButtonGroup;
+import javax.swing.JPanel;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.TableRowSorter;
 
-public class RolesGUI extends BaseRol implements IBaseGUI
+public class RolesGUI extends JPanel
 {    
-    private RolModelo rol;
+    private RolModelo modelo;
+    private ConsultarTodosRolesControlador consultarTodosControlador;
+    private CrearRolControlador crearControlador;
+    private ModificarRolControlador modificarControlador;
+    private EliminarRolControlador eliminarControlador;
     private String [] columnas = {"Id", "Nombre"};
     private ArrayList<Object[]> listaDatos;
     private DefaultTableModel tablaDatos;
@@ -26,7 +30,11 @@ public class RolesGUI extends BaseRol implements IBaseGUI
 
     public RolesGUI() 
     {
-        this.rol = new RolModelo();
+        this.modelo = new RolModelo();
+        this.consultarTodosControlador = new ConsultarTodosRolesControlador();
+        this.crearControlador = new CrearRolControlador();
+        this.modificarControlador = new ModificarRolControlador();
+        this.eliminarControlador = new EliminarRolControlador();
         this.listaDatos = new ArrayList<>();
         this.tablaDatos = new DefaultTableModel(columnas, 0);
         this.buttonGroupFiltro = new ButtonGroup();
@@ -36,11 +44,10 @@ public class RolesGUI extends BaseRol implements IBaseGUI
         cargarGrupoRadioBotones();        
     }
     
-    @Override
     public void cargarDatos()
     {
         tablaDatos.setRowCount(0);
-        listaDatos = getConsultarTodosRoles();
+        listaDatos = consultarTodosControlador.ConsultarTodosRoles();
         for(Object[] obj : listaDatos)
         {
             tablaDatos.addRow(obj);
@@ -49,7 +56,6 @@ public class RolesGUI extends BaseRol implements IBaseGUI
         this.txtId.enable(false);
     }
     
-    @Override
     public void seleccionarDatos()
     {
         this.txtId.setText(String.valueOf(this.tblDatos.getValueAt(this.tblDatos.getSelectedRow(), 0)));
@@ -57,7 +63,6 @@ public class RolesGUI extends BaseRol implements IBaseGUI
         this.btnCrear.setEnabled(false);
     }
     
-    @Override
     public void limpiarSeleccion()
     {
         this.txtId.setText(null);
@@ -65,19 +70,16 @@ public class RolesGUI extends BaseRol implements IBaseGUI
         this.btnCrear.setEnabled(true);
     }
     
-    @Override
     public void bloquearCampos()
     {
         this.txtNombre.enable(false);
     }
     
-    @Override
     public void desbloquearCampos()
     {
         this.txtNombre.enable(true);
     }
     
-    @Override
     public void bloquearBotones()
     {
         this.btnModificar.setEnabled(false);
@@ -85,7 +87,6 @@ public class RolesGUI extends BaseRol implements IBaseGUI
         this.btnLimpiar.setEnabled(false);
     }
     
-    @Override
     public void desbloquearBotones()
     {
         this.btnModificar.setEnabled(true);
@@ -93,7 +94,6 @@ public class RolesGUI extends BaseRol implements IBaseGUI
         this.btnLimpiar.setEnabled(true);
     }
     
-    @Override
     public void filtroBusqueda()
     {
         String filtro = jTextFieldBuscar.getText();
@@ -109,14 +109,12 @@ public class RolesGUI extends BaseRol implements IBaseGUI
         }  
     }    
     
-    @Override
     public void cargarFiltro()
     {
         filtroDatos = new TableRowSorter(tablaDatos);
         tblDatos.setRowSorter(filtroDatos);
     }
     
-    @Override
     public void cargarGrupoRadioBotones()
     {
         buttonGroupFiltro.add(jRadioButtonId);
@@ -293,8 +291,8 @@ public class RolesGUI extends BaseRol implements IBaseGUI
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCrearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCrearMouseClicked
-        rol.setNombre(this.txtNombre.getText());
-        if(getCrearRol(rol) == true)
+        modelo.setNombre(this.txtNombre.getText());
+        if(crearControlador.CrearRol(modelo) == true)
         {
             cargarDatos();
             limpiarSeleccion();
@@ -302,9 +300,9 @@ public class RolesGUI extends BaseRol implements IBaseGUI
     }//GEN-LAST:event_btnCrearMouseClicked
 
     private void btnModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModificarMouseClicked
-        rol.setId(Integer.parseInt(this.txtId.getText()));
-        rol.setNombre(this.txtNombre.getText());
-        if(getModificarRol(rol) == true)
+        modelo.setId(Integer.parseInt(this.txtId.getText()));
+        modelo.setNombre(this.txtNombre.getText());
+        if(modificarControlador.ModificarRol(modelo) == true)
         {
             cargarDatos();
             limpiarSeleccion();
@@ -314,8 +312,8 @@ public class RolesGUI extends BaseRol implements IBaseGUI
     }//GEN-LAST:event_btnModificarMouseClicked
 
     private void btnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseClicked
-        rol.setId(Integer.parseInt(this.txtId.getText()));
-        if(getEliminarRol(rol) == true)
+        modelo.setId(Integer.parseInt(this.txtId.getText()));
+        if(eliminarControlador.EliminarRol(modelo) == true)
         {
             cargarDatos();
             limpiarSeleccion();

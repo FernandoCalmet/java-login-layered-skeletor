@@ -3,7 +3,9 @@ package GUI.Archivo;
  *
  * @author Fernando Calmet <github.com/fernandocalmet>
  */
-public class InicioGUI extends javax.swing.JPanel 
+import javax.swing.JPanel;
+
+public class InicioGUI extends JPanel 
 {    
     public InicioGUI()
     {

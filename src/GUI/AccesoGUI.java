@@ -3,33 +3,29 @@ package GUI;
  *
  * @author Fernando Calmet <github.com/fernandocalmet>
  */
-import Servicio.AccesoServicio;
+import Controlador.Acceso.AccesoLoginControlador;
 import Modelo.UsuarioModelo;
+import javax.swing.JFrame;
 
-public class AccesoGUI extends javax.swing.JFrame 
-{ 
-    private final AccesoServicio servicio;
-    private UsuarioModelo entidad;
-    private String correo, clave;    
+public class AccesoGUI extends JFrame
+{
+    private String usuarioCorreo, usuarioClave; 
+    private UsuarioModelo modelo;
     
     public AccesoGUI() 
     {       
-        this.servicio = new AccesoServicio();
-        this.entidad = new UsuarioModelo();
-        this.correo = null;
-        this.clave = null;
         initComponents();
-        configPanel();
-    }
-    
-    private void configPanel()
-    {
         this.setResizable(false);
         this.setTitle("Acceso de Usuario");
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
-
+    
+    private void setUsuarioCorreo(String correo){ usuarioCorreo = correo; }
+    private void setUsuarioClave(String clave){ usuarioClave = clave; }
+    private void setObjModelo(UsuarioModelo objModelo){ modelo = objModelo; }
+    private UsuarioModelo getObjModelo(){ return modelo;}
+   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -120,12 +116,12 @@ public class AccesoGUI extends javax.swing.JFrame
     }// </editor-fold>//GEN-END:initComponents
 
     private void JButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButtonLoginActionPerformed
-        correo = this.JTextCorreo.getText();
-        clave = this.JTextClave.getText();
-        entidad = (UsuarioModelo) servicio.Login(correo, clave);
-        if(entidad.getId() > 0)
+        setUsuarioCorreo(this.JTextCorreo.getText());
+        setUsuarioClave(this.JTextClave.getText());
+        setObjModelo((UsuarioModelo) new AccesoLoginControlador().AccesoLogin(usuarioCorreo, usuarioClave));
+        if(getObjModelo().getId() > 0)
         {
-            new PrincipalGUI(entidad).setVisible(true);     
+            new PrincipalGUI(getObjModelo()).setVisible(true);     
             this.setVisible(false);            
         }      
     }//GEN-LAST:event_JButtonLoginActionPerformed

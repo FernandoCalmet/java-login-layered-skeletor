@@ -6,14 +6,18 @@ package Controlador.Modulo;
 import Controlador.BaseControlador;
 import Servicio.ModuloServicio;
 
-public class BaseModulo extends BaseControlador
+public abstract class BaseModulo extends BaseControlador
 { 
-    protected ModuloServicio moduloServicio;
+    private ModuloServicio moduloServicio;
     
     public BaseModulo()
     { 
-        this.moduloServicio = new ModuloServicio();
+        this.moduloServicio = null;
     }
     
-    protected ModuloServicio getModuloServicio(){ return moduloServicio; }
+    protected ModuloServicio getModuloServicio()
+    { 
+        moduloServicio = new ModuloServicio();
+        return moduloServicio; 
+    }
 }

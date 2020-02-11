@@ -5,5 +5,5 @@ package Controlador;
  */
 public abstract class BaseControlador 
 {
-    //
+    //   
 }

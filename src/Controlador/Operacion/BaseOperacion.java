@@ -6,14 +6,18 @@ package Controlador.Operacion;
 import Controlador.BaseControlador;
 import Servicio.OperacionServicio;
 
-public class BaseOperacion extends BaseControlador
+public abstract class BaseOperacion extends BaseControlador
 {
-    protected OperacionServicio operacionServicio;
+    private OperacionServicio operacionServicio;
     
     public BaseOperacion()
     {     
-        this.operacionServicio = new OperacionServicio();
+        this.operacionServicio = null;
     }
     
-    protected OperacionServicio getOperacionServicio(){ return operacionServicio; }
+    protected OperacionServicio getOperacionServicio()
+    { 
+        operacionServicio = new OperacionServicio();
+        return operacionServicio; 
+    }
 }

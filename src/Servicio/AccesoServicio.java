@@ -7,9 +7,7 @@ import Modelo.UsuarioModelo;
 import Excepcion.AccesoException;
 
 public class AccesoServicio extends BaseServicio implements IAccesoServicio
-{   
-    public AccesoServicio(){ }
-    
+{ 
     @Override
     public Object Login(String correo, String clave)
     {   

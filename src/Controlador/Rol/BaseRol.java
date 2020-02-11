@@ -6,14 +6,18 @@ package Controlador.Rol;
 import Controlador.BaseControlador;
 import Servicio.RolServicio;
 
-public class BaseRol extends BaseControlador
+public abstract class BaseRol extends BaseControlador
 { 
-    protected RolServicio rolServicio;
+    private RolServicio rolServicio;
     
     public BaseRol()
     {  
-        this.rolServicio = new RolServicio();
+        this.rolServicio = null;
     }
     
-    protected RolServicio getRolServicio(){ return rolServicio; }
+    protected RolServicio getRolServicio()
+    { 
+        rolServicio = new RolServicio();
+        return rolServicio; 
+    }
 }

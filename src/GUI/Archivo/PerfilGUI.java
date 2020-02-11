@@ -4,8 +4,9 @@ package GUI.Archivo;
  * @author Fernando Calmet <github.com/fernandocalmet>
  */
 import Modelo.UsuarioModelo;
+import javax.swing.JPanel;
 
-public class PerfilGUI extends javax.swing.JPanel 
+public class PerfilGUI extends JPanel 
 {
     private UsuarioModelo entidad;
 

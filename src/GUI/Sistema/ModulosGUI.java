@@ -3,21 +3,25 @@ package GUI.Sistema;
  *
  * @author Fernando Calmet <github.com/fernandocalmet>
  */
+import Controlador.Modulo.*;
+import Modelo.ModuloModelo;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
-import Modelo.ModuloModelo;
-import GUI.IBaseGUI;
-import GUI.BaseModulo;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.ButtonGroup;
+import javax.swing.JPanel;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.TableRowSorter;
 
-public class ModulosGUI extends BaseModulo implements IBaseGUI
+public class ModulosGUI extends JPanel
 {    
-    private ModuloModelo entidad;
+    private ModuloModelo modelo;
+    private ConsultarTodosModulosControlador consultarTodosControlador;
+    private CrearModuloControlador crearControlador;
+    private ModificarModuloControlador modificarControlador;
+    private EliminarModuloControlador eliminarControlador;
     private String [] columnas = {"Id Modulo", "Modulo"};
     private ArrayList<Object[]> listaDatos;
     private DefaultTableModel tablaDatos;
@@ -27,24 +31,23 @@ public class ModulosGUI extends BaseModulo implements IBaseGUI
     public ModulosGUI() 
     {   
         initComponents();
-        this.entidad = new ModuloModelo();
+        this.modelo = new ModuloModelo();
         this.listaDatos = new ArrayList<>();
         this.tablaDatos = new DefaultTableModel(columnas, 0);
-        this.buttonGroupFiltro = new ButtonGroup();        
+        this.buttonGroupFiltro = new ButtonGroup();
+        this.consultarTodosControlador = new ConsultarTodosModulosControlador();
+        this.crearControlador = new CrearModuloControlador();
+        this.modificarControlador = new ModificarModuloControlador();
+        this.eliminarControlador = new EliminarModuloControlador();
         cargarDatos();
         bloquearBotones(); 
         cargarGrupoRadioBotones();        
     }
-    
-    private Object getEntidad(){ return this.entidad; }
-    private void setEntidadId(int entidad_id){ this.entidad.setId(entidad_id); }
-    private void setEntidadNombre(String entidad_nombre){ this.entidad.setNombre(entidad_nombre); }
-    
-    @Override
+       
     public void cargarDatos()
     {
         tablaDatos.setRowCount(0);
-        listaDatos = getConsultarTodosModulos();
+        listaDatos = consultarTodosControlador.ConsultarTodosModulos();
         for(Object[] obj : listaDatos)
         {
             tablaDatos.addRow(obj);
@@ -53,7 +56,6 @@ public class ModulosGUI extends BaseModulo implements IBaseGUI
         this.jTextFieldId.enable(false);        
     }
     
-    @Override
     public void seleccionarDatos()
     {
         this.jTextFieldId.setText(String.valueOf(this.tblDatos.getValueAt(this.tblDatos.getSelectedRow(), 0)));
@@ -61,7 +63,6 @@ public class ModulosGUI extends BaseModulo implements IBaseGUI
         this.btnCrear.setEnabled(false);
     }
     
-    @Override
     public void limpiarSeleccion()
     {
         this.jTextFieldId.setText(null);
@@ -69,19 +70,16 @@ public class ModulosGUI extends BaseModulo implements IBaseGUI
         this.btnCrear.setEnabled(true);
     }
     
-    @Override
     public void bloquearCampos()
     {
         this.jTextFieldNombre.enable(false);
     }
     
-    @Override
     public void desbloquearCampos()
     {
         this.jTextFieldNombre.enable(true);
     }
     
-    @Override
     public void bloquearBotones()
     {
         this.btnModificar.setEnabled(false);
@@ -89,7 +87,6 @@ public class ModulosGUI extends BaseModulo implements IBaseGUI
         this.btnLimpiar.setEnabled(false);
     }
     
-    @Override
     public void desbloquearBotones()
     {
         this.btnModificar.setEnabled(true);
@@ -97,7 +94,6 @@ public class ModulosGUI extends BaseModulo implements IBaseGUI
         this.btnLimpiar.setEnabled(true);
     }
     
-    @Override
     public void filtroBusqueda()
     {
         String filtro = jTextFieldBuscar.getText();
@@ -113,14 +109,12 @@ public class ModulosGUI extends BaseModulo implements IBaseGUI
         }  
     }
     
-    @Override
     public void cargarFiltro()
     {
         filtroDatos = new TableRowSorter(tablaDatos);
         tblDatos.setRowSorter(filtroDatos);
     }
     
-    @Override
     public void cargarGrupoRadioBotones()
     {
         buttonGroupFiltro.add(jRadioButtonId);
@@ -298,8 +292,8 @@ public class ModulosGUI extends BaseModulo implements IBaseGUI
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCrearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCrearMouseClicked
-        setEntidadNombre(this.jTextFieldNombre.getText());
-        if(getCrearModulo(getEntidad()) == true)
+        modelo.setNombre(this.jTextFieldNombre.getText());        
+        if(crearControlador.CrearModulo(modelo) == true)
         {
             cargarDatos();
             limpiarSeleccion();
@@ -307,9 +301,9 @@ public class ModulosGUI extends BaseModulo implements IBaseGUI
     }//GEN-LAST:event_btnCrearMouseClicked
 
     private void btnModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModificarMouseClicked
-        setEntidadId(Integer.parseInt(this.jTextFieldId.getText()));
-        setEntidadNombre(this.jTextFieldNombre.getText());
-        if(getModificarModulo(getEntidad()) == true)
+        modelo.setId(Integer.parseInt(this.jTextFieldId.getText()));
+        modelo.setNombre(this.jTextFieldNombre.getText());
+        if(modificarControlador.ModificarModulo(modelo) == true)
         {
             cargarDatos();
             limpiarSeleccion();
@@ -319,8 +313,8 @@ public class ModulosGUI extends BaseModulo implements IBaseGUI
     }//GEN-LAST:event_btnModificarMouseClicked
 
     private void btnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseClicked
-        setEntidadId(Integer.parseInt(this.jTextFieldId.getText()));
-        if(getEliminarModulo(getEntidad()) == true)
+        modelo.setId(Integer.parseInt(this.jTextFieldId.getText()));
+        if(eliminarControlador.EliminarModulo(modelo) == true)
         {
             cargarDatos();
             limpiarSeleccion();

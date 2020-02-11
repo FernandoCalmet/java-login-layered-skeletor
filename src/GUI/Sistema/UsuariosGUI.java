@@ -3,21 +3,25 @@ package GUI.Sistema;
  *
  * @author Fernando Calmet <github.com/fernandocalmet>
  */
-import GUI.BaseUsuario;
+import Modelo.UsuarioModelo;
+import Controlador.Usuario.*;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
-import Modelo.UsuarioModelo;
-import GUI.IBaseGUI;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.ButtonGroup;
+import javax.swing.JPanel;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.TableRowSorter;
 
-public class UsuariosGUI extends BaseUsuario implements IBaseGUI
+public class UsuariosGUI extends JPanel
 {    
-    private UsuarioModelo usuario;
+    private UsuarioModelo modelo;
+    private ConsultarTodosUsuariosControlador consultarTodosControlador;
+    private CrearUsuarioControlador crearControlador;
+    private ModificarUsuarioControlador modificarControlador;
+    private EliminarUsuarioControlador eliminarControlador;
     private String [] columnas = {"Id", "Correo", "Clave", "Nombre", "Id Rol", "Rol"};
     private ArrayList<Object[]> listaDatos;   
     private DefaultTableModel tablaDatos;   
@@ -26,7 +30,11 @@ public class UsuariosGUI extends BaseUsuario implements IBaseGUI
 
     public UsuariosGUI() 
     {
-        this.usuario = new UsuarioModelo();
+        this.modelo = new UsuarioModelo();
+        this.consultarTodosControlador = new ConsultarTodosUsuariosControlador();
+        this.crearControlador = new CrearUsuarioControlador();
+        this.modificarControlador = new ModificarUsuarioControlador();
+        this.eliminarControlador = new EliminarUsuarioControlador();
         this.listaDatos = new ArrayList<>(); 
         this.tablaDatos = new DefaultTableModel(columnas, 0);
         this.buttonGroupFiltro = new ButtonGroup();
@@ -36,11 +44,10 @@ public class UsuariosGUI extends BaseUsuario implements IBaseGUI
         cargarGrupoRadioBotones();
     }
       
-    @Override
     public void cargarDatos()
     {
         tablaDatos.setRowCount(0);
-        listaDatos = getConsultarTodosUsuarios();
+        listaDatos = consultarTodosControlador.ConsultarTodosUsuarios();
         for(Object[] obj : listaDatos)
         {
             tablaDatos.addRow(obj);
@@ -50,7 +57,6 @@ public class UsuariosGUI extends BaseUsuario implements IBaseGUI
         this.txtNombreRol.enable(false);
     }
     
-    @Override
     public void seleccionarDatos()
     {
         this.txtId.setText(String.valueOf(this.tblDatos.getValueAt(this.tblDatos.getSelectedRow(), 0)));
@@ -62,7 +68,6 @@ public class UsuariosGUI extends BaseUsuario implements IBaseGUI
         this.btnCrear.setEnabled(false);
     }
     
-    @Override
     public void limpiarSeleccion()
     {
         this.txtId.setText(null);
@@ -74,7 +79,6 @@ public class UsuariosGUI extends BaseUsuario implements IBaseGUI
         this.btnCrear.setEnabled(true);
     }
     
-    @Override
     public void bloquearCampos()
     {
         this.txtNombre.enable(false);
@@ -84,7 +88,6 @@ public class UsuariosGUI extends BaseUsuario implements IBaseGUI
         this.txtIdRol.enable(false);
     }
     
-    @Override
     public void desbloquearCampos()
     {
         this.txtNombre.enable(true);
@@ -94,7 +97,6 @@ public class UsuariosGUI extends BaseUsuario implements IBaseGUI
         this.txtIdRol.enable(true);
     }
     
-    @Override
     public void bloquearBotones()
     {
         this.btnModificar.setEnabled(false);
@@ -102,7 +104,6 @@ public class UsuariosGUI extends BaseUsuario implements IBaseGUI
         this.btnLimpiar.setEnabled(false);
     }
     
-    @Override
     public void desbloquearBotones()
     {
         this.btnModificar.setEnabled(true);
@@ -110,7 +111,6 @@ public class UsuariosGUI extends BaseUsuario implements IBaseGUI
         this.btnLimpiar.setEnabled(true);
     }
     
-    @Override
     public void filtroBusqueda()
     {
         String filtro = jTextFieldBuscar.getText();
@@ -136,14 +136,12 @@ public class UsuariosGUI extends BaseUsuario implements IBaseGUI
         } 
     }
     
-    @Override
     public void cargarFiltro()
     {
         filtroDatos = new TableRowSorter(tablaDatos);
         tblDatos.setRowSorter(filtroDatos);
     }
     
-    @Override
     public void cargarGrupoRadioBotones()
     {
         buttonGroupFiltro.add(jRadioButtonId);
@@ -371,11 +369,11 @@ public class UsuariosGUI extends BaseUsuario implements IBaseGUI
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCrearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCrearMouseClicked
-        usuario.setCorreo(this.txtCorreo.getText());
-        usuario.setClave(this.txtClave.getText());
-        usuario.setNombre(this.txtNombre.getText());
-        usuario.setId_rol(Integer.parseInt(this.txtIdRol.getText()));
-        if(getCrearUsuario(usuario) == true)
+        modelo.setCorreo(this.txtCorreo.getText());
+        modelo.setClave(this.txtClave.getText());
+        modelo.setNombre(this.txtNombre.getText());
+        modelo.setId_rol(Integer.parseInt(this.txtIdRol.getText()));
+        if(crearControlador.CrearUsuario(modelo) == true)
         {
             cargarDatos();
             limpiarSeleccion();
@@ -383,12 +381,12 @@ public class UsuariosGUI extends BaseUsuario implements IBaseGUI
     }//GEN-LAST:event_btnCrearMouseClicked
 
     private void btnModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModificarMouseClicked
-        usuario.setId(Integer.parseInt(this.txtId.getText()));
-        usuario.setCorreo(this.txtCorreo.getText());
-        usuario.setClave(this.txtClave.getText());
-        usuario.setNombre(this.txtNombre.getText());
-        usuario.setId_rol(Integer.parseInt(this.txtIdRol.getText()));
-        if(getModificarUsuario(usuario) == true)
+        modelo.setId(Integer.parseInt(this.txtId.getText()));
+        modelo.setCorreo(this.txtCorreo.getText());
+        modelo.setClave(this.txtClave.getText());
+        modelo.setNombre(this.txtNombre.getText());
+        modelo.setId_rol(Integer.parseInt(this.txtIdRol.getText()));
+        if(modificarControlador.ModificarUsuario(modelo) == true)
         {
             cargarDatos();
             limpiarSeleccion();
@@ -398,8 +396,8 @@ public class UsuariosGUI extends BaseUsuario implements IBaseGUI
     }//GEN-LAST:event_btnModificarMouseClicked
 
     private void btnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseClicked
-        usuario.setId(Integer.parseInt(this.txtId.getText()));
-        if(getEliminarUsuario(usuario) == true)
+        modelo.setId(Integer.parseInt(this.txtId.getText()));
+        if(eliminarControlador.EliminarUsuario(modelo) == true)
         {
             cargarDatos();
             limpiarSeleccion();

@@ -6,14 +6,18 @@ package Controlador.Usuario;
 import Controlador.BaseControlador;
 import Servicio.UsuarioServicio;
 
-public class BaseUsuario extends BaseControlador
+public abstract class BaseUsuario extends BaseControlador
 {
-    protected UsuarioServicio usuarioServicio;
+    private UsuarioServicio usuarioServicio;
     
     public BaseUsuario()
     { 
-        this.usuarioServicio = new UsuarioServicio(); 
+        this.usuarioServicio = null;
     }
     
-    protected UsuarioServicio getUsuarioServicio(){ return usuarioServicio; }
+    protected UsuarioServicio getUsuarioServicio()
+    { 
+        usuarioServicio = new UsuarioServicio(); 
+        return usuarioServicio; 
+    }
 }

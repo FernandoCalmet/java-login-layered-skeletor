@@ -6,14 +6,15 @@ package Controlador.Acceso;
 import Controlador.BaseControlador;
 import Servicio.AccesoServicio;
 
-public class BaseAcceso extends BaseControlador
+public abstract class BaseAcceso extends BaseControlador
 {
-    protected AccesoServicio accesoServicio;
+    private AccesoServicio accesoServicio;    
     
-    public BaseAcceso()
-    {
-        this.accesoServicio = new AccesoServicio();
-    }
+    public BaseAcceso(){ this.accesoServicio = null; }
     
-    protected AccesoServicio getAccesoServicio(){ return accesoServicio; }
+    protected AccesoServicio getAccesoServicio()
+    { 
+        accesoServicio = new AccesoServicio();
+        return accesoServicio; 
+    }   
 }

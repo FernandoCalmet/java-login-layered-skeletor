@@ -24,8 +24,7 @@ public class AccesoRepositorio extends BaseRepositorio implements IAccesoReposit
             declaracionSql.setString(1, correo);
             declaracionSql.setString(2, clave);            
             resultadoSql = declaracionSql.executeQuery();
-            resultadoSql.next();
-            
+            resultadoSql.next();            
             if(correo.equals(resultadoSql.getString("correo")) && clave.equals(resultadoSql.getString("clave")))
             {
                 usuarioModelo.setId(resultadoSql.getInt("id"));

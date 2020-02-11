@@ -6,14 +6,18 @@ package Controlador.Permiso;
 import Controlador.BaseControlador;
 import Servicio.PermisoServicio;
 
-public class BasePermiso extends BaseControlador
+public abstract class BasePermiso extends BaseControlador
 {
-    protected PermisoServicio permisoServicio;
+    private PermisoServicio permisoServicio;
     
     public BasePermiso()
     {    
-        this.permisoServicio = new PermisoServicio();
+        this.permisoServicio = null;
     }
     
-    protected PermisoServicio getPermisoServicio(){ return permisoServicio; }
+    protected PermisoServicio getPermisoServicio()
+    { 
+        permisoServicio = new PermisoServicio();
+        return permisoServicio; 
+    }
 }

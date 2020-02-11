@@ -3,7 +3,9 @@ package GUI.Ayuda;
  *
  * @author Fernando Calmet <github.com/fernandocalmet>
  */
-public class SobreGUI extends javax.swing.JPanel 
+import javax.swing.JPanel;
+
+public class SobreGUI extends JPanel 
 {
     public SobreGUI() 
     {

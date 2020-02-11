@@ -3,44 +3,45 @@ package GUI;
  *
  * @author Fernando Calmet <github.com/fernandocalmet>
  */
-import java.awt.Component;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import Controlador.Acceso.AccesoLogoutControlador;
 import GUI.Archivo.*;
 import GUI.Ayuda.*;
 import GUI.Sistema.*;
-import Servicio.AccesoServicio;
-import Modelo.UsuarioModelo;
+import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JFrame;
 
-public class PrincipalGUI extends javax.swing.JFrame implements ActionListener
+public class PrincipalGUI extends JFrame implements ActionListener
 {  
-    private UsuarioModelo entidad;
-    private final AccesoServicio acceso;
-    private final InicioGUI inicio;
-    private final PerfilGUI perfil;
-    private final SobreGUI sobre;
-    private final ModulosGUI modulos;
-    private final OperacionesGUI operaciones;
-    private final PermisosGUI permisos;
-    private final RolesGUI roles;
-    private final UsuariosGUI usuarios;
+    private Object objModelo;
+    private InicioGUI inicio;
+    private PerfilGUI perfil;
+    private SobreGUI sobre;
+    private ModulosGUI modulos;
+    private OperacionesGUI operaciones;
+    private PermisosGUI permisos;
+    private RolesGUI roles;
+    private UsuariosGUI usuarios;
    
     public PrincipalGUI(Object objEntidad) 
     {
-        this.entidad = (UsuarioModelo) objEntidad;
-        this.acceso = new AccesoServicio();
+        this.objModelo = objEntidad;
         this.inicio = new InicioGUI();
-        this.perfil = new PerfilGUI(this.entidad);
-        this.sobre = new SobreGUI();
-        this.modulos = new ModulosGUI();
-        this.operaciones = new OperacionesGUI();
-        this.permisos = new PermisosGUI();
-        this.roles = new RolesGUI();
-        this.usuarios = new UsuariosGUI();
+        this.perfil = null;
+        this.sobre = null;
+        this.modulos = null;
+        this.operaciones = null;
+        this.permisos = null;
+        this.roles = null;
+        this.usuarios = null;
         initComponents();               
         cargarComponentePanel(inicio);
         configInicial();        
     }
+    
+    private void setObjModelo(Object obj){ objModelo = obj; }
+    private Object getObjModelo(){ return objModelo;}
     
     private void configInicial()
     {
@@ -55,7 +56,7 @@ public class PrincipalGUI extends javax.swing.JFrame implements ActionListener
         panelFondo.setVisible(false);
         panelFondo.removeAll();
         panelFondo.add(componenteGUI);
-        panelFondo.setVisible(true);
+        panelFondo.setVisible(true);        
     }   
     
     private void cargarAccionesMenu()
@@ -74,55 +75,63 @@ public class PrincipalGUI extends javax.swing.JFrame implements ActionListener
     
     @Override
     public void actionPerformed(ActionEvent e) 
-    {
+    { 
         if(e.getSource()==jMenuItemInicio)
         {
+            inicio = new InicioGUI();
             this.setTitle("Sistema Modular : Inicio");
             cargarComponentePanel(inicio); 
         }
         else if(e.getSource()==jMenuItemPerfilUsuario)
         {
+            perfil = new PerfilGUI(this.objModelo);
             this.setTitle("Sistema Modular : Perfil");           
             cargarComponentePanel(perfil);
         }
         else if(e.getSource()==jMenuItemSobrePrograma)
         {
+            sobre = new SobreGUI();
             this.setTitle("Sistema Modular : Sobre el Programa");
             cargarComponentePanel(sobre);  
         }
         else if(e.getSource()==jMenuItemCerrarPrograma)
         {           
-            acceso.Logout(this.entidad);
+            setObjModelo(new AccesoLogoutControlador().AccesoLogout(getObjModelo()));
             System.exit(0);                      
         }
         else if(e.getSource()==jMenuItemLogout)
         {            
-            acceso.Logout(this.entidad);             
+            setObjModelo(new AccesoLogoutControlador().AccesoLogout(getObjModelo()));        
             new GUI.AccesoGUI().setVisible(true);
             this.setVisible(false);            
         }
         else if(e.getSource()==jMenuItemBase)
         {
-            this.setTitle("Sistema Modular : Módulos");
+            modulos = new ModulosGUI();
+            this.setTitle("Sistema Modular : Módulos");          
             cargarComponentePanel(modulos);
         }
         else if(e.getSource()==jMenuItemOperaciones)
         {
+            operaciones = new OperacionesGUI();
             this.setTitle("Sistema Modular : Operaciones");
             cargarComponentePanel(operaciones);
         }
         else if(e.getSource()==jMenuItemPermisos)
         {
+            permisos = new PermisosGUI();
             this.setTitle("Sistema Modular : Permisos");
             cargarComponentePanel(permisos);
         }
         else if(e.getSource()==jMenuItemRoles)
         {
+            roles = new RolesGUI();
             this.setTitle("Sistema Modular : Roles");
             cargarComponentePanel(roles);
         }
         else if(e.getSource()==jMenuItemUsuarios)
         {
+            usuarios = new UsuariosGUI();
             this.setTitle("Sistema Modular : Usuarios");
             cargarComponentePanel(usuarios);
         }

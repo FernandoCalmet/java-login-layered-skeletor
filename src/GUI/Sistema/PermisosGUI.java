@@ -3,21 +3,25 @@ package GUI.Sistema;
  *
  * @author Fernando Calmet <github.com/fernandocalmet>
  */
-import GUI.BasePermiso;
+import Controlador.Permiso.*;
+import Modelo.PermisoModelo;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
-import Modelo.PermisoModelo;
-import GUI.IBaseGUI;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.ButtonGroup;
+import javax.swing.JPanel;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.TableRowSorter;
 
-public class PermisosGUI extends BasePermiso implements IBaseGUI
+public class PermisosGUI extends JPanel
 {    
-    private PermisoModelo permiso ;
+    private PermisoModelo modelo ;
+    private ConsultarTodosPermisosControlador consultarTodosControlador;
+    private CrearPermisoControlador crearControlador;
+    private ModificarPermisoControlador modificarControlador;
+    private EliminarPermisoControlador eliminarControlador;
     private String [] columnas = {"Id Permiso", "Id Rol", "Rol", "Id Operación", "Operación"};
     private ArrayList<Object[]> listaDatos;
     private DefaultTableModel tablaDatos;
@@ -26,10 +30,14 @@ public class PermisosGUI extends BasePermiso implements IBaseGUI
 
     public PermisosGUI() 
     {
-        this.permiso = new PermisoModelo();
+        this.modelo = new PermisoModelo();
+        this.consultarTodosControlador = new ConsultarTodosPermisosControlador();
+        this.crearControlador = new CrearPermisoControlador();
+        this.modificarControlador = new ModificarPermisoControlador();
+        this.eliminarControlador = new EliminarPermisoControlador();
         this.listaDatos = new ArrayList<>();
         this.tablaDatos = new DefaultTableModel(columnas, 0);
-        this.buttonGroupFiltro = new ButtonGroup();
+        this.buttonGroupFiltro = new ButtonGroup();        
         initComponents();
         cargarDatos();
         bloquearBotones();
@@ -39,7 +47,7 @@ public class PermisosGUI extends BasePermiso implements IBaseGUI
     public void cargarDatos()
     {
         tablaDatos.setRowCount(0);
-        listaDatos = getConsultarTodosPermisos();
+        listaDatos = consultarTodosControlador.ConsultarTodosPermisos();
         for(Object[] obj : listaDatos)
         {
             tablaDatos.addRow(obj);
@@ -96,7 +104,6 @@ public class PermisosGUI extends BasePermiso implements IBaseGUI
         this.btnLimpiar.setEnabled(true);
     }   
     
-    @Override
     public void filtroBusqueda()
     {
         String filtro = jTextFieldBuscar.getText();
@@ -117,14 +124,12 @@ public class PermisosGUI extends BasePermiso implements IBaseGUI
         }  
     }
     
-    @Override
     public void cargarFiltro()
     {
         filtroDatos = new TableRowSorter(tablaDatos);
         tblDatos.setRowSorter(filtroDatos);
     }
     
-    @Override
     public void cargarGrupoRadioBotones()
     {
         buttonGroupFiltro.add(jRadioButtonId);
@@ -329,9 +334,9 @@ public class PermisosGUI extends BasePermiso implements IBaseGUI
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCrearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCrearMouseClicked
-        permiso.setId_rol(Integer.parseInt(this.txtIdRol.getText()));
-        permiso.setId_operacion(Integer.parseInt(this.txtIdOperacion.getText()));
-        if(getCrearPermiso(permiso) == true)
+        modelo.setId_rol(Integer.parseInt(this.txtIdRol.getText()));
+        modelo.setId_operacion(Integer.parseInt(this.txtIdOperacion.getText()));
+        if(crearControlador.CrearPermiso(modelo) == true)
         {
             cargarDatos();
             limpiarSeleccion();
@@ -339,10 +344,10 @@ public class PermisosGUI extends BasePermiso implements IBaseGUI
     }//GEN-LAST:event_btnCrearMouseClicked
 
     private void btnModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModificarMouseClicked
-        permiso.setId(Integer.parseInt(this.jTextFieldId.getText()));
-        permiso.setId_rol(Integer.parseInt(this.txtIdRol.getText()));
-        permiso.setId_operacion(Integer.parseInt(this.txtIdOperacion.getText()));
-        if(getModificarPermiso(permiso) == true)
+        modelo.setId(Integer.parseInt(this.jTextFieldId.getText()));
+        modelo.setId_rol(Integer.parseInt(this.txtIdRol.getText()));
+        modelo.setId_operacion(Integer.parseInt(this.txtIdOperacion.getText()));
+        if(modificarControlador.ModificarPermiso(modelo) == true)
         {
             cargarDatos();
             limpiarSeleccion();
@@ -352,8 +357,8 @@ public class PermisosGUI extends BasePermiso implements IBaseGUI
     }//GEN-LAST:event_btnModificarMouseClicked
 
     private void btnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseClicked
-        permiso.setId(Integer.parseInt(this.jTextFieldId.getText()));
-        if(getEliminarPermiso(permiso) == true)
+        modelo.setId(Integer.parseInt(this.jTextFieldId.getText()));
+        if(eliminarControlador.EliminarPermiso(modelo) == true)
         {
             cargarDatos();
             limpiarSeleccion();
