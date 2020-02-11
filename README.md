@@ -9,7 +9,7 @@ https://github.com/fernandocalmet
 <ul>
 	<li>Crear, Eliminar, Modificar, Listar Uno, Listar Todos y Busquedas con filtro de datos.</li>
 	<li>Acceso de conexión y desconexión de usuarios al sistema.</li>
-	<li>Para la conexión con con la base de datos se importan los drivers de las bibliotecas correspondientes de cada gestor de base de datos.</li>	
+	<li>Capacidad de conexión con diferentes gestores de bases de datos. Se debe importar el driver de la biblioteca correspondientes para el uso de un gestor particular.</li>	
 </ul>
 
 <p>Tenga en cuenta que si bien este programa de ejemplo funciona, las características mencionadas anteriormente no están destinadas a ser tomadas y utilizadas en aplicaciones comerciales de producción. En otras palabras, este no es un proyecto semilla para ser tomado  e implementado en su entorno de producción.</p>  
@@ -34,12 +34,13 @@ https://github.com/fernandocalmet
 - Operaciones CRUD + Busqueda con filtro de datos
 
 ### Requerimientos No funcionales
-1. Java JDK 1.8
-2. MySQL JDBC Driver (mysql-connector-java)
-3. Microsoft JDBC Driver (sqljdbc42)
-4. Apache XAMPP [apachefriends.org](https://www.apachefriends.org/)
-5. XAMMP: Servicio del modulo Apache
-6. XAMMP: Servicio del modulo MySQL
+1. Java JDK 1.8 [java-jdk](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
+2. MySQL JDBC Driver [mysql-connector-java](https://dev.mysql.com/downloads/connector/j/)
+3. Microsoft JDBC Driver [sql-jdbc](http://www.microsoft.com/en-us/download/details.aspx?displaylang=en&id=11774)
+4. Oracle JDBC Driver [oracle-jdbc](http://www.oracle.com/technetwork/database/features/jdbc/index-091264.html)
+5. Apache XAMPP [apachefriends.org](https://www.apachefriends.org/)
+6. XAMMP: Servicio del modulo Apache
+7. XAMMP: Servicio del modulo MySQL
 
 ## Diagrama de Casos de uso
 ![Diagrama de Casos de uso](diagramas/Diagrama-Casos_de_uso.png)

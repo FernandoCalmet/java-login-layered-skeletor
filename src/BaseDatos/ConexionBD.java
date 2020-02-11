@@ -61,10 +61,10 @@ public class ConexionBD implements IConexionBD
     {
         try 
         { 
-            String dbURL = "jdbc:sqlserver://localhost\\sqlexpress";
-            String user = "";
-            String pass = "";
-            bd_conexion = DriverManager.getConnection(dbURL, user, pass);
+            String bd_url = "jdbc:sqlserver://localhost\\sqlexpress";
+            String bd_usuario = "root";
+            String bd_clave = "root";
+            bd_conexion = DriverManager.getConnection(bd_url, bd_usuario, bd_clave);
             if (bd_conexion != null) {
                 DatabaseMetaData dm = (DatabaseMetaData) bd_conexion.getMetaData();
                 System.out.println("Driver name: " + dm.getDriverName());
@@ -85,5 +85,32 @@ public class ConexionBD implements IConexionBD
             }
         }
         return bd_conexion;
-    }     
+    }
+    
+    private Connection getOracleSQL()
+    {   
+        try {
+            Class.forName("oracle.jdbc.OracleDriver");
+            String bd_url = "jdbc:oracle:thin:@localhost:1521:sistema_modular";
+            String bd_usuario = "tiger";
+            String bd_clave = "scott";
+            bd_conexion = DriverManager.getConnection(bd_url, bd_usuario, bd_clave);
+            if (bd_conexion != null) {
+                System.out.println("Connected with connection #2");
+            } 
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                if (bd_conexion != null && !bd_conexion.isClosed()) {
+                    bd_conexion.close();
+                }               
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+        return bd_conexion;
+    }
 }
