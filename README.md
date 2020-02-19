@@ -1,5 +1,5 @@
-# Sistema Modular CRUD + Java + JavaSwing + SQL
-> SistemaModular-CRUD-Java-JavaSwing-SQL
+# Aplicación CRUD + Java + JavaSwing + SQL
+> CRUD-Java-SQL
 
 > Autor : Fernando Calmet  
 https://github.com/fernandocalmet  
