@@ -29,9 +29,9 @@ public class FrameLogin extends javax.swing.JFrame {
                 UserModel user = new UserModel();
                 boolean validLogin = user.LogIn(txtUser.getText(), txtPassword.getText());
                 if (validLogin == true) {
-                    this.hide();
+                    this.setVisible(false);
                     FrameMainMenu mainMenu = new FrameMainMenu();
-                    mainMenu.show();
+                    mainMenu.setVisible(true);
                 } else {
                     msgError("Se ingresó un nombre de usuario o contraseña incorrectos. Inténtalo de nuevo.");
                     txtPassword.setText("Password");

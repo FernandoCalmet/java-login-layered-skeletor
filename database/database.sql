@@ -1,33 +1,6 @@
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
--- Table structure for tasks
--- ----------------------------
-DROP TABLE IF EXISTS `tasks`;
-CREATE TABLE IF NOT EXISTS `tasks` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) NOT NULL,
-  `description` text,
-  `status` tinyint(1) NOT NULL DEFAULT '0',
-  `userId` int(11) NOT NULL,
-  `createdAt` timestamp NOT NULL,
-  `updatedAt` timestamp NULL,
-  PRIMARY KEY (`id`),
-  CONSTRAINT `tasks_users_fk` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- ----------------------------
--- Records of tasks
--- ----------------------------
-INSERT INTO `tasks` (`id`, `name`, `status`, `userId`, `createdAt`) VALUES (1, 'Go to cinema', 1, 8, '2020-11-09 01:58:41');
-INSERT INTO `tasks` (`id`, `name`, `status`, `userId`, `createdAt`) VALUES (2, 'Buy shoes', 0, 8, '2020-11-09 01:58:41');
-INSERT INTO `tasks` (`id`, `name`, `status`, `userId`, `createdAt`) VALUES (3, 'Go to shopping', 0, 8, '2020-11-09 01:58:41');
-INSERT INTO `tasks` (`id`, `name`, `status`, `userId`, `createdAt`) VALUES (4, 'Pay the credit card ;-)', 1, 8, '2020-11-09 01:58:41');
-INSERT INTO `tasks` (`id`, `name`, `status`, `userId`, `createdAt`) VALUES (5, 'Do math homework...', 0, 8, '2020-11-09 01:58:41');
-INSERT INTO `tasks` (`id`, `name`, `status`, `userId`, `createdAt`) VALUES (6, 'Just Testing...', 1, 1, '2020-11-09 01:58:41');
-
-
--- ----------------------------
 -- Table structure for users
 -- ----------------------------
 DROP TABLE IF EXISTS `users`;
@@ -89,5 +62,32 @@ VALUES
     ('Walt Disney', 'If you can dream it, you can do it.'),
     ('William Shakespeare', 'Our doubts are traitors and make us lose the good we oft might win by fearing to attempt.'),
     ('Albert Einstein', 'A person who never made a mistake never tried anything new.');
+
+-- ----------------------------
+-- Table structure for tasks
+-- ----------------------------
+DROP TABLE IF EXISTS `tasks`;
+CREATE TABLE IF NOT EXISTS `tasks` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `description` text,
+  `status` tinyint(1) NOT NULL DEFAULT '0',
+  `userId` int(11) NOT NULL,
+  `createdAt` timestamp NOT NULL,
+  `updatedAt` timestamp NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `tasks_users_fk` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- ----------------------------
+-- Records of tasks
+-- ----------------------------
+INSERT INTO `tasks` (`id`, `name`, `status`, `userId`, `createdAt`) VALUES (1, 'Go to cinema', 1, 8, '2020-11-09 01:58:41');
+INSERT INTO `tasks` (`id`, `name`, `status`, `userId`, `createdAt`) VALUES (2, 'Buy shoes', 0, 8, '2020-11-09 01:58:41');
+INSERT INTO `tasks` (`id`, `name`, `status`, `userId`, `createdAt`) VALUES (3, 'Go to shopping', 0, 8, '2020-11-09 01:58:41');
+INSERT INTO `tasks` (`id`, `name`, `status`, `userId`, `createdAt`) VALUES (4, 'Pay the credit card ;-)', 1, 8, '2020-11-09 01:58:41');
+INSERT INTO `tasks` (`id`, `name`, `status`, `userId`, `createdAt`) VALUES (5, 'Do math homework...', 0, 8, '2020-11-09 01:58:41');
+INSERT INTO `tasks` (`id`, `name`, `status`, `userId`, `createdAt`) VALUES (6, 'Just Testing...', 1, 1, '2020-11-09 01:58:41');
+
 
 SET FOREIGN_KEY_CHECKS = 1;
