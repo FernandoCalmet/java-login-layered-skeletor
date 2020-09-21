@@ -5,6 +5,8 @@
  */
 package UserInterface.Frames.User;
 
+import Domain.Models.UserModel;
+import UserInterface.Frames.FrameMainMenu;
 import java.awt.Frame;
 
 /**
@@ -18,6 +20,43 @@ public class FrameLogin extends javax.swing.JFrame {
      */
     public FrameLogin() {
         initComponents();
+    }
+    
+    private void login()
+    {
+        if(!"Email".equals(txtUser.getText()) && txtUser.getText().length() > 2)
+        {
+            if(!"Password".equals(txtPassword.getText()))
+            {
+                UserModel user = new UserModel();
+                boolean validLogin = user.LogIn(txtUser.getText(), txtPassword.getText());
+                if(validLogin == true)
+                {
+                    this.hide();
+                    FrameMainMenu mainMenu = new FrameMainMenu();
+                    mainMenu.show();
+                }
+                else
+                {
+                    msgError("Se ingresó un nombre de usuario o contraseña incorrectos.\nInténtalo de nuevo.");
+                    txtPassword.setText("Password");
+                }
+            }
+            else
+            {
+                msgError("Por favor, ingrese una contraseña.");
+            }
+        }
+        else
+        {
+            msgError("Ingrese nombre de usuario o correo electrónico.");
+        }
+    }
+    
+    private void msgError(String msg)
+    {
+        lblErrorMessage.setText(" " +msg);
+        lblErrorMessage.setVisible(true);
     }
 
     /**
@@ -121,6 +160,11 @@ public class FrameLogin extends javax.swing.JFrame {
         btnLogin.setText("Log In");
         btnLogin.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 120, 212)));
         btnLogin.setName("btnLogin"); // NOI18N
+        btnLogin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnLoginMouseClicked(evt);
+            }
+        });
 
         linkRecoverPass.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         linkRecoverPass.setForeground(new java.awt.Color(210, 210, 210));
@@ -247,12 +291,22 @@ public class FrameLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_lblMinimizeMouseClicked
 
     private void txtUserFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtUserFocusGained
-        txtUser.setText("");
+        if("Email".equals(txtUser.getText()))
+        {
+            txtUser.setText("");
+        }
     }//GEN-LAST:event_txtUserFocusGained
 
     private void txtPasswordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPasswordFocusGained
-        txtPassword.setText("");
+        if("Password".equals(txtPassword.getText()))
+        {
+            txtPassword.setText("");
+        }
     }//GEN-LAST:event_txtPasswordFocusGained
+
+    private void btnLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseClicked
+        login();
+    }//GEN-LAST:event_btnLoginMouseClicked
 
     /**
      * @param args the command line arguments
