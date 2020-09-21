@@ -20,42 +20,32 @@ public class FrameLogin extends javax.swing.JFrame {
      */
     public FrameLogin() {
         initComponents();
+        lblErrorMessage.setVisible(false);
     }
-    
-    private void login()
-    {
-        if(!"Email".equals(txtUser.getText()) && txtUser.getText().length() > 2)
-        {
-            if(!"Password".equals(txtPassword.getText()))
-            {
+
+    private void login() {
+        if (!"Email".equals(txtUser.getText()) && txtUser.getText().length() > 2) {
+            if (!"Password".equals(txtPassword.getText())) {
                 UserModel user = new UserModel();
                 boolean validLogin = user.LogIn(txtUser.getText(), txtPassword.getText());
-                if(validLogin == true)
-                {
+                if (validLogin == true) {
                     this.hide();
                     FrameMainMenu mainMenu = new FrameMainMenu();
                     mainMenu.show();
-                }
-                else
-                {
-                    msgError("Se ingresó un nombre de usuario o contraseña incorrectos.\nInténtalo de nuevo.");
+                } else {
+                    msgError("Se ingresó un nombre de usuario o contraseña incorrectos. Inténtalo de nuevo.");
                     txtPassword.setText("Password");
                 }
-            }
-            else
-            {
+            } else {
                 msgError("Por favor, ingrese una contraseña.");
             }
-        }
-        else
-        {
+        } else {
             msgError("Ingrese nombre de usuario o correo electrónico.");
         }
     }
-    
-    private void msgError(String msg)
-    {
-        lblErrorMessage.setText(" " +msg);
+
+    private void msgError(String msg) {
+        lblErrorMessage.setText(" " + msg);
         lblErrorMessage.setVisible(true);
     }
 
@@ -110,10 +100,10 @@ public class FrameLogin extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(59, 59, 59)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(59, 59, 59))
         );
 
         jPanel2.setBackground(new java.awt.Color(30, 39, 46));
@@ -136,6 +126,9 @@ public class FrameLogin extends javax.swing.JFrame {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtUserFocusGained(evt);
             }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtUserFocusLost(evt);
+            }
         });
 
         txtPassword.setBackground(new java.awt.Color(30, 39, 46));
@@ -147,6 +140,9 @@ public class FrameLogin extends javax.swing.JFrame {
         txtPassword.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtPasswordFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtPasswordFocusLost(evt);
             }
         });
 
@@ -187,7 +183,7 @@ public class FrameLogin extends javax.swing.JFrame {
             }
         });
 
-        lblErrorMessage.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        lblErrorMessage.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         lblErrorMessage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UserInterface/Resources/Icono_Alerta.png"))); // NOI18N
         lblErrorMessage.setText("Error Message");
 
@@ -291,15 +287,13 @@ public class FrameLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_lblMinimizeMouseClicked
 
     private void txtUserFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtUserFocusGained
-        if("Email".equals(txtUser.getText()))
-        {
+        if ("Email".equals(txtUser.getText())) {
             txtUser.setText("");
         }
     }//GEN-LAST:event_txtUserFocusGained
 
     private void txtPasswordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPasswordFocusGained
-        if("Password".equals(txtPassword.getText()))
-        {
+        if ("Password".equals(txtPassword.getText())) {
             txtPassword.setText("");
         }
     }//GEN-LAST:event_txtPasswordFocusGained
@@ -307,6 +301,18 @@ public class FrameLogin extends javax.swing.JFrame {
     private void btnLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseClicked
         login();
     }//GEN-LAST:event_btnLoginMouseClicked
+
+    private void txtUserFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtUserFocusLost
+        if ("".equals(txtUser.getText())) {
+            txtUser.setText("Email");
+        }
+    }//GEN-LAST:event_txtUserFocusLost
+
+    private void txtPasswordFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPasswordFocusLost
+        if ("".equals(txtPassword.getText())) {
+            txtPassword.setText("Password");
+        }
+    }//GEN-LAST:event_txtPasswordFocusLost
 
     /**
      * @param args the command line arguments

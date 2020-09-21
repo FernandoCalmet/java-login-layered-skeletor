@@ -11,6 +11,7 @@ import UserInterface.Frames.User.FrameLogin;
 public class Program {
 
     public static void main(String[] args) {
-        new FrameLogin();
+        javax.swing.JFrame login = new FrameLogin();
+        login.setVisible(true);
     }
 }
