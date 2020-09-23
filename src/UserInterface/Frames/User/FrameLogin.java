@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package UserInterface.Frames.User;
 
 import Domain.Models.UserModel;
@@ -11,7 +6,9 @@ import java.awt.Frame;
 
 /**
  *
- * @author ferca
+ * @author FernandoCalmet
+ * @version 2.0
+ * @since 2020-01-10
  */
 public class FrameLogin extends javax.swing.JFrame {
 
@@ -24,7 +21,7 @@ public class FrameLogin extends javax.swing.JFrame {
     }
 
     private void login() {
-        if (!"Email".equals(txtUser.getText()) && txtUser.getText().length() > 2) {
+        if (!"Username or Email".equals(txtUser.getText()) && txtUser.getText().length() > 2) {
             if (!"Password".equals(txtPassword.getText())) {
                 UserModel user = new UserModel();
                 boolean validLogin = user.LogIn(txtUser.getText(), txtPassword.getText());
@@ -119,7 +116,7 @@ public class FrameLogin extends javax.swing.JFrame {
         txtUser.setBackground(new java.awt.Color(30, 39, 46));
         txtUser.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         txtUser.setForeground(new java.awt.Color(213, 214, 215));
-        txtUser.setText("Email");
+        txtUser.setText("Username or Email");
         txtUser.setBorder(null);
         txtUser.setName("txtUser"); // NOI18N
         txtUser.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -287,7 +284,7 @@ public class FrameLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_lblMinimizeMouseClicked
 
     private void txtUserFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtUserFocusGained
-        if ("Email".equals(txtUser.getText())) {
+        if ("Username or Email".equals(txtUser.getText())) {
             txtUser.setText("");
         }
     }//GEN-LAST:event_txtUserFocusGained
@@ -304,7 +301,7 @@ public class FrameLogin extends javax.swing.JFrame {
 
     private void txtUserFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtUserFocusLost
         if ("".equals(txtUser.getText())) {
-            txtUser.setText("Email");
+            txtUser.setText("Username or Email");
         }
     }//GEN-LAST:event_txtUserFocusLost
 

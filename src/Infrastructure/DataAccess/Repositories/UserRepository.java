@@ -22,13 +22,15 @@ public class UserRepository extends Repository implements IUserRepository, IGene
     @Override
     public UserEntity add(UserEntity entity) {
         try {
-            String query = "INSERT INTO users (id, name, email, password, createdAt) VALUES (?, ?, ?, ?, ?)";
+            String query = "INSERT INTO users (id, username, firstName, email, password, role, createdAt) VALUES (?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement statement = this.GetConnection().prepareStatement(query);
             statement.setInt(1, entity.getId());
-            statement.setString(2, entity.getName());
-            statement.setString(3, entity.getEmail());
-            statement.setString(4, entity.getPassword());
-            statement.setString(5, entity.getCreatedAt());
+            statement.setString(2, entity.getUsername());
+            statement.setString(3, entity.getFirstName());
+            statement.setString(4, entity.getEmail());
+            statement.setString(5, entity.getPassword());
+            statement.setString(6, entity.getRole());
+            statement.setString(7, entity.getCreatedAt());
             int result = statement.executeUpdate();
             if (result == 0) {
                 entity = null;
@@ -43,13 +45,14 @@ public class UserRepository extends Repository implements IUserRepository, IGene
     @Override
     public UserEntity edit(UserEntity entity) {
         try {
-            String query = "UPDATE users SET name = ? , email = ?, password = ?, updatedAt = ? WHERE id = ?";
+            String query = "UPDATE users SET firstName = ? , email = ?, password = ?, role = ?, updatedAt = ? WHERE id = ?";
             PreparedStatement statement = this.GetConnection().prepareStatement(query);
-            statement.setString(1, entity.getName());
+            statement.setString(1, entity.getFirstName());
             statement.setString(2, entity.getEmail());
             statement.setString(3, entity.getPassword());
-            statement.setString(4, entity.getUpdatedAt());
-            statement.setInt(5, entity.getId());
+            statement.setString(4, entity.getRole());
+            statement.setString(5, entity.getUpdatedAt());
+            statement.setInt(6, entity.getId());
             int result = statement.executeUpdate();
             if (result == 0) {
                 entity = null;
@@ -85,7 +88,7 @@ public class UserRepository extends Repository implements IUserRepository, IGene
         List<UserEntity[]> listUser = null;
 
         try {
-            String query = "SELECT id, name, email FROM users ORDER BY id";
+            String query = "SELECT id, username, firstName, email FROM users ORDER BY id";
             PreparedStatement statement = this.GetConnection().prepareStatement(query);
             ResultSet result = statement.executeQuery();
             ResultSetMetaData meta = result.getMetaData();
@@ -110,7 +113,7 @@ public class UserRepository extends Repository implements IUserRepository, IGene
         List<UserEntity[]> listUser = null;
 
         try {
-            String query = "SELECT id, name, email WHERE email LIKE ? OR name LIKE ?";
+            String query = "SELECT id, username, firstName, email WHERE email LIKE ? OR name LIKE ?";
             PreparedStatement statement = this.GetConnection().prepareStatement(query);
             ResultSet result = statement.executeQuery();
             ResultSetMetaData meta = result.getMetaData();
@@ -134,16 +137,20 @@ public class UserRepository extends Repository implements IUserRepository, IGene
         boolean response = false;
 
         try {
-            String query = "SELECT * FROM users WHERE email = ? AND password = ?";
+            String query = "SELECT * FROM users WHERE (email = ? AND password = ?) OR (userName = ? AND password = ?)";
             PreparedStatement statement = this.GetConnection().prepareStatement(query);
             statement.setString(1, user);
             statement.setString(2, pass);
+            statement.setString(3, user);
+            statement.setString(4, pass);
             ResultSet result = statement.executeQuery();
             if (result.next()) {
                 ActiveUser.setId(result.getInt("id"));
-                ActiveUser.setName(result.getString("name"));
+                ActiveUser.setUsername(result.getString("username"));
+                ActiveUser.setFirstName(result.getString("firstName"));
                 ActiveUser.setEmail(result.getString("email"));
                 ActiveUser.setPassword(result.getString("password"));
+                ActiveUser.setRole(result.getString("role"));
                 response = true;
             }
         } catch (SQLException ex) {

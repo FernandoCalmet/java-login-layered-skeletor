@@ -17,9 +17,11 @@ import java.util.List;
 public class UserModel {
 
     private int _id;
-    private String _name;
+    private String _username;
+    private String _firstName;
     private String _email;
     private String _password;
+    private String _role;
     private EntityState _state;
     private boolean _editMyUserProfile = false;
     private IUserRepository userRepository;
@@ -34,16 +36,24 @@ public class UserModel {
         return _id;
     }
 
-    public void setId(int _id) {
-        this._id = _id;
+    public void setId(int id) {
+        this._id = id;
     }
 
-    public String getName() {
-        return _name;
+    public String getUsername() {
+        return _username;
     }
 
-    public void setName(String _name) {
-        this._name = _name;
+    public void setUsername(String username) {
+        this._username = username;
+    }
+
+    public String getFirstame() {
+        return _firstName;
+    }
+
+    public void setFirstName(String name) {
+        this._firstName = name;
     }
 
     public String getEmail() {
@@ -60,6 +70,14 @@ public class UserModel {
 
     public void setPassword(String _password) {
         this._password = _password;
+    }
+
+    public String getRole() {
+        return _role;
+    }
+
+    public void setRole(String role) {
+        this._role = role;
     }
 
     public EntityState getState() {
@@ -81,9 +99,11 @@ public class UserModel {
     private UserEntity userEntity() {
         UserEntity userObject = new UserEntity();
         userObject.setId(_id);
-        userObject.setName(_name);
+        userObject.setUsername(_username);
+        userObject.setFirstName(_firstName);
         userObject.setEmail(_email);
         userObject.setPassword(_password);
+        userObject.setRole(_role);
 
         return userObject;
     }
@@ -131,9 +151,11 @@ public class UserModel {
         for (UserEntity item : result) {
             UserModel userModel = new UserModel();
             userModel.setId(item.getId());
-            userModel.setName(item.getName());
+            userModel.setUsername(item.getUsername());
+            userModel.setFirstName(item.getFirstName());
             userModel.setEmail(item.getEmail());
             userModel.setPassword(item.getPassword());
+            userModel.setRole(item.getRole());
             userModelList.add(userModel);
         }
 
@@ -147,9 +169,11 @@ public class UserModel {
         for (UserEntity item : result) {
             UserModel userModel = new UserModel();
             userModel.setId(item.getId());
-            userModel.setName(item.getName());
+            userModel.setUsername(item.getUsername());
+            userModel.setFirstName(item.getFirstName());
             userModel.setEmail(item.getEmail());
             userModel.setPassword(item.getPassword());
+            userModel.setRole(item.getRole());
             userModelList.add(userModel);
         }
 

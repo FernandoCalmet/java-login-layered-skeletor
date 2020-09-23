@@ -3,9 +3,11 @@
 -- ----------------------------
 CREATE TABLE USERS (
   id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-  name VARCHAR(100) NOT NULL,
+  username VARCHAR(100) NOT NULL,
+  firstName VARCHAR(100) NOT NULL,
   email VARCHAR(50) UNIQUE NOT NULL,
   password VARCHAR(128),
+  role VARCHAR(50) NOT NULL,
   createdAt TIMESTAMP NOT NULL,
   updatedAt TIMESTAMP
 );
@@ -13,14 +15,15 @@ CREATE TABLE USERS (
 -- ----------------------------
 -- Records of USERS
 -- ----------------------------
-INSERT INTO USERS (name, email, password, createdAt) VALUES ('Juan', 'juanmartin@mail.com', 'AnyPass1000', '2020-11-09 01:58:41');
-INSERT INTO USERS (name, email, password, createdAt) VALUES ('James', 'jbond@yahoo.net', 'AnyPass1000', '2020-11-09 01:58:41');
-INSERT INTO USERS (name, email, password, createdAt) VALUES ('Lionel', 'mess10@gmail.gol', 'AnyPass1000', '2020-11-09 01:58:41');
-INSERT INTO USERS (name, email, password, createdAt) VALUES ('Carlos', 'bianchini@hotmail.com.ar', 'AnyPass1000', '2020-11-09 01:58:41');
-INSERT INTO USERS (name, email, password, createdAt) VALUES ('Diego', 'diego1010@gmail.com', 'AnyPass1000', '2020-11-09 01:58:41');
-INSERT INTO USERS (name, email, password, createdAt) VALUES ('One User', 'one@user.com', 'AnyPass1000', '2020-11-09 01:58:41');
-INSERT INTO USERS (name, email, password, createdAt) VALUES ('Diegol', 'diego@gol.com.ar', 'AnyPass1000', '2020-11-09 01:58:41');
-INSERT INTO USERS (name, email, password, createdAt) VALUES ('Test User', 'test@user.com', 'AnyPass1000', '2020-11-09 01:58:41');
+INSERT INTO USERS (username, firstName, email, password, role, createdAt) VALUES ('juan', 'Juan', 'juanmartin@mail.com', 'AnyPass1000', 'Cliente', '2020-11-09 01:58:41');
+INSERT INTO USERS (username, firstName, email, password, role, createdAt) VALUES ('james', 'James', 'jbond@yahoo.net', 'AnyPass1000', 'Cliente', '2020-11-09 01:58:41');
+INSERT INTO USERS (username, firstName, email, password, role, createdAt) VALUES ('lionel', 'Lionel', 'mess10@gmail.gol', 'AnyPass1000', 'Cliente', '2020-11-09 01:58:41');
+INSERT INTO USERS (username, firstName, email, password, role, createdAt) VALUES ('carlos', 'Carlos', 'bianchini@hotmail.com.ar', 'AnyPass1000', 'Cliente', '2020-11-09 01:58:41');
+INSERT INTO USERS (username, firstName, email, password, role, createdAt) VALUES ('diego', 'Diego', 'diego1010@gmail.com', 'AnyPass1000', 'Cliente', '2020-11-09 01:58:41');
+INSERT INTO USERS (username, firstName, email, password, role, createdAt) VALUES ('one', 'One User', 'one@user.com', 'AnyPass1000', 'Cliente', '2020-11-09 01:58:41');
+INSERT INTO USERS (username, firstName, email, password, role, createdAt) VALUES ('diegol', 'Diegol', 'diego@gol.com.ar', 'AnyPass1000', 'Cliente', '2020-11-09 01:58:41');
+INSERT INTO USERS (username, firstName, email, password, role, createdAt) VALUES ('test', 'Test User', 'test@user.com', 'AnyPass1000', 'Cliente', '2020-11-09 01:58:41');
+INSERT INTO USERS (username, firstName, email, password, role, createdAt) VALUES ('admin', 'Admin User', 'admin@user.com', 'admin', 'Administrador', '2020-11-09 01:58:41');
 
 -- ----------------------------
 -- Table structure for NOTES
