@@ -13,8 +13,9 @@ import java.util.HashMap;
  */
 public class DbProvider {
 
-    protected static Connection getMySQL(HashMap<String, String> connectionString) {
+    protected static Connection getDB(HashMap<String, String> connectionString) {
         Connection db = null;
+
         try {
             Class.forName(connectionString.get("driver"));
             db = DriverManager.getConnection(connectionString.get("host"), connectionString.get("user"), connectionString.get("pass"));
