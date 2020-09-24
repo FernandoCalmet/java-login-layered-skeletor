@@ -22,7 +22,11 @@ public class FrameMainMenu extends javax.swing.JFrame {
     }
 
     private void loadForm() {
-        jLabelLogo.setIcon(new javax.swing.ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/UserInterface/Resources/logo.png")).getImage().getScaledInstance(jLabelLogo.getWidth(), jLabelLogo.getHeight(), Image.SCALE_SMOOTH)));
+        jLabelLogo.setIcon(new javax.swing.ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/UserInterface/Resources/logo_blue.png")).getImage().getScaledInstance(jLabelLogo.getWidth(), jLabelLogo.getHeight(), Image.SCALE_SMOOTH)));
+        jLabelUsers.setIcon(new javax.swing.ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/UserInterface/Resources/group-profile-users.png")).getImage().getScaledInstance(jLabelUsers.getWidth(), jLabelUsers.getHeight(), Image.SCALE_SMOOTH)));
+        jLabelNotes.setIcon(new javax.swing.ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/UserInterface/Resources/bookmark-white.png")).getImage().getScaledInstance(jLabelNotes.getWidth(), jLabelNotes.getHeight(), Image.SCALE_SMOOTH)));
+        jLabelTasks.setIcon(new javax.swing.ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/UserInterface/Resources/tasks-list.png")).getImage().getScaledInstance(jLabelTasks.getWidth(), jLabelTasks.getHeight(), Image.SCALE_SMOOTH)));
+        jLabelLogout.setIcon(new javax.swing.ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/UserInterface/Resources/sign-out-option.png")).getImage().getScaledInstance(jLabelLogout.getWidth(), jLabelLogout.getHeight(), Image.SCALE_SMOOTH)));
     }
 
     private void ManagePermissions() {
@@ -43,36 +47,23 @@ public class FrameMainMenu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanelMenuButtons = new javax.swing.JPanel();
-        jLabelLogo = new javax.swing.JLabel();
         jPanelTitleBar = new javax.swing.JPanel();
         jLabelClose = new javax.swing.JLabel();
         jLabelMinimize = new javax.swing.JLabel();
         jPanelHeader = new javax.swing.JPanel();
         jPanelContainer = new javax.swing.JPanel();
+        jPanelMenuBack = new javax.swing.JPanel();
+        jPanelMenuBottom = new javax.swing.JPanel();
+        jLabelLogout = new javax.swing.JLabel();
+        jPanelMenuButtons = new javax.swing.JPanel();
+        jLabelLogo = new javax.swing.JLabel();
+        jLabelUsers = new javax.swing.JLabel();
+        jLabelNotes = new javax.swing.JLabel();
+        jLabelTasks = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         setSize(new java.awt.Dimension(1284, 561));
-
-        jPanelMenuButtons.setBackground(new java.awt.Color(43, 52, 59));
-
-        javax.swing.GroupLayout jPanelMenuButtonsLayout = new javax.swing.GroupLayout(jPanelMenuButtons);
-        jPanelMenuButtons.setLayout(jPanelMenuButtonsLayout);
-        jPanelMenuButtonsLayout.setHorizontalGroup(
-            jPanelMenuButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelMenuButtonsLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabelLogo, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanelMenuButtonsLayout.setVerticalGroup(
-            jPanelMenuButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelMenuButtonsLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabelLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
 
         jPanelTitleBar.setBackground(new java.awt.Color(0, 120, 212));
 
@@ -117,7 +108,7 @@ public class FrameMainMenu extends javax.swing.JFrame {
         jPanelHeader.setLayout(jPanelHeaderLayout);
         jPanelHeaderLayout.setHorizontalGroup(
             jPanelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1208, Short.MAX_VALUE)
+            .addGap(0, 1212, Short.MAX_VALUE)
         );
         jPanelHeaderLayout.setVerticalGroup(
             jPanelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,11 +121,84 @@ public class FrameMainMenu extends javax.swing.JFrame {
         jPanelContainer.setLayout(jPanelContainerLayout);
         jPanelContainerLayout.setHorizontalGroup(
             jPanelContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1208, Short.MAX_VALUE)
+            .addGap(0, 1212, Short.MAX_VALUE)
         );
         jPanelContainerLayout.setVerticalGroup(
             jPanelContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 407, Short.MAX_VALUE)
+        );
+
+        jPanelMenuBack.setBackground(new java.awt.Color(30, 39, 46));
+
+        jPanelMenuBottom.setBackground(new java.awt.Color(43, 52, 59));
+        jPanelMenuBottom.setPreferredSize(new java.awt.Dimension(66, 100));
+
+        javax.swing.GroupLayout jPanelMenuBottomLayout = new javax.swing.GroupLayout(jPanelMenuBottom);
+        jPanelMenuBottom.setLayout(jPanelMenuBottomLayout);
+        jPanelMenuBottomLayout.setHorizontalGroup(
+            jPanelMenuBottomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelMenuBottomLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jLabelLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(19, Short.MAX_VALUE))
+        );
+        jPanelMenuBottomLayout.setVerticalGroup(
+            jPanelMenuBottomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelMenuBottomLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabelLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(54, Short.MAX_VALUE))
+        );
+
+        jPanelMenuButtons.setBackground(new java.awt.Color(43, 52, 59));
+
+        javax.swing.GroupLayout jPanelMenuButtonsLayout = new javax.swing.GroupLayout(jPanelMenuButtons);
+        jPanelMenuButtons.setLayout(jPanelMenuButtonsLayout);
+        jPanelMenuButtonsLayout.setHorizontalGroup(
+            jPanelMenuButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelMenuButtonsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelMenuButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelMenuButtonsLayout.createSequentialGroup()
+                        .addGap(0, 14, Short.MAX_VALUE)
+                        .addGroup(jPanelMenuButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(jLabelNotes, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelTasks, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelUsers, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(12, 12, 12)))
+                .addContainerGap())
+        );
+        jPanelMenuButtonsLayout.setVerticalGroup(
+            jPanelMenuButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelMenuButtonsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabelLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabelUsers, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabelNotes, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabelTasks, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanelMenuBackLayout = new javax.swing.GroupLayout(jPanelMenuBack);
+        jPanelMenuBack.setLayout(jPanelMenuBackLayout);
+        jPanelMenuBackLayout.setHorizontalGroup(
+            jPanelMenuBackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelMenuBackLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(jPanelMenuBackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanelMenuBottom, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanelMenuButtons, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+        jPanelMenuBackLayout.setVerticalGroup(
+            jPanelMenuBackLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelMenuBackLayout.createSequentialGroup()
+                .addComponent(jPanelMenuButtons, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanelMenuBottom, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -142,7 +206,8 @@ public class FrameMainMenu extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanelMenuButtons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanelMenuBack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanelHeader, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanelTitleBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -150,13 +215,13 @@ public class FrameMainMenu extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelMenuButtons, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanelTitleBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jPanelHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(jPanelContainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jPanelMenuBack, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -209,9 +274,15 @@ public class FrameMainMenu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabelClose;
     private javax.swing.JLabel jLabelLogo;
+    private javax.swing.JLabel jLabelLogout;
     private javax.swing.JLabel jLabelMinimize;
+    private javax.swing.JLabel jLabelNotes;
+    private javax.swing.JLabel jLabelTasks;
+    private javax.swing.JLabel jLabelUsers;
     private javax.swing.JPanel jPanelContainer;
     private javax.swing.JPanel jPanelHeader;
+    private javax.swing.JPanel jPanelMenuBack;
+    private javax.swing.JPanel jPanelMenuBottom;
     private javax.swing.JPanel jPanelMenuButtons;
     private javax.swing.JPanel jPanelTitleBar;
     // End of variables declaration//GEN-END:variables
