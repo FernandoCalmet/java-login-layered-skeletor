@@ -4,12 +4,8 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group/>
         <group name="IntroduccionPatronesDiseno">
-            <file>file:/F:/FERNANDOCALMET/Github/FernandoCalmet/FullLoginLayered-Java/src/Domain/Models/UserModel.java</file>
-            <file>file:/F:/FERNANDOCALMET/Github/FernandoCalmet/FullLoginLayered-Java/src/Repositorio/AccesoRepositorio.java</file>
-            <file>file:/F:/FERNANDOCALMET/Github/FernandoCalmet/FullLoginLayered-Java/src/GUI/AccesoGUI.java</file>
+            <file>file:/F:/FERNANDOCALMET/Github/FernandoCalmet/FullLoginLayered-Java/src/UserInterface/Frames/FrameMainMenu.java</file>
             <file>file:/F:/FERNANDOCALMET/Github/FernandoCalmet/FullLoginLayered-Java/src/UserInterface/Program.java</file>
-            <file>file:/F:/FERNANDOCALMET/Github/FernandoCalmet/FullLoginLayered-Java/src/UserInterface/Frames/User/FrameLogin.java</file>
-            <file>file:/F:/FERNANDOCALMET/Github/FernandoCalmet/FullLoginLayered-Java/src/Infrastructure/DataAccess/Repositories/UserRepository.java</file>
         </group>
     </open-files>
 </project-private>

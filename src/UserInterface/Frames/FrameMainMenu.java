@@ -2,6 +2,8 @@ package UserInterface.Frames;
 
 import Infrastructure.Common.Cache.ActiveUser;
 import Infrastructure.Common.Cache.Roles;
+import java.awt.Frame;
+import java.awt.Image;
 
 /**
  *
@@ -16,6 +18,11 @@ public class FrameMainMenu extends javax.swing.JFrame {
      */
     public FrameMainMenu() {
         initComponents();
+        loadForm();
+    }
+
+    private void loadForm() {
+        jLabelLogo.setIcon(new javax.swing.ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/UserInterface/Resources/logo.png")).getImage().getScaledInstance(jLabelLogo.getWidth(), jLabelLogo.getHeight(), Image.SCALE_SMOOTH)));
     }
 
     private void ManagePermissions() {
@@ -37,11 +44,15 @@ public class FrameMainMenu extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanelMenuButtons = new javax.swing.JPanel();
+        jLabelLogo = new javax.swing.JLabel();
         jPanelTitleBar = new javax.swing.JPanel();
+        jLabelClose = new javax.swing.JLabel();
+        jLabelMinimize = new javax.swing.JLabel();
         jPanelHeader = new javax.swing.JPanel();
         jPanelContainer = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         setSize(new java.awt.Dimension(1284, 561));
 
         jPanelMenuButtons.setBackground(new java.awt.Color(43, 52, 59));
@@ -50,24 +61,54 @@ public class FrameMainMenu extends javax.swing.JFrame {
         jPanelMenuButtons.setLayout(jPanelMenuButtonsLayout);
         jPanelMenuButtonsLayout.setHorizontalGroup(
             jPanelMenuButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 70, Short.MAX_VALUE)
+            .addGroup(jPanelMenuButtonsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabelLogo, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanelMenuButtonsLayout.setVerticalGroup(
             jPanelMenuButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanelMenuButtonsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabelLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanelTitleBar.setBackground(new java.awt.Color(0, 120, 212));
+
+        jLabelClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UserInterface/Resources/Icono_Cerrar.png"))); // NOI18N
+        jLabelClose.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelCloseMouseClicked(evt);
+            }
+        });
+
+        jLabelMinimize.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UserInterface/Resources/Icono_Minimizar.png"))); // NOI18N
+        jLabelMinimize.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelMinimizeMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelTitleBarLayout = new javax.swing.GroupLayout(jPanelTitleBar);
         jPanelTitleBar.setLayout(jPanelTitleBarLayout);
         jPanelTitleBarLayout.setHorizontalGroup(
             jPanelTitleBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanelTitleBarLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabelMinimize)
+                .addGap(18, 18, 18)
+                .addComponent(jLabelClose)
+                .addContainerGap())
         );
         jPanelTitleBarLayout.setVerticalGroup(
             jPanelTitleBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 58, Short.MAX_VALUE)
+            .addGroup(jPanelTitleBarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelTitleBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelMinimize)
+                    .addComponent(jLabelClose))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         jPanelHeader.setBackground(new java.awt.Color(30, 39, 46));
@@ -80,7 +121,7 @@ public class FrameMainMenu extends javax.swing.JFrame {
         );
         jPanelHeaderLayout.setVerticalGroup(
             jPanelHeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 44, Short.MAX_VALUE)
+            .addGap(0, 38, Short.MAX_VALUE)
         );
 
         jPanelContainer.setBackground(new java.awt.Color(30, 39, 46));
@@ -89,11 +130,11 @@ public class FrameMainMenu extends javax.swing.JFrame {
         jPanelContainer.setLayout(jPanelContainerLayout);
         jPanelContainerLayout.setHorizontalGroup(
             jPanelContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 1208, Short.MAX_VALUE)
         );
         jPanelContainerLayout.setVerticalGroup(
             jPanelContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 446, Short.MAX_VALUE)
+            .addGap(0, 407, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -103,9 +144,7 @@ public class FrameMainMenu extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanelMenuButtons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, 0)
-                        .addComponent(jPanelHeader, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanelHeader, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanelTitleBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanelContainer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
@@ -114,14 +153,23 @@ public class FrameMainMenu extends javax.swing.JFrame {
             .addComponent(jPanelMenuButtons, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanelTitleBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jPanelHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanelHeader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
                 .addComponent(jPanelContainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jLabelCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCloseMouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_jLabelCloseMouseClicked
+
+    private void jLabelMinimizeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelMinimizeMouseClicked
+        this.setState(Frame.ICONIFIED);
+    }//GEN-LAST:event_jLabelMinimizeMouseClicked
 
     /**
      * @param args the command line arguments
@@ -159,6 +207,9 @@ public class FrameMainMenu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabelClose;
+    private javax.swing.JLabel jLabelLogo;
+    private javax.swing.JLabel jLabelMinimize;
     private javax.swing.JPanel jPanelContainer;
     private javax.swing.JPanel jPanelHeader;
     private javax.swing.JPanel jPanelMenuButtons;
