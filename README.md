@@ -4,7 +4,7 @@ Principales tecnologías utilizadas: `Java, JDBC, MySQL`.
 
 IDE utilizado: `Intellij IDEA`
 
-Esta simple **Aplicación Java Swing**, permite que las operaciones **CRUD** administren recursos como: `Usuarios Taras y Notas`.
+Esta simple **Aplicación Java Swing**, permite que las operaciones **CRUD** administren recursos como: `Usuarios Tareas y Notas`.
 
 ## :page_facing_up: LICENCIA
 
