@@ -1,10 +1,5 @@
 # Full Login Layered Java
 
-```note
-Author : Fernando Calmet
-<https://github.com/fernandocalmet>
-```
-
 Principales tecnologías utilizadas: `Java, JDBC, MySQL`.
 
 IDE utilizado: `Intellij IDEA`
@@ -13,7 +8,7 @@ Esta simple **Aplicación Java Swing**, permite que las operaciones **CRUD** adm
 
 ## :page_facing_up: LICENCIA
 
-Licencia MIT. Puedes verla en el [Archivo de Licencia](LICENSE.md) para más información.
+Licencia MIT. Puedes verla en el [Archivo de Licencia](https://github.com/FernandoCalmet/FullLoginLayered-Java/blob/master/LICENSE) para más información.
 
 ---
 
