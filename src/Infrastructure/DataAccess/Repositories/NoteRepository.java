@@ -1,8 +1,8 @@
 package Infrastructure.DataAccess.Repositories;
 
 import Infrastructure.DataAccess.Abstracts.IGenericRepository;
-import Infrastructure.DataAccess.Abstracts.INoteRepository;
 import Support.Entities.NoteEntity;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -10,14 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author FernandoCalmet
- * @version 2.0
- * @since 2020-01-10
- */
-public class NoteRepository extends Repository implements INoteRepository, IGenericRepository<NoteEntity> {
-
+public class NoteRepository extends Repository implements IGenericRepository<NoteEntity> {
     @Override
     public NoteEntity add(NoteEntity entity) {
         try {

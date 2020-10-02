@@ -6,8 +6,9 @@ SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(100) NOT NULL,
-  `firstName` varchar(100) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `firstName` varchar(50) NULL,
+  `lastName` varchar(50) NULL,
   `email` varchar(50) NOT NULL UNIQUE,
   `password` varchar(128),
   `role` varchar(50) NOT NULL,
@@ -19,15 +20,15 @@ CREATE TABLE `users` (
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` (`username`, `firstName`, `email`, `password`, `role`, `createdAt`) VALUES ('juan', 'Juan', 'juanmartin@mail.com', 'AnyPass1000', 'Cliente', '2020-11-09 01:58:41');
-INSERT INTO `users` (`username`, `firstName`, `email`, `password`, `role`, `createdAt`) VALUES ('james', 'James', 'jbond@yahoo.net', 'AnyPass1000', 'Cliente', '2020-11-09 01:58:41');
-INSERT INTO `users` (`username`, `firstName`, `email`, `password`, `role`, `createdAt`) VALUES ('lionel', 'Lionel', 'mess10@gmail.gol', 'AnyPass1000', 'Cliente', '2020-11-09 01:58:41');
-INSERT INTO `users` (`username`, `firstName`, `email`, `password`, `role`, `createdAt`) VALUES ('carlos', 'Carlos', 'bianchini@hotmail.com.ar', 'AnyPass1000', 'Cliente', '2020-11-09 01:58:41');
-INSERT INTO `users` (`username`, `firstName`, `email`, `password`, `role`, `createdAt`) VALUES ('diego', 'Diego', 'diego1010@gmail.com', 'AnyPass1000', 'Cliente', '2020-11-09 01:58:41');
-INSERT INTO `users` (`username`, `firstName`, `email`, `password`, `role`, `createdAt`) VALUES ('one', 'One User', 'one@user.com', 'AnyPass1000', 'Cliente', '2020-11-09 01:58:41');
-INSERT INTO `users` (`username`, `firstName`, `email`, `password`, `role`, `createdAt`) VALUES ('diegol', 'Diegol', 'diego@gol.com.ar', 'AnyPass1000', 'Cliente', '2020-11-09 01:58:41');
-INSERT INTO `users` (`username`, `firstName`, `email`, `password`, `role`, `createdAt`) VALUES ('test', 'Test User', 'test@user.com', 'AnyPass1000', 'Cliente', '2020-11-09 01:58:41');
-INSERT INTO `users` (`username`, `firstName`, `email`, `password`, `role`, `createdAt`) VALUES ('admin', 'Admin User', 'admin@user.com', 'admin', 'Administrador', '2020-11-09 01:58:41');
+INSERT INTO `users` (`username`, `firstName`, `lastName`, `email`, `password`, `role`, `createdAt`) VALUES ('juan', 'Juan', 'Martin', 'juanmartin@mail.com', 'AnyPass1000', 'Cliente', '2020-11-09 01:58:41');
+INSERT INTO `users` (`username`, `firstName`, `lastName`, `email`, `password`, `role`, `createdAt`) VALUES ('james', 'James', 'Bond', 'jbond@yahoo.net', 'AnyPass1000', 'Cliente', '2020-11-09 01:58:41');
+INSERT INTO `users` (`username`, `firstName`, `lastName`, `email`, `password`, `role`, `createdAt`) VALUES ('lionel', 'Lionel', 'Mess', 'mess10@gmail.gol', 'AnyPass1000', 'Cliente', '2020-11-09 01:58:41');
+INSERT INTO `users` (`username`, `firstName`, `lastName`, `email`, `password`, `role`, `createdAt`) VALUES ('carlos', 'Carlos', 'Bianchini' 'bianchini@hotmail.com.ar', 'AnyPass1000', 'Cliente', '2020-11-09 01:58:41');
+INSERT INTO `users` (`username`, `firstName`, `lastName`, `email`, `password`, `role`, `createdAt`) VALUES ('diego', 'Diego', 'Somebody', 'diego1010@gmail.com', 'AnyPass1000', 'Cliente', '2020-11-09 01:58:41');
+INSERT INTO `users` (`username`, `firstName`, `lastName`, `email`, `password`, `role`, `createdAt`) VALUES ('one', 'One User', 'Any', 'one@user.com', 'AnyPass1000', 'Cliente', '2020-11-09 01:58:41');
+INSERT INTO `users` (`username`, `firstName`, `lastName`, `email`, `password`, `role`, `createdAt`) VALUES ('diegol', 'Diegol', 'Gol', 'diego@gol.com.ar', 'AnyPass1000', 'Cliente', '2020-11-09 01:58:41');
+INSERT INTO `users` (`username`, `firstName`, `lastName`, `email`, `password`, `role`, `createdAt`) VALUES ('test', 'Test User', 'Prueba', 'test@user.com', 'AnyPass1000', 'Cliente', '2020-11-09 01:58:41');
+INSERT INTO `users` (`username`, `firstName`, `lastName`, `email`, `password`, `role`, `createdAt`) VALUES ('admin', 'Admin', 'User', 'admin@user.com', 'admin', 'Administrador', '2020-11-09 01:58:41');
 
 -- ----------------------------
 -- Table structure for notes

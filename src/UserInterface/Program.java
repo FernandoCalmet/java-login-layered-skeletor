@@ -1,17 +1,17 @@
 package UserInterface;
 
-import UserInterface.Frames.User.FrameLogin;
+import UserInterface.Forms.User.FormLogin;
 
-/**
- *
- * @author FernandoCalmet
- * @version 2.0
- * @since 2020-01-10
- */
+import javax.swing.*;
+
 public class Program {
-
     public static void main(String[] args) {
-        javax.swing.JFrame login = new FrameLogin();
-        login.setVisible(true);
+        JFrame formLogin = new JFrame("Login");
+        formLogin.setContentPane(new FormLogin().panelLogin);
+        formLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        formLogin.pack();
+        formLogin.setLocationRelativeTo(null);
+        formLogin.setSize(400,250);
+        formLogin.setVisible(true);
     }
 }

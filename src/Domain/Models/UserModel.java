@@ -5,20 +5,15 @@ import Infrastructure.DataAccess.Abstracts.IGenericRepository;
 import Infrastructure.DataAccess.Abstracts.IUserRepository;
 import Infrastructure.DataAccess.Repositories.UserRepository;
 import Support.Entities.UserEntity;
+
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author FernandoCalmet
- * @version 2.0
- * @since 2020-01-10
- */
 public class UserModel {
-
     private int _id;
     private String _username;
     private String _firstName;
+    private String _lastName;
     private String _email;
     private String _password;
     private String _role;
@@ -54,6 +49,14 @@ public class UserModel {
 
     public void setFirstName(String name) {
         this._firstName = name;
+    }
+
+    public String get_lastName() {
+        return _lastName;
+    }
+
+    public void setLastName(String name) {
+        this._lastName = name;
     }
 
     public String getEmail() {
@@ -101,6 +104,7 @@ public class UserModel {
         userObject.setId(_id);
         userObject.setUsername(_username);
         userObject.setFirstName(_firstName);
+        userObject.setLastName(_lastName);
         userObject.setEmail(_email);
         userObject.setPassword(_password);
         userObject.setRole(_role);
@@ -113,24 +117,24 @@ public class UserModel {
 
         try {
             switch (getState()) {
-                case Added:
+                case ADDED:
                     this.genericRepository.add(userEntity());
-                    result = "Se guardo exitosamente";
+                    result = "Saved successfully";
                     break;
-                case Edited:
+                case EDITED:
                     this.genericRepository.edit(userEntity());
                     if (isEditMyUserProfile() == true) {
-                        LogIn(getEmail(), getPassword());
+                        LogIn(getUsername(), getPassword());
                     }
-                    result = "Se modifico exitosamente";
+                    result = "Updated successfully";
                     break;
-                case Removed:
+                case REMOVED:
                     genericRepository.remove(getId());
-                    result = "Se elimino exitosamente";
+                    result = "Deleted successfully";
                     break;
             }
         } catch (Exception ex) {
-            throw new IllegalArgumentException("Se ha producido un error: " + ex.getMessage());
+            throw new IllegalArgumentException("An error has occurred: " + ex.getMessage());
         }
 
         return result;
@@ -140,7 +144,7 @@ public class UserModel {
         try {
             return this.userRepository.login(user, pass);
         } catch (Exception ex) {
-            throw new IllegalArgumentException("Se ha producido un error: " + ex.getMessage());
+            throw new IllegalArgumentException("An login error has occurred, probably no connection to the database has been established. " + ex.getMessage());
         }
     }
 
@@ -153,6 +157,7 @@ public class UserModel {
             userModel.setId(item.getId());
             userModel.setUsername(item.getUsername());
             userModel.setFirstName(item.getFirstName());
+            userModel.setLastName(item.getLastName());
             userModel.setEmail(item.getEmail());
             userModel.setPassword(item.getPassword());
             userModel.setRole(item.getRole());
@@ -171,6 +176,7 @@ public class UserModel {
             userModel.setId(item.getId());
             userModel.setUsername(item.getUsername());
             userModel.setFirstName(item.getFirstName());
+            userModel.setLastName(item.getLastName());
             userModel.setEmail(item.getEmail());
             userModel.setPassword(item.getPassword());
             userModel.setRole(item.getRole());

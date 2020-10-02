@@ -1,16 +1,10 @@
 package Support.Entities;
 
-/**
- *
- * @author FernandoCalmet
- * @version 2.0
- * @since 2020-01-10
- */
 public class UserEntity {
-
     private int id;
     private String username;
     private String firstName;
+    private String lastName;
     private String email;
     private String password;
     private String role;
@@ -39,6 +33,14 @@ public class UserEntity {
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getEmail() {

@@ -1,16 +1,10 @@
 package Infrastructure.Common.Cache;
 
-/**
- *
- * @author FernandoCalmet
- * @version 2.0
- * @since 2020-01-10
- */
 public class ActiveUser {
-
     public static int c_id;
     public static String c_username;
     public static String c_firstName;
+    public static String c_lastName;
     public static String c_email;
     public static String c_password;
     public static String c_role;
@@ -37,6 +31,14 @@ public class ActiveUser {
 
     public static void setFirstName(String name) {
         ActiveUser.c_firstName = name;
+    }
+
+    public static String getLastName() {
+        return c_lastName;
+    }
+
+    public static void setLastName(String name) {
+        ActiveUser.c_lastName = name;
     }
 
     public static String getEmail() {

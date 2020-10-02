@@ -1,8 +1,8 @@
 package Infrastructure.DataAccess.Repositories;
 
 import Infrastructure.DataAccess.Abstracts.IGenericRepository;
-import Infrastructure.DataAccess.Abstracts.ITaskRepository;
 import Support.Entities.TaskEntity;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -10,14 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author FernandoCalmet
- * @version 2.0
- * @since 2020-01-10
- */
-public class TaskRepository extends Repository implements ITaskRepository, IGenericRepository<TaskEntity> {
-
+public class TaskRepository extends Repository implements IGenericRepository<TaskEntity> {
     @Override
     public TaskEntity add(TaskEntity entity) {
         try {

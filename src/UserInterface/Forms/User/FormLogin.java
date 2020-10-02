@@ -1,0 +1,100 @@
+package UserInterface.Forms.User;
+
+import Domain.Models.UserModel;
+import UserInterface.Forms.FormMainMenu;
+
+import javax.swing.*;
+
+public class FormLogin extends JFrame{
+    public JPanel panelLogin;
+    private JTextField txtUser;
+    private JTextField txtPassword;
+    private JLabel lblErrorMessage;
+    private JButton btnLogin;
+
+    public FormLogin() {
+        initListeners();
+        lblErrorMessage.setVisible(false);
+    }
+
+    private void login() {
+        try{
+            if (!"Username or Email".equals(txtUser.getText()) && txtUser.getText().length() > 2) {
+                if (!"Password".equals(txtPassword.getText())) {
+                    UserModel user = new UserModel();
+                    boolean validLogin = user.LogIn(txtUser.getText(), txtPassword.getText());
+                    if (validLogin == true) {
+                        this.setVisible(false);
+                        FormMainMenu mainMenu = new FormMainMenu();
+                        mainMenu.setVisible(true);
+                    } else {
+                        msgError("The wrong username or password was entered. Try again.");
+                        txtPassword.setText("Password");
+                    }
+                } else {
+                    msgError("Please enter a password.");
+                }
+            } else {
+                msgError("Enter username or email.");
+            }
+        } catch (Exception ex){
+            msgError(ex.getMessage());
+        }
+    }
+
+    private void msgError(String msg) {
+        lblErrorMessage.setText(" " + msg);
+        lblErrorMessage.setVisible(true);
+    }
+
+    private void initListeners()
+    {
+        btnLogin.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent e) {
+                super.mouseClicked(e);
+                login();
+            }
+        });
+
+        txtUser.addFocusListener(new java.awt.event.FocusAdapter() {
+            @Override
+            public void focusGained(java.awt.event.FocusEvent e) {
+                super.focusGained(e);
+                if ("Username or Email".equals(txtUser.getText())) {
+                    txtUser.setText("");
+                }
+            }
+        });
+
+        txtUser.addFocusListener(new java.awt.event.FocusAdapter() {
+            @Override
+            public void focusLost(java.awt.event.FocusEvent e) {
+                super.focusLost(e);
+                if ("".equals(txtUser.getText())) {
+                    txtUser.setText("Username or Email");
+                }
+            }
+        });
+
+        txtPassword.addFocusListener(new java.awt.event.FocusAdapter() {
+            @Override
+            public void focusGained(java.awt.event.FocusEvent e) {
+                super.focusGained(e);
+                if ("Password".equals(txtPassword.getText())) {
+                    txtPassword.setText("");
+                }
+            }
+        });
+
+        txtPassword.addFocusListener(new java.awt.event.FocusAdapter() {
+            @Override
+            public void focusLost(java.awt.event.FocusEvent e) {
+                super.focusLost(e);
+                if ("".equals(txtPassword.getText())) {
+                    txtPassword.setText("Password");
+                }
+            }
+        });
+    }
+}

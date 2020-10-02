@@ -1,13 +1,6 @@
 package Support.Entities;
 
-/**
- *
- * @author FernandoCalmet
- * @version 2.0
- * @since 2020-01-10
- */
 public class TaskEntity {
-
     private int id;
     private String name;
     private String description;
