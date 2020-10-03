@@ -1,6 +1,6 @@
 package Infrastructure.DataAccess.Repositories;
 
-import Infrastructure.Common.Utils.DbProvider;
+import Infrastructure.DataAccess.Provider.DbProvider;
 
 import java.sql.Connection;
 import java.util.HashMap;

@@ -1,6 +1,6 @@
 package Infrastructure.DataAccess.Repositories;
 
-import Infrastructure.Common.Cache.ActiveUser;
+import Support.Common.Cache.ActiveUser;
 import Infrastructure.DataAccess.Abstracts.IGenericRepository;
 import Infrastructure.DataAccess.Abstracts.IUserRepository;
 import Support.Entities.UserEntity;

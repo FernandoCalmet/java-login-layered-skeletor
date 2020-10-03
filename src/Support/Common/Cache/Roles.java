@@ -1,4 +1,4 @@
-package Infrastructure.Common.Cache;
+package Support.Common.Cache;
 
 public class Roles {
     public static final String ADMINISTRATOR = "Administrator";

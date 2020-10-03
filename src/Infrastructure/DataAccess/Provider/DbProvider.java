@@ -1,4 +1,4 @@
-package Infrastructure.Common.Utils;
+package Infrastructure.DataAccess.Provider;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

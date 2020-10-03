@@ -1,7 +1,7 @@
 package UserInterface.Forms;
 
-import Infrastructure.Common.Cache.ActiveUser;
-import Infrastructure.Common.Cache.Roles;
+import Support.Common.Cache.ActiveUser;
+import Support.Common.Cache.Roles;
 
 import javax.swing.*;
 

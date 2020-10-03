@@ -1,4 +1,4 @@
-package Infrastructure.Common.Cache;
+package Support.Common.Cache;
 
 public class ActiveUser {
     public static int c_id;
