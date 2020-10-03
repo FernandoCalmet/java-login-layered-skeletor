@@ -51,7 +51,7 @@ public class UserModel {
         this._firstName = name;
     }
 
-    public String get_lastName() {
+    public String getLastName() {
         return _lastName;
     }
 
@@ -148,8 +148,8 @@ public class UserModel {
         }
     }
 
-    public List<UserModel> getAllUsers(String value) {
-        Iterable<UserEntity> result = this.genericRepository.getByValue(value);
+    public List<UserModel> getAllUsers() {
+        Iterable<UserEntity> result = this.genericRepository.getAll();
         List<UserModel> userModelList = new ArrayList<>();
 
         for (UserEntity item : result) {
