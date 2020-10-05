@@ -23,7 +23,7 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`username`, `firstName`, `lastName`, `email`, `password`, `role`, `createdAt`) VALUES ('juan', 'Juan', 'Martin', 'juanmartin@mail.com', 'AnyPass1000', 'Cliente', '2020-11-09 01:58:41');
 INSERT INTO `users` (`username`, `firstName`, `lastName`, `email`, `password`, `role`, `createdAt`) VALUES ('james', 'James', 'Bond', 'jbond@yahoo.net', 'AnyPass1000', 'Cliente', '2020-11-09 01:58:41');
 INSERT INTO `users` (`username`, `firstName`, `lastName`, `email`, `password`, `role`, `createdAt`) VALUES ('lionel', 'Lionel', 'Mess', 'mess10@gmail.gol', 'AnyPass1000', 'Cliente', '2020-11-09 01:58:41');
-INSERT INTO `users` (`username`, `firstName`, `lastName`, `email`, `password`, `role`, `createdAt`) VALUES ('carlos', 'Carlos', 'Bianchini' 'bianchini@hotmail.com.ar', 'AnyPass1000', 'Cliente', '2020-11-09 01:58:41');
+INSERT INTO `users` (`username`, `firstName`, `lastName`, `email`, `password`, `role`, `createdAt`) VALUES ('carlos', 'Carlos', 'Bianchini', 'bianchini@hotmail.com.ar', 'AnyPass1000', 'Cliente', '2020-11-09 01:58:41');
 INSERT INTO `users` (`username`, `firstName`, `lastName`, `email`, `password`, `role`, `createdAt`) VALUES ('diego', 'Diego', 'Somebody', 'diego1010@gmail.com', 'AnyPass1000', 'Cliente', '2020-11-09 01:58:41');
 INSERT INTO `users` (`username`, `firstName`, `lastName`, `email`, `password`, `role`, `createdAt`) VALUES ('one', 'One User', 'Any', 'one@user.com', 'AnyPass1000', 'Cliente', '2020-11-09 01:58:41');
 INSERT INTO `users` (`username`, `firstName`, `lastName`, `email`, `password`, `role`, `createdAt`) VALUES ('diegol', 'Diegol', 'Gol', 'diego@gol.com.ar', 'AnyPass1000', 'Cliente', '2020-11-09 01:58:41');

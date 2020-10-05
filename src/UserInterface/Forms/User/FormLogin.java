@@ -5,7 +5,7 @@ import UserInterface.Forms.FormMainMenu;
 
 import javax.swing.*;
 
-public class FormLogin extends JFrame{
+public class FormLogin extends JFrame {
     public JPanel panelLogin;
     private JTextField txtUser;
     private JTextField txtPassword;
@@ -18,13 +18,13 @@ public class FormLogin extends JFrame{
     }
 
     private void login() {
-        try{
+        try {
             if (!"Username or Email".equals(txtUser.getText()) && txtUser.getText().length() > 2) {
                 if (!"Password".equals(txtPassword.getText())) {
                     UserModel user = new UserModel();
                     boolean validLogin = user.LogIn(txtUser.getText(), txtPassword.getText());
                     if (validLogin == true) {
-                        this.setVisible(false);
+                        this.panelLogin.setVisible(false);
                         FormMainMenu mainMenu = new FormMainMenu();
                         mainMenu.setVisible(true);
                     } else {
@@ -37,7 +37,7 @@ public class FormLogin extends JFrame{
             } else {
                 msgError("Enter username or email.");
             }
-        } catch (Exception ex){
+        } catch (Exception ex) {
             msgError(ex.getMessage());
         }
     }
@@ -47,8 +47,7 @@ public class FormLogin extends JFrame{
         lblErrorMessage.setVisible(true);
     }
 
-    private void initListeners()
-    {
+    private void initListeners() {
         btnLogin.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent e) {

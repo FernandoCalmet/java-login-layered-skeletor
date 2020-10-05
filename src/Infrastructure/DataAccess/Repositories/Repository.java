@@ -14,8 +14,15 @@ public abstract class Repository {
     }
 
     private void connectionMySQL() {
-        this.connectionString.put("driver", "com.mysql.jdbc.Driver");
-        this.connectionString.put("host", "jdbc:mysql://localhost/ToDoDatabase");
+        this.connectionString.put("driver", "com.mysql.cj.jdbc.Driver");
+        this.connectionString.put("host", "jdbc:mysql://localhost:3306/ToDoDatabase");
+        this.connectionString.put("user", "root");
+        this.connectionString.put("pass", "root");
+    }
+
+    private void connectionMariaDB(){
+        this.connectionString.put("driver", "org.mariadb.jdbc.Driver");
+        this.connectionString.put("host", "jdbc:mariadb://localhost:3306/ToDoDatabase");
         this.connectionString.put("user", "root");
         this.connectionString.put("pass", "root");
     }
@@ -23,7 +30,7 @@ public abstract class Repository {
     private void connectionJDBC() {
         this.connectionString.put("driver", "org.apache.derby.jdbc.ClientDriver");
         this.connectionString.put("host", "jdbc:derby://localhost:1527/ToDoDatabase");
-        this.connectionString.put("user", "root");
+        this.connectionString.put("user", "app");
         this.connectionString.put("pass", "");
     }
 

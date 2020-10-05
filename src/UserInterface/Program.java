@@ -11,7 +11,7 @@ public class Program {
         formLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         formLogin.pack();
         formLogin.setLocationRelativeTo(null);
-        formLogin.setSize(400,250);
+        formLogin.setSize(450,250);
         formLogin.setVisible(true);
     }
 }
