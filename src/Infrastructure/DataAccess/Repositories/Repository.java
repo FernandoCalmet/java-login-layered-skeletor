@@ -31,7 +31,7 @@ public abstract class Repository {
         this.connectionString.put("driver", "org.apache.derby.jdbc.ClientDriver");
         this.connectionString.put("host", "jdbc:derby://localhost:1527/ToDoDatabase");
         this.connectionString.put("user", "app");
-        this.connectionString.put("pass", "");
+        this.connectionString.put("pass", "derby");
     }
 
     protected Connection GetConnection() {

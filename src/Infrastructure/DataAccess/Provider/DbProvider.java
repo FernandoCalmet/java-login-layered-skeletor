@@ -9,9 +9,9 @@ public class DbProvider {
     public static Connection getDB(HashMap<String, String> connectionString) {
         Connection db = null;
         try {
-            Class.forName(connectionString.get("driver"));
+            //Class.forName(connectionString.get("driver"));
             db = DriverManager.getConnection(connectionString.get("host"), connectionString.get("user"), connectionString.get("pass"));
-        } catch (SQLException | ClassNotFoundException ex) {
+        } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
 

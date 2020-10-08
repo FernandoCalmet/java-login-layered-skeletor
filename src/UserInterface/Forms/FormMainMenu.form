@@ -36,6 +36,12 @@
                       <text value="Logout"/>
                     </properties>
                   </component>
+                  <component id="ba854" class="javax.swing.JMenuItem" binding="ExitMenuItem">
+                    <constraints/>
+                    <properties>
+                      <text value="Exit"/>
+                    </properties>
+                  </component>
                 </children>
               </grid>
               <grid id="797a7" class="javax.swing.JMenu" binding="userMenu" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
@@ -45,13 +51,26 @@
                 </properties>
                 <border type="none"/>
                 <children>
-                  <component id="e2a51" class="javax.swing.JMenuItem" binding="notesMenuItem">
+                  <component id="825ed" class="javax.swing.JMenuItem" binding="settingsMenuItem">
+                    <constraints/>
+                    <properties>
+                      <text value="Settings"/>
+                    </properties>
+                  </component>
+                  <component id="4f4fe" class="javax.swing.JMenuItem" binding="usersMenuItem">
+                    <constraints/>
+                    <properties>
+                      <iconTextGap value="4"/>
+                      <text value="Users"/>
+                    </properties>
+                  </component>
+                  <component id="57dc" class="javax.swing.JMenuItem" binding="notesMenuItem">
                     <constraints/>
                     <properties>
                       <text value="Notes"/>
                     </properties>
                   </component>
-                  <component id="f128d" class="javax.swing.JMenuItem" binding="tasksMenuItem">
+                  <component id="2a044" class="javax.swing.JMenuItem" binding="tasksMenuItem">
                     <constraints/>
                     <properties>
                       <text value="Tasks"/>

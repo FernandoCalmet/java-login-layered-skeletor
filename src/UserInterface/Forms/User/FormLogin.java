@@ -8,7 +8,7 @@ import javax.swing.*;
 public class FormLogin extends JFrame {
     public JPanel panelLogin;
     private JTextField txtUser;
-    private JTextField txtPassword;
+    private JPasswordField txtPassword;
     private JLabel lblErrorMessage;
     private JButton btnLogin;
 
@@ -23,10 +23,15 @@ public class FormLogin extends JFrame {
                 if (!"Password".equals(txtPassword.getText())) {
                     UserModel user = new UserModel();
                     boolean validLogin = user.LogIn(txtUser.getText(), txtPassword.getText());
-                    if (validLogin == true) {
+                    if (validLogin) {
+                        JFrame formMainMenu = new JFrame("Main Menu");
+                        formMainMenu.setContentPane(new FormMainMenu().panelMain);
+                        formMainMenu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                        formMainMenu.pack();
+                        formMainMenu.setLocationRelativeTo(null);
+                        formMainMenu.setVisible(true);
                         this.panelLogin.setVisible(false);
-                        FormMainMenu mainMenu = new FormMainMenu();
-                        mainMenu.setVisible(true);
+                        this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
                     } else {
                         msgError("The wrong username or password was entered. Try again.");
                         txtPassword.setText("Password");
@@ -48,10 +53,9 @@ public class FormLogin extends JFrame {
     }
 
     private void initListeners() {
-        btnLogin.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
             @Override
-            public void mouseClicked(java.awt.event.MouseEvent e) {
-                super.mouseClicked(e);
+            public void actionPerformed(java.awt.event.ActionEvent e) {
                 login();
             }
         });
