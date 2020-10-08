@@ -24,14 +24,13 @@ public class FormLogin extends JFrame {
                     UserModel user = new UserModel();
                     boolean validLogin = user.LogIn(txtUser.getText(), txtPassword.getText());
                     if (validLogin) {
+                        this.panelLogin.setVisible(false);
                         JFrame formMainMenu = new JFrame("Main Menu");
                         formMainMenu.setContentPane(new FormMainMenu().panelMain);
                         formMainMenu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                         formMainMenu.pack();
                         formMainMenu.setLocationRelativeTo(null);
                         formMainMenu.setVisible(true);
-                        this.panelLogin.setVisible(false);
-                        this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
                     } else {
                         msgError("The wrong username or password was entered. Try again.");
                         txtPassword.setText("Password");

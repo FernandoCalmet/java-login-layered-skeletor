@@ -29,8 +29,8 @@ public class FormMainMenu extends JFrame {
     public FormMainMenu()
     {
         ManagePermissions();
-        SetComponents();
-        LoadComponentPanel(componentWelcome);
+        //SetComponents();
+        //LoadComponentPanel(componentWelcome);
     }
 
     private void ManagePermissions()
