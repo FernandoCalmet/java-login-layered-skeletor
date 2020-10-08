@@ -6,38 +6,30 @@ import Support.Common.Cache.Roles;
 import javax.swing.*;
 
 public class FormMainMenu extends JFrame {
-    private JPanel panelMain;
-    private JMenuBar mainMenu;
-    private JMenu menuFile;
-    private JMenu menuUser;
-    private JMenu menuNote;
-    private JMenu menuTask;
-    private JMenuItem itemInfo;
-    private JMenuItem itemLogout;
+
+    private JPanel panelMenu;
+    private JPanel panelBody;
+    private JMenu fileMenu;
+    private JMenu userMenu;
+    private JMenu helpMenu;
+    private JMenuItem profileMenuItem;
+    private JMenuItem logoutMenuItem;
+    private JMenuItem notesMenuItem;
+    private JMenuItem tasksMenuItem;
+    private JMenuItem aboutMenuItem;
 
     public FormMainMenu()
     {
-        initComponents();
+
     }
 
     private void ManagePermissions()
     {
-        if (ActiveUser.c_role == Roles.ADMINISTRATOR) {
+        if (ActiveUser.c_role.equals(Roles.ADMINISTRATOR)) {
             //Administrator Rules
         }
-        if (ActiveUser.c_role == Roles.CUSTOMER) {
+        if (ActiveUser.c_role.equals(Roles.CUSTOMER)) {
             //Customer Rules
         }
-    }
-
-    private void initComponents() {
-        menuFile = new JMenu();
-        itemInfo = new JMenuItem();
-        itemLogout = new JMenuItem();
-        menuFile.setText("File");
-        menuFile.add(itemInfo);
-        menuFile.add(itemLogout);
-
-        mainMenu.add(menuFile);
     }
 }

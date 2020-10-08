@@ -1,24 +1,89 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="UserInterface.Forms.FormMainMenu">
-  <grid id="27dc6" binding="panelMain" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-    <margin top="0" left="0" bottom="0" right="0"/>
+  <grid id="27dc6" binding="panelMain" layout-manager="BorderLayout" hgap="0" vgap="0">
     <constraints>
       <xy x="20" y="20" width="500" height="400"/>
     </constraints>
     <properties/>
     <border type="none"/>
     <children>
-      <vspacer id="d3df1">
-        <constraints>
-          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
-        </constraints>
-      </vspacer>
-      <grid id="35d15" class="javax.swing.JMenuBar" binding="mainMenu" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-        <margin top="0" left="0" bottom="0" right="0"/>
-        <constraints>
-          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
+      <grid id="a5ecd" binding="panelMenu" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="0">
+        <constraints border-constraint="Center"/>
         <properties/>
+        <border type="none"/>
+        <children>
+          <grid id="926ae" class="javax.swing.JMenuBar" binding="menuBar" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="0">
+            <constraints/>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <grid id="f1fe7" class="javax.swing.JMenu" binding="fileMenu" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                <constraints/>
+                <properties>
+                  <text value="File"/>
+                </properties>
+                <border type="none"/>
+                <children>
+                  <component id="7debf" class="javax.swing.JMenuItem" binding="profileMenuItem">
+                    <constraints/>
+                    <properties>
+                      <text value="My Profile"/>
+                    </properties>
+                  </component>
+                  <component id="9fdc2" class="javax.swing.JMenuItem" binding="logoutMenuItem">
+                    <constraints/>
+                    <properties>
+                      <text value="Logout"/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+              <grid id="797a7" class="javax.swing.JMenu" binding="userMenu" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                <constraints/>
+                <properties>
+                  <text value="User"/>
+                </properties>
+                <border type="none"/>
+                <children>
+                  <component id="e2a51" class="javax.swing.JMenuItem" binding="notesMenuItem">
+                    <constraints/>
+                    <properties>
+                      <text value="Notes"/>
+                    </properties>
+                  </component>
+                  <component id="f128d" class="javax.swing.JMenuItem" binding="tasksMenuItem">
+                    <constraints/>
+                    <properties>
+                      <text value="Tasks"/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+              <grid id="6843c" class="javax.swing.JMenu" binding="helpMenu" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                <constraints/>
+                <properties>
+                  <text value="Help"/>
+                </properties>
+                <border type="none"/>
+                <children>
+                  <component id="358d6" class="javax.swing.JMenuItem" binding="aboutMenuItem">
+                    <constraints/>
+                    <properties>
+                      <text value="About"/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+            </children>
+          </grid>
+        </children>
+      </grid>
+      <grid id="2708" binding="panelBody" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints border-constraint="South"/>
+        <properties>
+          <preferredSize width="24" height="350"/>
+        </properties>
         <border type="none"/>
         <children/>
       </grid>
