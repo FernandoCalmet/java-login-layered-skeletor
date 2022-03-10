@@ -1,27 +1,33 @@
-# Full Login Layered Java
+# Java Login Layered Skeletor
 
-Principales tecnologías utilizadas: `Java, Swing UI, JDBC, MySQL`.
+[![Github][github-shield]][github-url]
+[![Kofi][kofi-shield]][kofi-url]
+[![LinkedIn][linkedin-shield]][linkedin-url]
+[![Khanakat][khanakat-shield]][khanakat-url]
+
+## 📓 TABLA DE CONTENIDO
+
+* [Acerca del proyecto](#acerca-del-proyecto)
+* [Características](#características)
+* [Instalación](#instalación)
+* [Licencia](#licencia)
+
+## 🔥 ACERCA DEL PROYECTO
+
+Este proyecto es una muestra de una solución base de `CRUD Layered + Swing UI` utilizando `Java + JDBC + MySQL`.  
+Funcionalidades del proyecto CRUD, Login, Swing UI, Programación Orientada a Objetos (POO). Arquitectura tradicional en Capas, Basado en Patrones de Arquitectura de Aplicaciones Empresariales (PEAA) y Diseño Orientado al Dominio (DDD).
 
 IDE utilizado: `Intellij IDEA`
 
 Esta simple **Aplicación Java Swing**, permite que las operaciones **CRUD** administren recursos como: `Usuarios Tareas y Notas`.
 
-## Descripción
+## ✔️ CARACTERÍSTICAS
 
-Funcionalidades del proyecto CRUD, Login, Swing UI, Programación Orientada a Objetos (POO). Arquitectura tradicional en Capas, Basado en Patrones de Arquitectura de Aplicaciones Empresariales (PEAA) y Diseño Orientado al Dominio (DDD).
-
-## Características de la aplicación
-
-### Generales
-
-- Servicios Base de Datos (CRUD)
-- Formularios con Swing UI, Only-Window
-
-### Cualquier Usuario
-
-- Iniciar sesión, Cerrar Sesión y Mostrar datos del usuario
-- Roles y Privilegios de usuarios
-- Editar Perfil de Usuario + Validaciones de seguridad de datos
+- [x] Servicios Base de Datos (CRUD)
+- [x] Formularios con Swing UI, Only-Window
+- [x] Iniciar sesión, Cerrar Sesión y Mostrar datos del usuario
+- [x] Roles y Privilegios de usuarios
+- [x] Editar Perfil de Usuario + Validaciones de seguridad de datos
 
 ### Solo Usuarios Administradores de sistema (SA)
 
@@ -94,12 +100,34 @@ Clase objeto de acceso a datos de tareas (Task Dao), es responsable de realizar 
 
 En este componente se Mapea todas las tablas de la base de datos, es decir, tendrás una clase por cada tabla (Entidad).
 
-## :page_facing_up: LICENCIA
+## ⚙️ INSTALACIÓN
 
-Licencia MIT. Puedes verla en el [Archivo de Licencia](https://github.com/FernandoCalmet/FullLoginLayered-Java/blob/master/LICENSE) para más información.
+Clonar el repositorio.
 
----
+```bash
+gh repo clone FernandoCalmet/Java-Login-Layered-Skeletor
+```
 
-:octocat: [Puedes seguirme en Github.](https://github.com/FernandoCalmet)
+Ejecutar aplicación.
 
-[![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/T6T41JKMI)
+```bash
+dotnet run
+```
+
+## 📄 LICENCIA
+
+Este proyecto está bajo la Licencia (Licencia MIT) - mire el archivo [LICENSE](LICENSE) para más detalles.
+
+## ⭐️ DAME UNA ESTRELLA
+
+Si esta Implementación le resultó útil o la utilizó en sus Proyectos, déle una estrella. ¡Gracias! O, si te sientes realmente generoso, [¡Apoye el proyecto con una pequeña contribución!](https://ko-fi.com/fernandocalmet).
+
+<!--- reference style links --->
+[github-shield]: https://img.shields.io/badge/-@fernandocalmet-%23181717?style=flat-square&logo=github
+[github-url]: https://github.com/fernandocalmet
+[kofi-shield]: https://img.shields.io/badge/-@fernandocalmet-%231DA1F2?style=flat-square&logo=kofi&logoColor=ff5f5f
+[kofi-url]: https://ko-fi.com/fernandocalmet
+[linkedin-shield]: https://img.shields.io/badge/-fernandocalmet-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/fernandocalmet
+[linkedin-url]: https://www.linkedin.com/in/fernandocalmet
+[khanakat-shield]: https://img.shields.io/badge/khanakat.com-brightgreen?style=flat-square
+[khanakat-url]: https://khanakat.com
