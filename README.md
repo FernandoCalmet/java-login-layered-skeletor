@@ -105,7 +105,7 @@ En este componente se Mapea todas las tablas de la base de datos, es decir, tend
 Clonar el repositorio.
 
 ```bash
-gh repo clone FernandoCalmet/Java-Login-Layered-Skeletor
+gh repo clone FernandoCalmet/java-login-layered-skeletor
 ```
 
 Ejecutar aplicación.
